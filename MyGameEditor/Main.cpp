@@ -103,6 +103,8 @@ int main(int argc, char** argv)
 	return main_return;
 }
 
+// Hablar con el profe sobre rehacer el repositorio con este proyecto en lugar de intentar subirlo para evitar conflictos
+
 //int main(int argc, char* argv[])
 //{
 //    try {
