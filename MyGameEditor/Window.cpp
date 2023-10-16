@@ -5,6 +5,7 @@
 #include <thread>
 
 #include "Globals.h"
+#include "Window.h"
 
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
@@ -12,6 +13,22 @@
 
 using namespace std;
 using namespace chrono;
+
+Window::Window(Application* app, bool start_enabled) : Module(app, start_enabled)
+{
+    window = NULL;
+    screen_surface = NULL;
+}
+
+Window::~Window()
+{}
+
+bool Window::Init()
+{
+    window = initSDLWindowWithOpenGL();
+    GLContext = createSdlGlContext(window);
+    initOpenGL();
+}
 
 static SDL_Window* initSDLWindowWithOpenGL() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) throw exception(SDL_GetError());

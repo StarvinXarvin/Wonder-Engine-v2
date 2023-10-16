@@ -1,4 +1,5 @@
 #include "Module.h"
+#include <SDL2/SDL.h>
 
 class Application;
 
@@ -22,4 +23,6 @@ public:
 
 	//The surface contained by the window
 	SDL_Surface* screen_surface;
+
+	SDL_GLContext GLContext;
 };
