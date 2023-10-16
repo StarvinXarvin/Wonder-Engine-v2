@@ -23,13 +23,6 @@ Window::Window(Application* app, bool start_enabled) : Module(app, start_enabled
 Window::~Window()
 {}
 
-bool Window::Init()
-{
-    window = initSDLWindowWithOpenGL();
-    GLContext = createSdlGlContext(window);
-    initOpenGL();
-}
-
 static SDL_Window* initSDLWindowWithOpenGL() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) throw exception(SDL_GetError());
 
@@ -52,7 +45,7 @@ static SDL_Window* initSDLWindowWithOpenGL() {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-    auto window = SDL_CreateWindow("SDL+OpenGL Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
+    auto window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
     if (!window) throw exception(SDL_GetError());
 
     return window;
@@ -89,5 +82,34 @@ static bool processSDLEvents() {
             break;
         }
     }
+    return true;
+}
+
+bool Window::Init()
+{
+    window = initSDLWindowWithOpenGL();
+    GLContext = createSdlGlContext(window);
+    initOpenGL();
+
+    return true;
+}
+
+update_status Window::PostUpdate()
+{
+    return UPDATE_CONTINUE;
+}
+
+bool Window::CleanUp()
+{
+    LOG("Destroying SDL window and quitting all SDL systems");
+
+    //Destroy window
+    if (window != NULL)
+    {
+        SDL_DestroyWindow(window);
+    }
+
+    //Quit SDL subsystems
+    SDL_Quit();
     return true;
 }

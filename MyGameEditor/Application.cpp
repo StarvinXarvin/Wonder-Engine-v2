@@ -24,6 +24,7 @@ bool Application::Init()
 	}
 
 	// After all Init calls we call Start() in all modules
+	//
 	LOG("Application Start --------------");
 	for (const auto& item : list_modules)
 	{

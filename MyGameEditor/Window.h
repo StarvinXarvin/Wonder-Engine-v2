@@ -13,9 +13,8 @@ public:
 	virtual ~Window();
 
 	bool Init();
+	update_status PostUpdate();
 	bool CleanUp();
-
-	void SetTitle(const char* title);
 
 public:
 	//The window we'll be rendering to
@@ -24,5 +23,6 @@ public:
 	//The surface contained by the window
 	SDL_Surface* screen_surface;
 
+	// OpenGL Context creation
 	SDL_GLContext GLContext;
 };
