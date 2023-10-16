@@ -13,8 +13,6 @@
 using namespace std;
 using namespace chrono;
 
-static const unsigned int WINDOW_WIDTH = 576*4/3;
-static const unsigned int WINDOW_HEIGHT = 576;
 static const unsigned int FPS = 60;
 static const auto FDT = 1.0s / FPS;
 
