@@ -6,7 +6,6 @@ class Application;
 class Window : public Module
 {
 public:
-
 	Window(Application* app, bool start_enabled = true);
 
 	// Destructor
@@ -15,6 +14,8 @@ public:
 	bool Init();
 	update_status PostUpdate();
 	bool CleanUp();
+
+	bool processSDLEvents();
 
 public:
 	//The window we'll be rendering to
