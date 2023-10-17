@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Window.h"
 #include "Engine.h"
+#include "UI.h"
 
 #include <list>
 
@@ -11,6 +12,7 @@ class Application {
 public:
 	Window* window;
 	GameEngine* Gengine;
+	UI* ui;
 
 private:
 	std::list<Module*> list_modules;
