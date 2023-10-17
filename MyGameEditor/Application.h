@@ -23,6 +23,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	JSON_Value* config;
+
 private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();

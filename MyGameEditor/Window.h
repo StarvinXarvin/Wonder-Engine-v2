@@ -2,6 +2,7 @@
 
 #include "Module.h"
 #include <SDL2/SDL.h>
+#include "parson.h"
 
 class Application;
 
@@ -18,6 +19,10 @@ public:
 
 	bool processSDLEvents();
 
+	void initOpenGL();
+
+	SDL_Window* initSDLWindowWithOpenGL();
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;
@@ -27,4 +32,8 @@ public:
 
 	// OpenGL Context creation
 	SDL_GLContext GLContext;
+
+	int width;
+	int height;
+
 };

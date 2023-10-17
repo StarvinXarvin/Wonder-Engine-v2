@@ -6,6 +6,8 @@ Application::Application() {
 	window = new Window(this);
 	Gengine = new GameEngine(this);
 
+	config = json_parse_file("config.json");
+
 	AddModule(window);
 	AddModule(Gengine);
 }
@@ -20,6 +22,8 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
+
+	LoadConfig();
 
 	// Call Init() in all modules
 	for (const auto& item : list_modules)
@@ -76,6 +80,7 @@ update_status Application::Update()
 bool Application::CleanUp()
 {
 	bool ret = true;
+	delete config;
 	for (const auto& item : list_modules)
 	{
 		item->CleanUp();
@@ -90,13 +95,15 @@ void Application::AddModule(Module* mod)
 
 void Application::SaveConfig() {
 
-	JSON_Value* config = json_value_init_object();
-	json_object_dotset_number(json_object(config), "config.window.width", 1920);
-	json_object_dotset_number(json_object(config), "config.window.height", 1080);
+	json_object_dotset_number(json_object(config), "config.window.width", window->width);
+	json_object_dotset_number(json_object(config), "config.window.height", window->height);
 	json_serialize_to_file(config, "config.json");
 
 }
 
 void Application::LoadConfig() {
+
+	window->height = json_object_dotget_number(json_object(config), "config.window.height");
+	window->width = json_object_dotget_number(json_object(config), "config.window.width");
 
 }

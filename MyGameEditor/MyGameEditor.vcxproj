@@ -104,6 +104,7 @@ $(SolutionDir)\vcpkg\vcpkg.exe install opengl glew sdl2 imgui[opengl3-binding,sd
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\vcpkg\installed\x64-windows\include\parson.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Globals.h" />
