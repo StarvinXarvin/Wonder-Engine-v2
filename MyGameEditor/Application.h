@@ -23,4 +23,6 @@ private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
+	void SaveConfig();
+	void LoadConfig();
 };

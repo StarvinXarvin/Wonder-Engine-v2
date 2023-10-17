@@ -1,4 +1,6 @@
 #include "Application.h"
+#include <parson.h>
+#include "Globals.h"
 
 Application::Application() {
 	window = new Window(this);
@@ -82,4 +84,17 @@ bool Application::CleanUp()
 void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);
+}
+
+void Application::SaveConfig() {
+
+	JSON_Value* config = json_value_init_object();
+	json_object_dotset_number(json_object(config), "config.window.width", 1920);
+	json_object_dotset_number(json_object(config), "config.window.height", 1080);
+	json_serialize_to_file(config, "config.json");
+
+}
+
+void Application::LoadConfig() {
+
 }
