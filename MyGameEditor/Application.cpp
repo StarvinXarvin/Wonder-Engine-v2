@@ -4,8 +4,10 @@
 
 Application::Application() {
 	window = new Window(this);
+	Gengine = new GameEngine(this);
 
 	AddModule(window);
+	AddModule(Gengine);
 }
 
 Application::~Application()

@@ -11,14 +11,6 @@
 #include "Application.h"
 #include "Globals.h"
 
-#include "../MyGameEngine/MyGameEngine.h"
-
-using namespace std;
-using namespace chrono;
-
-static const unsigned int FPS = 60;
-static const auto FDT = 1.0s / FPS;
-
 enum main_states
 {
 	MAIN_CREATION,
@@ -142,7 +134,7 @@ int main(int argc, char** argv)
 //        return EXIT_SUCCESS;
 //    }
 //    catch (const exception& ex) {
-//        cerr << ex.what() << endl;
+//       cerr << ex.what() << endl;
 //        return EXIT_FAILURE;
 //    }
 //}

@@ -1,12 +1,16 @@
+#pragma once
+
 #include "Globals.h"
 #include "Module.h"
 #include "Window.h"
+#include "Engine.h"
 
 #include <list>
 
 class Application {
 public:
 	Window* window;
+	GameEngine* Gengine;
 
 private:
 	std::list<Module*> list_modules;

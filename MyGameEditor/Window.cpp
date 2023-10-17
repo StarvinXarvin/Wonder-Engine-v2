@@ -4,6 +4,7 @@
 #include <chrono>
 #include <thread>
 
+#include "Application.h"
 #include "Globals.h"
 #include "Window.h"
 
@@ -69,7 +70,7 @@ static void initOpenGL() {
     glDepthFunc(GL_LEQUAL);
 }
 
-static bool processSDLEvents() {
+bool Window::processSDLEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
@@ -92,11 +93,6 @@ bool Window::Init()
     initOpenGL();
 
     return true;
-}
-
-update_status Window::PostUpdate()
-{
-    return UPDATE_CONTINUE;
 }
 
 bool Window::CleanUp()
