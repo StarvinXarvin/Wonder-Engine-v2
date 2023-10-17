@@ -95,11 +95,6 @@ bool Window::Init()
     return true;
 }
 
-update_status Window::PostUpdate()
-{
-    return UPDATE_CONTINUE;
-}
-
 bool Window::CleanUp()
 {
     LOG("Destroying SDL window and quitting all SDL systems");

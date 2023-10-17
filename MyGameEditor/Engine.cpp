@@ -19,7 +19,7 @@ using namespace chrono;
 static const unsigned int FPS = 60;
 static const auto FDT = 1.0s / FPS;
 
-GameEngine::GameEngine(Application* app, bool start_enabled = true) : Module(app, start_enabled)
+GameEngine::GameEngine(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
 

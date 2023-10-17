@@ -1,3 +1,5 @@
+#pragma once
+
 class Application;
 
 class Module

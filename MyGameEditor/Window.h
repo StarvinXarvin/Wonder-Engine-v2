@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Module.h"
 #include <SDL2/SDL.h>
 
@@ -12,7 +14,6 @@ public:
 	virtual ~Window();
 
 	bool Init();
-	update_status PostUpdate();
 	bool CleanUp();
 
 	bool processSDLEvents();
