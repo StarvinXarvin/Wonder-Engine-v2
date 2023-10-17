@@ -5,9 +5,11 @@
 Application::Application() {
 	window = new Window(this);
 	Gengine = new GameEngine(this);
+	ui = new UI(this);
 
 	AddModule(window);
 	AddModule(Gengine);
+	AddModule(ui);
 }
 
 Application::~Application()
