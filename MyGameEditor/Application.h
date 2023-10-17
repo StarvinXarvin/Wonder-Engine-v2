@@ -1,14 +1,12 @@
 #include "Globals.h"
 #include "Module.h"
 #include "Window.h"
-#include "UI.h"
 
 #include <list>
 
 class Application {
 public:
 	Window* window;
-	UI* ui;
 
 private:
 	std::list<Module*> list_modules;

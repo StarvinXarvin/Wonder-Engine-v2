@@ -2,10 +2,8 @@
 
 Application::Application() {
 	window = new Window(this);
-	ui = new UI(this);
 
 	AddModule(window);
-	AddModule(ui);
 }
 
 Application::~Application()
