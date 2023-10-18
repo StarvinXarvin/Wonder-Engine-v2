@@ -32,7 +32,8 @@ bool Application::Init()
 	// Call Init() in all modules
 	for (const auto& item : list_modules)
 	{
-		item->Init();
+		ret = item->Init();
+		if (ret == false) return ret;
 	}
 
 	// After all Init calls we call Start() in all modules
@@ -40,7 +41,8 @@ bool Application::Init()
 	LOG("Application Start --------------");
 	for (const auto& item : list_modules)
 	{
-		item->Start();
+		ret = item->Start();
+		if (ret == false) return ret;
 	}
 
 	return ret;
@@ -64,23 +66,23 @@ update_status Application::Update()
 
 	for (const auto& item : list_modules)
 	{
-		item->PreUpdate();
+		ret = item->PreUpdate();
+		if (ret == UPDATE_STOP) return ret;
 	}
 
 	for (const auto& item : list_modules)
 	{
-		item->Update();
+		ret = item->Update();
+		if (ret == UPDATE_STOP) return ret;
 	}
 
 	for (const auto& item : list_modules)
 	{
-		item->PostUpdate();
+		ret = item->PostUpdate();
+		if (ret == UPDATE_STOP) return ret;
 	}
 
 	FinishUpdate();
-
-	if (input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_STATE::KEY_REPEAT)
-		ret = UPDATE_STOP;
 
 	return ret;
 }
@@ -91,7 +93,7 @@ bool Application::CleanUp()
 	delete config;
 	for (const auto& item : list_modules)
 	{
-		item->CleanUp();
+		ret = item->CleanUp();
 	}
 	return ret;
 }

@@ -111,18 +111,10 @@ update_status Input::PreUpdate()
 		case SDL_QUIT:
 			quit = true;
 			break;
-
-		case SDL_WINDOWEVENT:
-		{
-			//if(e.window.event == SDL_WINDOWEVENT_RESIZED)
-				//App->renderer3D->OnResize(e.window.data1, e.window.data2);
-		}
 		}
 
 		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
-
-
 
 	if (quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
 		return UPDATE_STOP;
