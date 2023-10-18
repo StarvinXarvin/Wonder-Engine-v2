@@ -14,7 +14,7 @@ public:
 	virtual ~GameEngine();
 
 	bool Init();
-	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 
 private:

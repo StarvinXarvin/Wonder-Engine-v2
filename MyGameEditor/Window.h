@@ -16,8 +16,6 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	bool processSDLEvents();
-
 	void initOpenGL();
 
 	SDL_Window* initSDLWindowWithOpenGL();

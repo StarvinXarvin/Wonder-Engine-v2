@@ -10,12 +10,11 @@ public:
 	virtual ~UI();
 
 	bool Init();
+	update_status PreUpdate();
 	update_status PostUpdate();
 	bool CleanUp();
 
 private:
 	bool createImGuiContext();
 	void setUpUI();
-
-	SDL_Event eve;
 };

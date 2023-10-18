@@ -40,18 +40,17 @@ bool GameEngine::Init()
 	return true;
 }
 
-update_status GameEngine::Update()
+update_status GameEngine::PostUpdate()
 {
-	if (App->window->processSDLEvents()) {
-		const auto frame_start = steady_clock::now();
-		engine.step(FDT);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-		engine.render();
-		SDL_GL_SwapWindow(App->window->window);
-		const auto frame_end = steady_clock::now();
-		const auto frame_duration = frame_end - frame_start;
-		if (frame_duration < FDT) this_thread::sleep_for(FDT - frame_duration);
-	}
+	const auto frame_start = steady_clock::now();
+	engine.step(FDT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	engine.render();
+	SDL_GL_SwapWindow(App->window->window);
+	const auto frame_end = steady_clock::now();
+	const auto frame_duration = frame_end - frame_start;
+	if (frame_duration < FDT) this_thread::sleep_for(FDT - frame_duration);
+
 	return UPDATE_CONTINUE;
 }
 

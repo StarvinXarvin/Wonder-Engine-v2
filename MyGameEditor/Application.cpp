@@ -10,8 +10,8 @@ Application::Application() {
 
 	AddModule(window);
 	AddModule(input);
-	AddModule(Gengine);
 	AddModule(ui);
+	AddModule(Gengine);
 
 	config = json_parse_file("config.json");
 }

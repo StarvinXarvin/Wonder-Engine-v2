@@ -37,13 +37,6 @@ bool UI::createImGuiContext()
 
 void UI::setUpUI()
 {
-	ImGui_ImplSDL2_NewFrame();
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui::NewFrame();
-
-	ImGui::DockSpaceOverViewport();
-
-	ImGui::ShowDemoWindow();
 }
 
 bool UI::Init()
@@ -54,7 +47,16 @@ bool UI::Init()
 
 update_status UI::PostUpdate()
 {
-	setUpUI();
+	//setUpUI();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui::NewFrame();
+
+	ImGui::DockSpaceOverViewport();
+
+	ImGui::ShowDemoWindow();
+
+
 
 	// Render UI
 	ImGui::Render();

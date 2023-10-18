@@ -70,22 +70,6 @@ void Window::initOpenGL() {
 	glDepthFunc(GL_LEQUAL);
 }
 
-bool Window::processSDLEvents() {
-	SDL_Event event;
-	while (SDL_PollEvent(&event))
-	{
-		switch (event.type) {
-		case SDL_QUIT: return false;
-		case SDL_KEYDOWN:
-			switch (event.key.keysym.sym) {
-			case SDLK_ESCAPE: return false;
-			}
-			break;
-		}
-	}
-	return true;
-}
-
 bool Window::Init()
 {
 	window = initSDLWindowWithOpenGL();
