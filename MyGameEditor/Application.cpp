@@ -7,11 +7,11 @@ Application::Application() {
 	Gengine = new GameEngine(this);
 	ui = new UI(this);
 
-	config = json_parse_file("config.json");
-
 	AddModule(window);
 	AddModule(Gengine);
 	AddModule(ui);
+
+	config = json_parse_file("config.json");
 }
 
 Application::~Application()
