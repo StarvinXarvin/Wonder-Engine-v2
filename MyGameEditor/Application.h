@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "Module.h"
 #include "Window.h"
+#include "Input.h"
 #include "Engine.h"
 #include "UI.h"
 
@@ -12,6 +13,7 @@
 class Application {
 public:
 	Window* window;
+	Input* input;
 	GameEngine* Gengine;
 	UI* ui;
 

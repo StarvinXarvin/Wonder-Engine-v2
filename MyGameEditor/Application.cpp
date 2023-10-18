@@ -4,10 +4,12 @@
 
 Application::Application() {
 	window = new Window(this);
+	input = new Input(this);
 	Gengine = new GameEngine(this);
 	ui = new UI(this);
 
 	AddModule(window);
+	AddModule(input);
 	AddModule(Gengine);
 	AddModule(ui);
 
@@ -76,6 +78,10 @@ update_status Application::Update()
 	}
 
 	FinishUpdate();
+
+	if (input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_STATE::KEY_REPEAT)
+		ret = UPDATE_STOP;
+
 	return ret;
 }
 
