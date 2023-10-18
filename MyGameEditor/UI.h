@@ -10,7 +10,7 @@ public:
 	virtual ~UI();
 
 	bool Init();
-	update_status PreUpdate();
+	//update_status PreUpdate();
 	update_status PostUpdate();
 	bool CleanUp();
 
