@@ -25,11 +25,14 @@ bool UI::createImGuiContext()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
+	(void)io;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->window->GLContext);
+
+	
 
 	if (ImGui_ImplOpenGL3_Init())   return true;
 	else    return false;
@@ -45,19 +48,26 @@ bool UI::Init()
 	else    return false;
 }
 
-update_status UI::PostUpdate()
+update_status UI::PreUpdate()
 {
 	//setUpUI();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui::NewFrame();
 
+	ImGuiDockNodeFlags dock_flags = 0;
+	dock_flags |= ImGuiDockNodeFlags_PassthruCentralNode;
+	ImGui::DockSpaceOverViewport(0, dock_flags);
+
 	ImGui::DockSpaceOverViewport();
 
 	ImGui::ShowDemoWindow();
 
+	return UPDATE_CONTINUE;
+}
 
-
+update_status UI::PostUpdate()
+{
 	// Render UI
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

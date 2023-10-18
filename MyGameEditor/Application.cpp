@@ -10,8 +10,8 @@ Application::Application() {
 
 	AddModule(window);
 	AddModule(input);
-	AddModule(ui);
 	AddModule(Gengine);
+	AddModule(ui);
 
 	
 }
@@ -54,6 +54,7 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	SDL_GL_SwapWindow(window->window);
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
