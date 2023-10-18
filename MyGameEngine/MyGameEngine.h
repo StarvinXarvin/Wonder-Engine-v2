@@ -13,5 +13,9 @@ public:
 	MyGameEngine();
 	void step(std::chrono::duration<double> dt);
 	void render();
+	void LoadConfig();
+	void SaveConfig();
+
+	JSON_Value* config;
 };
 
