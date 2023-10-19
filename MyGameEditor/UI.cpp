@@ -32,14 +32,101 @@ bool UI::createImGuiContext()
 
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->window->GLContext);
 
-	
-
 	if (ImGui_ImplOpenGL3_Init())   return true;
 	else    return false;
 }
 
 void UI::setUpUI()
 {
+#pragma region
+	if (ImGui::BeginMenuBar()) {
+		if (ImGui::BeginMenu("Menu"))
+		{
+			if (ImGui::BeginMenu("Window Toggle"))
+			{
+				if (ImGui::MenuItem("Hierarchy", NULL, false, false))
+				{
+					// Toggle Hierarchy window
+				}
+				if (ImGui::MenuItem("Inspector", NULL, false, false))
+				{
+					// Toggle Inspector window
+				}
+				if (ImGui::MenuItem("Configuration", NULL, false, false))
+				{
+					// Toggle Configuration window
+				}
+				if (ImGui::MenuItem("Console", NULL, false, false))
+				{
+					// Toggle Console window
+				}
+				EndMenu();
+			}
+
+			if (ImGui::MenuItem("GitHub", NULL, false, false))
+			{
+				// Open default explorer with our GitHub link
+			}
+			if (ImGui::MenuItem("About", NULL, false, false))
+			{
+				// Open a window with description of the editor
+			}
+			if (ImGui::MenuItem("Quit", "Esc", false, true))
+			{
+				// Quit app
+			}
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+#pragma endregion
+#pragma region
+	if (ImGui::BeginMenu("Hierarchy", false))
+	{
+		//for (all items in GameObject list)
+		//{
+		//	ImGui::MenuItem("Objectname", NULL, false, false);
+		//}
+		ImGui::EndMenuBar();
+	}
+
+	// Console
+	if (ImGui::BeginMenu("Console", false))
+	{
+		//for (all items in log list)
+		//{
+		//	// Find a better way to print a prettier and less heavy log
+		//	ImGui::MenuItem("HH:MM:SS  Log description", NULL, false, false);
+		//}
+		ImGui::EndMenuBar();
+	}
+
+	// Inspector
+	if (ImGui::BeginMenu("Inspector", false))
+	{
+
+		if (ImGui::CollapsingHeader("Transform"))
+		{
+			//ImGui::SeparatorText("Position");
+			//ImGui::DragFloat("x axis", NULL, ranges);
+			//ImGui::DragFloat("y axis", NULL, ranges);
+			//ImGui::DragFloat("z axis", NULL, ranges);
+			//
+			//ImGui::SeparatorText("Rotation");
+			//ImGui::DragFloat("x axis", NULL, ranges);
+			//ImGui::DragFloat("y axis", NULL, ranges);
+			//ImGui::DragFloat("z axis", NULL, ranges);
+		}
+		if (ImGui::CollapsingHeader("Mesh"))
+		{
+			ImGui::MenuItem("Mesh Name", NULL, false, false);
+		}
+		if (ImGui::CollapsingHeader("Texture"))
+		{
+			ImGui::MenuItem("Texture Name", NULL, false, false);
+		}
+		ImGui::EndMenuBar();
+	}
 }
 
 bool UI::Init()
@@ -61,7 +148,7 @@ update_status UI::PreUpdate()
 
 	ImGui::DockSpaceOverViewport();
 
-	ImGui::ShowDemoWindow();
+	setUpUI();
 
 	return UPDATE_CONTINUE;
 }
