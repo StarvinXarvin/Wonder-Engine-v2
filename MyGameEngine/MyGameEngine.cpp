@@ -20,7 +20,6 @@ static double angle = 0.0;
 MyGameEngine::MyGameEngine() {
 
     ilInit();
-    config = json_parse_file("config.json");
 
 }
 
@@ -63,21 +62,6 @@ static void drawGrid(int grid_size, int grid_step) {
         glVertex3i( grid_size, 0, i);
     }
     glEnd();
-}
-
-void MyGameEngine::SaveConfig() {
-
-    //json_object_dotset_number(json_object(config), "config.window.width", window->width);
-    //json_object_dotset_number(json_object(config), "config.window.height", window->height);
-    //json_serialize_to_file(config, "config.json");
-
-}
-
-void MyGameEngine::LoadConfig() {
-
-    //window->height = json_object_dotget_number(json_object(config), "config.window.height");
-    //window->width = json_object_dotget_number(json_object(config), "config.window.width");
-
 }
 
 void MyGameEngine::render() {

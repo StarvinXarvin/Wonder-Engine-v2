@@ -46,7 +46,7 @@ SDL_Window* Window::initSDLWindowWithOpenGL() {
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-	auto window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
+	auto window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
 	if (!window) throw exception(SDL_GetError());
 
 	return window;
@@ -64,7 +64,7 @@ void Window::initOpenGL() {
 	auto glew_init_error = glewInit();
 	if (glew_init_error != GLEW_OK) throw exception((char*)glewGetErrorString(glew_init_error));
 	if (!GLEW_VERSION_3_1) throw exception("OpenGL 3.1 Not Supported!");
-	glViewport(0, 0, width, height);
+	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	glClearColor(1, 1, 1, 1);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);

@@ -29,8 +29,4 @@ public:
 
 	// OpenGL Context creation
 	SDL_GLContext GLContext;
-
-	int width;
-	int height;
-
 };
