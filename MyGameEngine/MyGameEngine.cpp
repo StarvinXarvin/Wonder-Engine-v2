@@ -79,7 +79,7 @@ void MyGameEngine::render() {
     
     
 #pragma region Draw Sandbox
-    auto cubeDraw = make_shared<CubeImmediateMode>();
+    /*auto cubeDraw = make_shared<CubeImmediateMode>();
     GraphicObject cubeA(cubeDraw);
     GraphicObject cubeB(cubeDraw);
     GraphicObject cubeC(cubeDraw);
@@ -93,7 +93,7 @@ void MyGameEngine::render() {
     cubeB.rotate(glm::radians(angle), vec3(1, 0, 0));
     cubeC.rotate(glm::radians(angle), vec3(0, 0, 1));
 
-    cubeA.paint();
+    cubeA.paint();*/
 
 #pragma endregion
     assert(glGetError() ==GL_NONE);
