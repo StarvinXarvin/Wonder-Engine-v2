@@ -81,28 +81,29 @@ void UI::setUpUI()
 	}
 #pragma endregion
 #pragma region
-	if (ImGui::BeginMenu("Hierarchy", false))
+	
+	if (ImGui::Begin("Hierarchy"))
 	{
 		//for (all items in GameObject list)
 		//{
 		//	ImGui::MenuItem("Objectname", NULL, false, false);
 		//}
-		ImGui::EndMenuBar();
+		ImGui::End();
 	}
 
 	// Console
-	if (ImGui::BeginMenu("Console", false))
+	if (ImGui::Begin("Console"))
 	{
 		//for (all items in log list)
 		//{
 		//	// Find a better way to print a prettier and less heavy log
 		//	ImGui::MenuItem("HH:MM:SS  Log description", NULL, false, false);
 		//}
-		ImGui::EndMenuBar();
+		ImGui::End();
 	}
 
 	// Inspector
-	if (ImGui::BeginMenu("Inspector", false))
+	if (ImGui::Begin("Inspector"))
 	{
 
 		if (ImGui::CollapsingHeader("Transform"))
@@ -125,7 +126,7 @@ void UI::setUpUI()
 		{
 			ImGui::MenuItem("Texture Name", NULL, false, false);
 		}
-		ImGui::EndMenuBar();
+		ImGui::End();
 	}
 }
 
