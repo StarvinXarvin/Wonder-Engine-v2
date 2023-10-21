@@ -36,52 +36,41 @@ bool UI::createImGuiContext()
 	else    return false;
 }
 
-void UI::setUpUI()
+update_status UI::setupMAINMENU()
 {
-#pragma region
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("Menu"))
 		{
 			if (ImGui::BeginMenu("Window Toggle"))
 			{
-				if (ImGui::MenuItem("Hierarchy", NULL, false, false))
-				{
-					// Toggle Hierarchy window
-				}
-				if (ImGui::MenuItem("Inspector", NULL, false, false))
-				{
-					// Toggle Inspector window
-				}
-				if (ImGui::MenuItem("Configuration", NULL, false, false))
-				{
-					// Toggle Configuration window
-				}
-				if (ImGui::MenuItem("Console", NULL, false, false))
-				{
-					// Toggle Console window
-				}
-				EndMenu();
+				ImGui::Checkbox("Hierarchy", &showHier);
+				ImGui::Checkbox("Inspector", &showInsp);
+				ImGui::Checkbox("Configuration", &showConf);
+				ImGui::Checkbox("Console", &showCons);
+				ImGui::EndMenu();
 			}
 
-			if (ImGui::MenuItem("GitHub", NULL, false, false))
+			ImGui::Checkbox("Show Demo Window", &showDemo);
+
+			if (ImGui::MenuItem("GitHub", NULL, false, true))
 			{
-				// Open default explorer with our GitHub link
+
 			}
-			if (ImGui::MenuItem("About", NULL, false, false))
-			{
-				// Open a window with description of the editor
-			}
+
+			ImGui::Checkbox("About", &showAbout);
+
 			if (ImGui::MenuItem("Quit", "Esc", false, true))
 			{
-				// Quit app
+				return UPDATE_STOP;
 			}
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
 	}
-#pragma endregion
-#pragma region
-	
+	return UPDATE_CONTINUE;
+}
+void UI::setupHIERARCHY()
+{
 	if (ImGui::Begin("Hierarchy"))
 	{
 		//for (all items in GameObject list)
@@ -90,8 +79,9 @@ void UI::setUpUI()
 		//}
 		ImGui::End();
 	}
-
-	// Console
+}
+void UI::setupCONSOLE()
+{
 	if (ImGui::Begin("Console"))
 	{
 		//for (all items in log list)
@@ -101,22 +91,22 @@ void UI::setUpUI()
 		//}
 		ImGui::End();
 	}
-
-	// Inspector
+}
+void UI::setupINSPECTOR()
+{
 	if (ImGui::Begin("Inspector"))
 	{
-
 		if (ImGui::CollapsingHeader("Transform"))
 		{
-			//ImGui::SeparatorText("Position");
-			//ImGui::DragFloat("x axis", NULL, ranges);
-			//ImGui::DragFloat("y axis", NULL, ranges);
-			//ImGui::DragFloat("z axis", NULL, ranges);
-			//
-			//ImGui::SeparatorText("Rotation");
-			//ImGui::DragFloat("x axis", NULL, ranges);
-			//ImGui::DragFloat("y axis", NULL, ranges);
-			//ImGui::DragFloat("z axis", NULL, ranges);
+			ImGui::SeparatorText("Position");
+			ImGui::DragFloat(posxlabel, &fobjPos.x);
+			ImGui::DragFloat(posylabel, &fobjPos.y);
+			ImGui::DragFloat(poszlabel, &fobjPos.z);
+
+			ImGui::SeparatorText("Rotation");
+			ImGui::DragFloat(anglexlabel, &fobjRot.x);
+			ImGui::DragFloat(angleylabel, &fobjRot.y);
+			ImGui::DragFloat(anglezlabel, &fobjRot.z);
 		}
 		if (ImGui::CollapsingHeader("Mesh"))
 		{
@@ -129,9 +119,42 @@ void UI::setUpUI()
 		ImGui::End();
 	}
 }
+void UI::setupABOUT()
+{
+	if (ImGui::Begin("About"))
+	{
+		ImGui::Text("Hello test text");
+	}
+}
+
+update_status UI::setUpUI()
+{
+	update_status ret = UPDATE_CONTINUE;
+
+	ret = setupMAINMENU();
+	if (showHier) setupHIERARCHY();
+	if (showCons) setupCONSOLE();
+	if (showInsp) setupINSPECTOR();
+
+	if (showAbout) setupABOUT();
+	if (showDemo) ImGui::ShowDemoWindow();
+
+	return ret;
+}
 
 bool UI::Init()
 {
+	fobjPos.x = 3; fobjPos.y = 3; fobjPos.z = 3;
+	fobjRot.x = 10; fobjRot.y = 10; fobjRot.z = 10;
+
+	showDemo = false;
+	showHier = true;
+	showCons = true;
+	showInsp = true;
+	showConf = true;
+
+	showAbout = false;
+
 	if (createImGuiContext())   return true;
 	else    return false;
 }
@@ -149,9 +172,7 @@ update_status UI::PreUpdate()
 
 	ImGui::DockSpaceOverViewport();
 
-	setUpUI();
-
-	return UPDATE_CONTINUE;
+	return setUpUI();
 }
 
 update_status UI::PostUpdate()
