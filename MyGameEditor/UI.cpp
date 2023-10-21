@@ -32,18 +32,129 @@ bool UI::createImGuiContext()
 
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->window->GLContext);
 
-	
-
 	if (ImGui_ImplOpenGL3_Init())   return true;
 	else    return false;
 }
 
-void UI::setUpUI()
+update_status UI::setupMAINMENU()
 {
+	if (ImGui::BeginMainMenuBar()) {
+		if (ImGui::BeginMenu("Menu"))
+		{
+			if (ImGui::BeginMenu("Window Toggle"))
+			{
+				ImGui::Checkbox("Hierarchy", &showHier);
+				ImGui::Checkbox("Inspector", &showInsp);
+				ImGui::Checkbox("Configuration", &showConf);
+				ImGui::Checkbox("Console", &showCons);
+				ImGui::EndMenu();
+			}
+
+			ImGui::Checkbox("Show Demo Window", &showDemo);
+
+			if (ImGui::MenuItem("GitHub", NULL, false, true))
+			{
+
+			}
+
+			ImGui::Checkbox("About", &showAbout);
+
+			if (ImGui::MenuItem("Quit", "Esc", false, true))
+			{
+				return UPDATE_STOP;
+			}
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+	}
+	return UPDATE_CONTINUE;
+}
+void UI::setupHIERARCHY()
+{
+	if (ImGui::Begin("Hierarchy"))
+	{
+		//for (all items in GameObject list)
+		//{
+		//	ImGui::MenuItem("Objectname", NULL, false, false);
+		//}
+		ImGui::End();
+	}
+}
+void UI::setupCONSOLE()
+{
+	if (ImGui::Begin("Console"))
+	{
+		//for (all items in log list)
+		//{
+		//	// Find a better way to print a prettier and less heavy log
+		//	ImGui::MenuItem("HH:MM:SS  Log description", NULL, false, false);
+		//}
+		ImGui::End();
+	}
+}
+void UI::setupINSPECTOR()
+{
+	if (ImGui::Begin("Inspector"))
+	{
+		if (ImGui::CollapsingHeader("Transform"))
+		{
+			ImGui::SeparatorText("Position");
+			ImGui::DragFloat(posxlabel, &fobjPos.x);
+			ImGui::DragFloat(posylabel, &fobjPos.y);
+			ImGui::DragFloat(poszlabel, &fobjPos.z);
+
+			ImGui::SeparatorText("Rotation");
+			ImGui::DragFloat(anglexlabel, &fobjRot.x);
+			ImGui::DragFloat(angleylabel, &fobjRot.y);
+			ImGui::DragFloat(anglezlabel, &fobjRot.z);
+		}
+		if (ImGui::CollapsingHeader("Mesh"))
+		{
+			ImGui::MenuItem("Mesh Name", NULL, false, false);
+		}
+		if (ImGui::CollapsingHeader("Texture"))
+		{
+			ImGui::MenuItem("Texture Name", NULL, false, false);
+		}
+		ImGui::End();
+	}
+}
+void UI::setupABOUT()
+{
+	if (ImGui::Begin("About"))
+	{
+		ImGui::Text("Hello test text");
+	}
+}
+
+update_status UI::setUpUI()
+{
+	update_status ret = UPDATE_CONTINUE;
+
+	ret = setupMAINMENU();
+	if (showHier) setupHIERARCHY();
+	if (showCons) setupCONSOLE();
+	if (showInsp) setupINSPECTOR();
+
+	if (showAbout) setupABOUT();
+	if (showDemo) ImGui::ShowDemoWindow();
+
+	return ret;
 }
 
 bool UI::Init()
 {
+	fobjPos.x = 3; fobjPos.y = 3; fobjPos.z = 3;
+	fobjRot.x = 10; fobjRot.y = 10; fobjRot.z = 10;
+
+	showDemo = false;
+	showHier = true;
+	showCons = true;
+	showInsp = true;
+	showConf = true;
+
+	showAbout = false;
+
 	if (createImGuiContext())   return true;
 	else    return false;
 }
@@ -61,9 +172,7 @@ update_status UI::PreUpdate()
 
 	ImGui::DockSpaceOverViewport();
 
-	ImGui::ShowDemoWindow();
-
-	return UPDATE_CONTINUE;
+	return setUpUI();
 }
 
 update_status UI::PostUpdate()
