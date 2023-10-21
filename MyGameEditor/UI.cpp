@@ -39,7 +39,7 @@ bool UI::createImGuiContext()
 void UI::setUpUI()
 {
 #pragma region
-	if (ImGui::BeginMenuBar()) {
+	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("Menu"))
 		{
 			if (ImGui::BeginMenu("Window Toggle"))
@@ -77,7 +77,7 @@ void UI::setUpUI()
 			}
 			ImGui::EndMenu();
 		}
-		ImGui::EndMenuBar();
+		ImGui::EndMainMenuBar();
 	}
 #pragma endregion
 #pragma region
