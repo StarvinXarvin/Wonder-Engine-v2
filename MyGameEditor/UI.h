@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.h"
+#include <vector>
 
 class Application;
 
@@ -23,8 +24,15 @@ private:
 	void setupCONSOLE();
 	void setupHIERARCHY();
 	void setupABOUT();
+	void setupCONFIG();
+
+	void calculateFramerate();
 
 private:
+	float frame_rate;
+
+	std::vector<float> frame_list;
+
 	bool showDemo;
 	bool showHier;
 	bool showCons;

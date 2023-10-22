@@ -9,6 +9,7 @@
 
 #include "parson.h"
 #include <list>
+#include <chrono>
 
 class Application {
 public:
@@ -32,4 +33,8 @@ private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
+
+public:
+	std::chrono::milliseconds frame_start;
+		std::chrono::milliseconds frame_end;
 };
