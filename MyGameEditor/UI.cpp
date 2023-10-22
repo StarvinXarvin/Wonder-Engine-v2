@@ -40,10 +40,18 @@ void UI::calculateFramerate()
 {
 	frame_rate = 1.0f / App->Gengine->frame_ratef * 1000000000;
 
+	milliseconds = App->Gengine->frame_ratef * 0.000001f;
+
 	frame_list.push_back(frame_rate);
 	if (frame_list.size() > 100)
 	{
 		frame_list.erase(frame_list.begin());
+	}
+
+	ms_list.push_back(milliseconds);
+	if (ms_list.size() > 100)
+	{
+		ms_list.erase(ms_list.begin());
 	}
 }
 
@@ -134,10 +142,11 @@ void UI::setupCONFIG()
 {
 	if (ImGui::Begin("Configuration"))
 	{
-		if (ImGui::CollapsingHeader("FPS Counter"))
+		if (ImGui::CollapsingHeader("Application"))
 		{
-			ImGui::Text("%f", frame_rate);
 			ImGui::PlotHistogram("FPS", &frame_list[0], frame_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
+
+			ImGui::PlotHistogram("Milliseconds", &ms_list[0], ms_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
 		}
 	}
 }
@@ -157,7 +166,7 @@ update_status UI::setUpUI()
 	if (showHier) setupHIERARCHY();
 	if (showCons) setupCONSOLE();
 	if (showInsp) setupINSPECTOR();
-	
+
 	calculateFramerate();
 	if (showConf) setupCONFIG();
 
@@ -181,6 +190,7 @@ bool UI::Init()
 	showAbout = false;
 
 	frame_list.push_back(0);
+	ms_list.push_back(0);
 
 	if (createImGuiContext())   return true;
 	else    return false;

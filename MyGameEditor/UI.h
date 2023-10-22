@@ -30,8 +30,10 @@ private:
 
 private:
 	float frame_rate;
+	float milliseconds;
 
 	std::vector<float> frame_list;
+	std::vector<float> ms_list;
 
 	bool showDemo;
 	bool showHier;
