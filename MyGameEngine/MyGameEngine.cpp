@@ -9,6 +9,7 @@
 #include "CubeVertexBuffer.h"
 #include "CubeInterleavedVBO.h"
 #include "CubeWireframeIVBO.h"
+#include "Mesh.h"
 
 #include "GraphicObject.h"
 
@@ -64,6 +65,9 @@ static void drawGrid(int grid_size, int grid_step) {
 }
 
 void MyGameEngine::render() {
+
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);            //Para hacer que se ponga en wireframe
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(camera.fov, camera.aspect, camera.zNear, camera.zFar);
@@ -94,6 +98,9 @@ void MyGameEngine::render() {
     cubeC.rotate(glm::radians(angle), vec3(0, 0, 1));
 
     cubeA.paint();*/
+
+    static auto mesh_ptrs = Mesh::loadFromFile("Assets/BakerHouse.fbx");
+    for (auto& mesh_ptr : mesh_ptrs) mesh_ptr->draw();
 
 #pragma endregion
     assert(glGetError() ==GL_NONE);
