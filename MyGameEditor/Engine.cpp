@@ -40,6 +40,16 @@ bool GameEngine::Init()
 	return true;
 }
 
+update_status GameEngine::Update()
+{
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT == KEY_STATE::KEY_REPEAT))
+	{
+
+	}
+
+	return UPDATE_CONTINUE;
+}
+
 update_status GameEngine::PostUpdate()
 {
 	const auto frame_start = steady_clock::now();
@@ -49,6 +59,12 @@ update_status GameEngine::PostUpdate()
 	const auto frame_end = steady_clock::now();
 	const auto frame_duration = frame_end - frame_start;
 	if (frame_duration < FDT) this_thread::sleep_for(FDT - frame_duration);
+
+	const auto true_frame_end = steady_clock::now();
+
+	const auto frame_rate = true_frame_end - frame_start;
+
+	frame_ratef = frame_rate.count();
 
 	return UPDATE_CONTINUE;
 }
