@@ -44,7 +44,7 @@ update_status GameEngine::Update()
 {
 	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT == KEY_STATE::KEY_REPEAT))
 	{
-
+    // Camera circular movement here
 	}
 
 	return UPDATE_CONTINUE;
