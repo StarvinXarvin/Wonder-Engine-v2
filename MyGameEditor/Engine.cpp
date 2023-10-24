@@ -29,6 +29,8 @@ GameEngine::~GameEngine()
 
 bool GameEngine::Init()
 {
+	engine.Init();
+
 	engine.renderer->camera.fov = 60;
 	engine.renderer->camera.aspect = static_cast<double>(WINDOW_WIDTH) / WINDOW_HEIGHT;
 	engine.renderer->camera.zNear = 0.1;

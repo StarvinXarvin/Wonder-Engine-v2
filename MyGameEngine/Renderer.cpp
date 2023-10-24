@@ -39,7 +39,6 @@ update_statusE Renderer::PreUpdate()
 
 update_statusE Renderer::Update()
 {
-	
 	return UPDATE_CONTINUEE;
 }
 

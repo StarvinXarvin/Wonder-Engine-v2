@@ -1,11 +1,14 @@
 #include "WonderEngine.h"
 #include <list>
+#include <IL/il.h>
 
 WonderEngine::WonderEngine()
 {
 	renderer = new Renderer(this);
 
 	AddModule(renderer);
+
+	ilInit();
 }
 
 WonderEngine::~WonderEngine()
