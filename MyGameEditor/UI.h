@@ -52,4 +52,7 @@ private:
 	const char anglexlabel[13] = "Angle x axis";
 	const char angleylabel[13] = "Angle y axis";
 	const char anglezlabel[13] = "Angle z axis";
+	const char scalexlabel[13] = "Scale x axis";
+	const char scaleylabel[13] = "Scale y axis";
+	const char scalezlabel[13] = "Scale z axis";
 };
