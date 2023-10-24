@@ -1,33 +1,97 @@
-#include "MyGameEngine.h"
-#include <GL\glew.h>
-#include <glm/ext/matrix_transform.hpp>
-#include <vector>
-#include <IL/il.h>
+#include "WonderEngine.h"
+#include <list>
 
-#include "CubeImmediateMode.h"
-#include "CubeVertexArray.h"
-#include "CubeVertexBuffer.h"
-#include "CubeInterleavedVBO.h"
-#include "CubeWireframeIVBO.h"
-#include "Mesh.h"
+WonderEngine::WonderEngine()
+{
+	renderer = new Renderer(this);
 
-#include "GraphicObject.h"
-
-using namespace std;
-
-static double angle = 0.0;
-
-MyGameEngine::MyGameEngine() {
-
-	ilInit();
-
+	AddModule(renderer);
 }
 
-void MyGameEngine::step(std::chrono::duration<double> dt) {
-	const double angle_vel = 90.0; // degrees per second
-	angle += angle_vel * dt.count();
+WonderEngine::~WonderEngine()
+{
+	std::list<EngineModule*>::iterator item = list_modulesE.end();
+
+	list_modulesE.clear();
 }
 
+bool WonderEngine::Init()
+{
+	bool ret = true;
+
+	// Call Init() in all modules
+	for (const auto& item : list_modulesE)
+	{
+		ret = item->Init();
+		if (ret == false) return ret;
+	}
+
+	// After all Init calls we call Start() in all modules
+	//
+	LOG("Engine Start --------------");
+	for (const auto& item : list_modulesE)
+	{
+		ret = item->Start();
+		if (ret == false) return ret;
+	}
+
+	return ret;
+}
+
+void WonderEngine::PrepareUpdate()
+{
+}
+
+// ---------------------------------------------
+void WonderEngine::FinishUpdate()
+{
+}
+
+// Call PreUpdate, Update and PostUpdate on all modules
+update_statusE WonderEngine::Update()
+{
+	update_statusE ret = UPDATE_CONTINUEE;
+	PrepareUpdate();
+
+	for (const auto& item : list_modulesE)
+	{
+		ret = item->PreUpdate();
+		if (ret == UPDATE_STOPE) return ret;
+	}
+
+	for (const auto& item : list_modulesE)
+	{
+		ret = item->Update();
+		if (ret == UPDATE_STOPE) return ret;
+	}
+
+	for (const auto& item : list_modulesE)
+	{
+		ret = item->PostUpdate();
+		if (ret == UPDATE_STOPE) return ret;
+	}
+
+	FinishUpdate();
+
+	return ret;
+}
+
+bool WonderEngine::CleanUp()
+{
+	bool ret = true;
+	for (const auto& item : list_modulesE)
+	{
+		ret = item->CleanUp();
+	}
+	return ret;
+}
+
+void WonderEngine::AddModule(EngineModule* mod)
+{
+	list_modulesE.push_back(mod);
+}
+
+/*
 static void drawAxis() {
 	glLineWidth(4.0);
 	glBegin(GL_LINES);
@@ -65,6 +129,8 @@ static void drawGrid(int grid_size, int grid_step) {
 }
 
 void MyGameEngine::render() {
+
+	//PostUpdate of render
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);            //Para hacer que se ponga en wireframe
 
@@ -119,3 +185,4 @@ void MyGameEngine::render() {
 #pragma endregion
 	assert(glGetError() == GL_NONE);
 }
+*/

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Module.h"
-#include "../MyGameEngine/MyGameEngine.h"
+#include "../MyGameEngine/WonderEngine.h"
 
 class Application;
 
@@ -19,7 +19,7 @@ public:
 	bool CleanUp();
 
 private:
-	MyGameEngine engine;
+	WonderEngine engine;
 
 	float camSensitivity = 1.0f;
 
