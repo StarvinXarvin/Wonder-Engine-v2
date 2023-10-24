@@ -83,21 +83,21 @@ void MyGameEngine::render() {
     
     
 #pragma region Draw Sandbox
-    /*auto cubeDraw = make_shared<CubeImmediateMode>();
-    GraphicObject cubeA(cubeDraw);
-    GraphicObject cubeB(cubeDraw);
-    GraphicObject cubeC(cubeDraw);
+    //auto cubeDraw = make_shared<CubeImmediateMode>();
+    //GraphicObject cubeA(cubeDraw);
+    //GraphicObject cubeB(cubeDraw);
+    //GraphicObject cubeC(cubeDraw);
 
-    cubeA.addChild(&cubeB);
-    cubeB.addChild(&cubeC);
-    cubeB.pos().y = 2.5;
-    cubeC.pos().x = 2.5;
-    
-    cubeA.rotate(glm::radians(angle), vec3(0, 1, 0));
-    cubeB.rotate(glm::radians(angle), vec3(1, 0, 0));
-    cubeC.rotate(glm::radians(angle), vec3(0, 0, 1));
+    //cubeA.addChild(&cubeB);
+    //cubeB.addChild(&cubeC);
+    //cubeB.pos().y = 2.5;
+    //cubeC.pos().x = 2.5;
+    //
+    //cubeA.rotate(glm::radians(angle), vec3(0, 1, 0));
+    //cubeB.rotate(glm::radians(angle), vec3(1, 0, 0));
+    //cubeC.rotate(glm::radians(angle), vec3(0, 0, 1));
 
-    cubeA.paint();*/
+    //cubeA.paint();
 
     static auto mesh_ptrs = Mesh::loadFromFile("Assets/BakerHouse.fbx");
     for (auto& mesh_ptr : mesh_ptrs) mesh_ptr->draw();

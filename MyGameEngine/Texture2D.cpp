@@ -9,7 +9,7 @@ Texture2D::Texture2D(const std::string& path) {
     //load image data using devil
     auto img = ilGenImage();
     ilBindImage(img);
-    ilLoadImage("Assets/Baker_house.png");
+    ilLoadImage(path.data());
     auto width = ilGetInteger(IL_IMAGE_WIDTH);
     auto height = ilGetInteger(IL_IMAGE_HEIGHT);
     auto channels = ilGetInteger(IL_IMAGE_CHANNELS);
