@@ -12,8 +12,6 @@ Application::Application() {
 	AddModule(input);
 	AddModule(Gengine);
 	AddModule(ui);
-
-	
 }
 
 Application::~Application()

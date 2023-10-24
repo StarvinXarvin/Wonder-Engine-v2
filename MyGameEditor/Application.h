@@ -36,5 +36,5 @@ private:
 
 public:
 	std::chrono::milliseconds frame_start;
-		std::chrono::milliseconds frame_end;
+	std::chrono::milliseconds frame_end;
 };

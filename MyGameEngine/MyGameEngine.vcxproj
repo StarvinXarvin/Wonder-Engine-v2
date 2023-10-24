@@ -18,10 +18,13 @@
     <ClInclude Include="CubeVertexArray.h" />
     <ClInclude Include="CubeVertexBuffer.h" />
     <ClInclude Include="CubeWireframeIVBO.h" />
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="GraphicObject.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MyGameEngine.h" />
+    <ClInclude Include="EngineModule.h" />
+    <ClInclude Include="WonderEngine.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Texture2D.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>
@@ -35,7 +38,8 @@
     <ClCompile Include="CubeWireframeIVBO.cpp" />
     <ClCompile Include="GraphicObject.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MyGameEngine.cpp" />
+    <ClCompile Include="WonderEngine.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Texture2D.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -90,7 +94,7 @@
 $(SolutionDir)\vcpkg\vcpkg.exe install opengl glew glm devil[libjpeg,libpng] assimp --recurse --triplet x64-windows</Command>
     </PreBuildEvent>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;GLU32.lib;DevIL.lib;assimp-vc143-mt.lib</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;GLU32.lib;DevIL.lib;assimp-vc142-mt.lib</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)vcpkg\installed\x64-windows\lib\</AdditionalLibraryDirectories>
