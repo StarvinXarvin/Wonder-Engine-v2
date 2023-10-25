@@ -83,7 +83,6 @@ update_statusE Renderer::PostUpdate()
 		}
 	}
 
-
 #pragma endregion
 	assert(glGetError() == GL_NONE);
 
