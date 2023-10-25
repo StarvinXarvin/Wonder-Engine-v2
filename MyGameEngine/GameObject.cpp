@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(std::vector<Mesh::Ptr> mesh) : position(0, 0, 0), rotation(0, 0, 0), scale(0, 0, 0)
+GameObject::GameObject(Mesh mesh) : position(0, 0, 0), rotation(0, 0, 0), scale(0, 0, 0)
 {
 	this->mesh = mesh;
 }

@@ -7,7 +7,7 @@
 class GameObject
 {
 public:
-	GameObject(std::vector<Mesh::Ptr> mesh);
+	GameObject(Mesh mesh);
 	~GameObject();
 
 	vec3f getPos();
@@ -19,7 +19,7 @@ public:
 	void setRot(vec3f newRot);
 	void setScale(vec3f newScale);
 
-	std::vector<Mesh::Ptr> mesh;
+	Mesh mesh;
 
 private:
 	vec3f position;

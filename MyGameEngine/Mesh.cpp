@@ -11,9 +11,7 @@
 
 using namespace std;
 
-std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
-
-	vector<Mesh::Ptr> mesh_ptrs;
+void Mesh::loadFromFile(const std::string& path) {
 
 	auto scene = aiImportFile(path.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
 	for (size_t m = 0; m < scene->mNumMeshes; ++m) {
@@ -47,12 +45,10 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 		auto mesh_ptr = make_shared<Mesh>(Formats::F_V3T2, vertex_data.data(), vertex_data.size(), index_data.data(), index_data.size());
 		mesh_ptr->texture = make_shared<Texture2D>(texPath);
 
-		mesh_ptrs.push_back(mesh_ptr);
+		mesh_pointers.push_back(mesh_ptr);
 	}
 	
 	aiReleaseImport(scene);
-
-	return mesh_ptrs;
 }
 
 Mesh::Mesh(Formats format, const void* vertex_data, unsigned int numVerts, const unsigned int* index_data, unsigned int numIndexs) :
