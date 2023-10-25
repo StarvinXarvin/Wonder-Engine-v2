@@ -55,6 +55,9 @@ update_status GameEngine::Update()
 update_status GameEngine::PostUpdate()
 {
 	const auto frame_start = steady_clock::now();
+
+	detectCameraInput();
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	engine.Update();
 	const auto frame_end = steady_clock::now();
@@ -68,6 +71,28 @@ update_status GameEngine::PostUpdate()
 	frame_ratef = frame_rate.count();
 
 	return UPDATE_CONTINUE;
+}
+
+void GameEngine::detectCameraInput() {
+
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+		(engine.renderer->camera.cameraMove(CameraDirection::LEFT));
+	}
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+		(engine.renderer->camera.cameraMove(CameraDirection::UP));
+	}
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+		(engine.renderer->camera.cameraMove(CameraDirection::DOWN));
+	}
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+		(engine.renderer->camera.cameraMove(CameraDirection::RIGHT));
+	}
+	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {
+		(engine.renderer->camera.cameraMove(CameraDirection::ZOOMIN));
+	}
+	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT) {
+		(engine.renderer->camera.cameraMove(CameraDirection::ZOOMOUT));
+	}
 }
 
 bool GameEngine::CleanUp()
