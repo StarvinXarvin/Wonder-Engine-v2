@@ -28,6 +28,8 @@ struct Camera
 
 	mat4 computeLookAt() const;
 
+	void computeAxis();
+
 	Camera();
 };
 
