@@ -45,7 +45,9 @@ void Camera::computeAxis() {
 	vec3f zAxis = eye - center;
 	//yAxis tiene que ser coplanario al eje y ortonormal y simultaneamente perpendicular a zAxis
 	//El determinante de yAxis, zAxis y (0, 1, 0) debe ser 0 + El producto escalar de yAxis y zAxis debe ser 0
-	//vec3f yAxis = 
+	vec3f yAxis = vec3f((zAxis.x / zAxis.z), ((-((zAxis.x * zAxis.x) / zAxis.z) - zAxis.z) / zAxis.y), 1);
+	//vec3f xAxis = yAxis.
+
 	//xAxis tiene que ser perpendicular a yAxis y a zAxis (Producto vectorial)
 }
 
