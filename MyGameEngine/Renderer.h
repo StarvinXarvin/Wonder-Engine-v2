@@ -2,7 +2,7 @@
 
 #include "EngineModule.h"
 #include "Camera.h"
-#include "Mesh.h"
+#include "GameObject.h"
 
 #include <list>
 #include <vector>
@@ -24,8 +24,6 @@ public:
 	static void drawAxis();
 	static void drawGrid(int grid_size, int grid_step);
 	Camera camera;
-private:
 
-
-	std::list<std::vector<Mesh::Ptr>> mesh_list;
+	std::list<GameObject*> object_list;
 };

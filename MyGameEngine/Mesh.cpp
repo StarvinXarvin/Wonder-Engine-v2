@@ -49,7 +49,7 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 
 		mesh_ptrs.push_back(mesh_ptr);
 	}
-
+	
 	aiReleaseImport(scene);
 
 	return mesh_ptrs;

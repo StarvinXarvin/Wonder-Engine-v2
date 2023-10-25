@@ -69,6 +69,9 @@
     <ClInclude Include="Renderer.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>VisualLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WonderEngine.cpp">
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>VisualLoader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

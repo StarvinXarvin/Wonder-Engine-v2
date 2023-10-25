@@ -9,6 +9,7 @@ GameObject::~GameObject()
 {
 }
 
+
 vec3f GameObject::getPos()
 {
 	return position;

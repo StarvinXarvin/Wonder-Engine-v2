@@ -44,5 +44,3 @@ private:
 	Mesh(const Mesh& cpy);
 	Mesh& operator=(const Mesh&);
 };
-
-//Añadido Mesh.h

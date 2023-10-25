@@ -27,7 +27,8 @@ bool Renderer::Init()
 
 bool Renderer::Start()
 {
-	mesh_list.push_back(Mesh::loadFromFile("Assets/BakerHouse.fbx"));
+	GameObject* house = new GameObject(Mesh::loadFromFile("Assets/BakerHouse.fbx"));
+	object_list.push_back(house);
 
 	return true;
 }
@@ -75,9 +76,9 @@ update_statusE Renderer::PostUpdate()
 	//cubeA.paint();
 
 
-	for (const auto& mesh_list_item : mesh_list)
+	for (const auto& object_list_item : object_list)
 	{
-		for (const auto& mesh_ptr_vector : mesh_list_item)
+		for (const auto& mesh_ptr_vector : object_list_item->mesh)
 		{
 			mesh_ptr_vector->draw();
 		}

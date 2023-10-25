@@ -18,6 +18,7 @@
     <ClInclude Include="CubeVertexArray.h" />
     <ClInclude Include="CubeVertexBuffer.h" />
     <ClInclude Include="CubeWireframeIVBO.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="GraphicObject.h" />
@@ -38,6 +39,7 @@
     <ClCompile Include="CubeWireframeIVBO.cpp" />
     <ClCompile Include="GraphicObject.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="WonderEngine.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Texture2D.cpp" />
@@ -53,7 +55,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
