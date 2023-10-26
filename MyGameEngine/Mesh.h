@@ -5,13 +5,14 @@
 #include <string>
 
 #include "Graphic.h"
+#include "Component.h"
 #include "Texture2D.h"
 #include "types.h"
 
 using namespace std;
 
 
-class Mesh : public Graphic
+class Mesh : public Graphic, Component
 {
 public:
 	enum Formats { F_V3, F_V3C4, F_V3T2 };
@@ -50,6 +51,11 @@ public:
 		return *this;
 	}
 
+	void Enable();
+	update_statusE Update();
+	void Disable();
+
 private:
 	Mesh(const Mesh& cpy);
+	bool active;
 };
