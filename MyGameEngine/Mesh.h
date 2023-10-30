@@ -1,21 +1,18 @@
 #pragma once
 
+#include "Component.h"
+#include "Graphic.h"
+
 #include <vector>
 #include <memory>
 #include <string>
 
-#include "Graphic.h"
-#include "Component.h"
-#include "Texture2D.h"
-#include "types.h"
+class GameObject;
 
-using namespace std;
-
-
-class Mesh : public Graphic, Component
+class Mesh : public Component, public Graphic
 {
 public:
-	enum Formats { F_V3, F_V3C4, F_V3T2 };
+	enum Formats { F_V3, FV3C4, F_V3T2 };
 	struct V3 { vec3f v; };
 	struct V3C4 { vec3f v; vec4f c; };
 	struct V3T2 { vec3f v; vec2f t; };
@@ -30,32 +27,9 @@ private:
 	const unsigned int _numIndexs;
 
 public:
-	Mesh(Formats format, const void* vertex_data, unsigned int numVerts, const unsigned int* indexs_data = nullptr, unsigned int numIndexs = 0);
-	Mesh(Mesh&& b) noexcept;
-	~Mesh();
-
-	void draw();
-
 	using Ptr = std::shared_ptr<Mesh>;
+	static std::vector<Ptr> loadPtrsFromFile(const std::string& path);
 
-	Texture2D::Ptr texture;
-	void loadFromFile(const std::string& path);
-
-	std::vector<Ptr> mesh_pointers;
-
-	Mesh& operator=(const Mesh& nmesh)
-	{
-		if (this == &nmesh)
-			return *this;
-
-		return *this;
-	}
-
-	void Enable();
-	update_statusE Update();
-	void Disable();
-
-private:
-	Mesh(const Mesh& cpy);
-	bool active;
+	Mesh();
+	virtual ~Mesh();
 };

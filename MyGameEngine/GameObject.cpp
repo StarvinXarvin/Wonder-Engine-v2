@@ -1,41 +1,33 @@
 #include "GameObject.h"
+#include "Mesh.h"
+#include "Transform.h"
 
-GameObject::GameObject(Mesh mesh) : position(0, 0, 0), rotation(0, 0, 0), scale(0, 0, 0)
+GameObject::GameObject()
 {
-	this->mesh = mesh;
 }
 
 GameObject::~GameObject()
 {
 }
 
-
-vec3f GameObject::getPos()
+Component* GameObject::createComponent(component_type type)
 {
-	return position;
-}
+	Component* newComponent = nullptr;
 
-vec3f GameObject::getRot()
-{
-	return rotation;
-}
+	switch (type)
+	{
+	case TRANSFORM:
+		newComponent = new Transform();
+		break;
 
-vec3f GameObject::getScale()
-{
-	return scale;
-}
+	case MESH:
+		newComponent = new Mesh();
+		break;
 
-void GameObject::setPos(vec3f newPos)
-{
-	position = newPos;
-}
+	case TEXTURE:
+		
+		break;
+	}
 
-void GameObject::setRot(vec3f newRot)
-{
-	rotation = newRot;
-}
-
-void GameObject::setScale(vec3f newScale)
-{
-	scale = newScale;
+	return newComponent;
 }

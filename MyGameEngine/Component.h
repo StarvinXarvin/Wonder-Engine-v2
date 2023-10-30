@@ -2,16 +2,25 @@
 #include "GameObject.h"
 #include "Globals.h"
 
+class GameObject;
+
 enum component_type
 {
 	TRANSFORM = 0,
 	MESH,
-	TRANSFORM,
+	TEXTURE,
 };
 
 class Component
 {
 public:
+	GameObject* gameObj;
+
+	Component(component_type type) : type(type), active(true)
+	{}
+	virtual ~Component()
+	{}
+
 	virtual void Enable()
 	{
 		active = true;
@@ -23,6 +32,15 @@ public:
 	virtual void Disable()
 	{
 		active = false;
+	}
+
+	component_type getType()
+	{
+		return type;
+	}
+	GameObject* getOwner()
+	{
+		return owner;
 	}
 
 private:

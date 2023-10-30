@@ -27,9 +27,7 @@ bool Renderer::Init()
 
 bool Renderer::Start()
 {
-	GameObject* house = new GameObject(Mesh::loadFromFile("Assets/BakerHouse.fbx"));
-	object_list.push_back(house);
-
+	// Load GameObjects
 	return true;
 }
 
@@ -74,15 +72,6 @@ update_statusE Renderer::PostUpdate()
 	//cubeC.rotate(glm::radians(angle), vec3(0, 0, 1));
 
 	//cubeA.paint();
-
-
-	for (const auto& object_list_item : object_list)
-	{
-		for (const auto& mesh_ptr_vector : object_list_item->mesh)
-		{
-			mesh_ptr_vector->draw();
-		}
-	}
 
 #pragma endregion
 	assert(glGetError() == GL_NONE);
