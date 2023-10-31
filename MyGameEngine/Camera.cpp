@@ -38,6 +38,7 @@ void Camera::cameraMove(int id) {
 		break;
 
 		//Va con matrices
+		//Para rotar, probar a hacer que rotes con las flechas direccionales moviendo el center, en teoria eso deberia crear la rotacion
 	}
 }
 
@@ -50,8 +51,8 @@ void Camera::computeAxis() {
 	glm::normalize(zAxis);
 	glm::normalize(yAxis);
 	glm::normalize(xAxis);
-	zAxis *= cameraSpeed*0.4;
-	yAxis *= cameraSpeed*0.1;
+	zAxis *= cameraSpeed*0.35;
+	yAxis *= cameraSpeed*0.15;
 	xAxis *= cameraSpeed*0.02;
 
 	//xAxis tiene que ser perpendicular a yAxis y a zAxis (Producto vectorial)
