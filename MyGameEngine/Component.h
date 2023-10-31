@@ -9,6 +9,7 @@ enum component_type
 	TRANSFORM = 0,
 	MESH,
 	TEXTURE,
+	UNKNOWN
 };
 
 class Component
@@ -16,7 +17,7 @@ class Component
 public:
 	GameObject* gameObj;
 
-	Component(component_type type) : type(type), active(true)
+	Component(component_type type, GameObject* owner) : type(type), active(true)
 	{}
 	virtual ~Component()
 	{}
@@ -34,6 +35,9 @@ public:
 		active = false;
 	}
 
+	virtual void drawComponent()
+	{}
+
 	component_type getType()
 	{
 		return type;
@@ -42,9 +46,18 @@ public:
 	{
 		return owner;
 	}
+	bool getActive()
+	{
+		return active;
+	}
 
 private:
-	component_type type;
-	GameObject* owner;
-	bool active;
+	component_type type = component_type::UNKNOWN;
+	
+	GameObject* owner = nullptr;
+	
+	std::string extension = "";
+	std::string name = "";
+	
+	bool active = true;
 };

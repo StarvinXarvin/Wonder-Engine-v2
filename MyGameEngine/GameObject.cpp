@@ -25,11 +25,11 @@ Component* GameObject::createComponent(component_type type, std::string path)
 	switch (type)
 	{
 	case TRANSFORM:
-		newComponent = new Transform();
+		newComponent = new Transform(this);
 		break;
 
 	case MESH:
-		newComponent = new Mesh(path, );
+		newComponent = new Mesh(path, this);
 		break;
 
 	case TEXTURE:
@@ -42,4 +42,12 @@ Component* GameObject::createComponent(component_type type, std::string path)
 void GameObject::addComponent(Component* component)
 {
 	component_list.push_back(component);
+}
+
+void GameObject::draw()
+{
+	for (Component* item : component_list)
+	{
+		if (item->getActive()) item->drawComponent();
+	}
 }

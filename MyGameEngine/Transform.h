@@ -5,7 +5,7 @@ class GameObject;
 class Transform : public Component
 {
 public:
-	Transform();
+	Transform(GameObject* owner);
 	virtual ~Transform();
 
 	void Enable();
