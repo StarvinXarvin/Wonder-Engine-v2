@@ -30,6 +30,7 @@ public:
 	using Ptr = std::shared_ptr<Mesh>;
 	static std::vector<Ptr> loadPtrsFromFile(const std::string& path);
 
-	Mesh();
+	Mesh(std::string path, Formats format, const void* vertex_data, unsigned int numVerts, const unsigned int* indexs_data = nullptr, unsigned int numIndex = 0);
 	virtual ~Mesh();
+	void draw();
 };

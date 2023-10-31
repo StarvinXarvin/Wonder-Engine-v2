@@ -2,15 +2,23 @@
 #include "Mesh.h"
 #include "Transform.h"
 
-GameObject::GameObject()
+GameObject::GameObject(std::string meshPath, std::string texturePath)
 {
+	Component* transform = createComponent(TRANSFORM);
+	Component* mesh = createComponent(MESH, meshPath);
+	Component* texture = createComponent(TEXTURE, texturePath);
+
+	addComponent(transform);
+	addComponent(mesh);
+	addComponent(texture);
+
 }
 
 GameObject::~GameObject()
 {
 }
 
-Component* GameObject::createComponent(component_type type)
+Component* GameObject::createComponent(component_type type, std::string path)
 {
 	Component* newComponent = nullptr;
 
@@ -21,7 +29,7 @@ Component* GameObject::createComponent(component_type type)
 		break;
 
 	case MESH:
-		newComponent = new Mesh();
+		newComponent = new Mesh(path, );
 		break;
 
 	case TEXTURE:
@@ -30,4 +38,8 @@ Component* GameObject::createComponent(component_type type)
 	}
 
 	return newComponent;
+}
+void GameObject::addComponent(Component* component)
+{
+	component_list.push_back(component);
 }
