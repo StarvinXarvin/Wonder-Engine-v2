@@ -38,6 +38,7 @@ bool GameEngine::Init()
 	engine.renderer->camera.eye = vec3(5, 2, 5);
 	engine.renderer->camera.center = vec3(0, 1, 0);
 	engine.renderer->camera.up = vec3(0, 1, 0);
+	engine.renderer->camera.computeAxis();
 
 	return true;
 }
@@ -93,6 +94,7 @@ void GameEngine::detectCameraInput() {
 	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT) {
 		(engine.renderer->camera.cameraMove(CameraDirection::ZOOMOUT));
 	}
+	engine.renderer->camera.computeAxis();
 }
 
 bool GameEngine::CleanUp()

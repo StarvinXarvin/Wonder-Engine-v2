@@ -21,8 +21,11 @@ struct Camera
 	vec3 eye;
 	vec3 center;
 	vec3 up;
+	vec3 xAxis;
+	vec3 yAxis;
+	vec3 zAxis;
 
-	int cameraSpeed = 1;
+	float cameraSpeed = 0.1f;
 
 	void cameraMove(int id);
 
