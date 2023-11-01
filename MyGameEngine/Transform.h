@@ -1,7 +1,5 @@
 #include "Component.h"
 
-class GameObject;
-
 class Transform : public Component
 {
 public:

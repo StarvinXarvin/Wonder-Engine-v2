@@ -24,6 +24,4 @@ public:
 	static void drawAxis();
 	static void drawGrid(int grid_size, int grid_step);
 	Camera camera;
-
-	std::list<GameObject*> object_list;
 };

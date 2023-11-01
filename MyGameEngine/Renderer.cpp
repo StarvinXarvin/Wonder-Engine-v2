@@ -5,7 +5,6 @@
 #include <thread>
 
 #include "Renderer.h"
-//#include "GraphicObject.h"
 #include "Mesh.h"
 
 #include <GL/glew.h>
@@ -57,21 +56,6 @@ update_statusE Renderer::PostUpdate()
 	drawAxis();
 
 #pragma region Draw Sandbox
-	//auto cubeDraw = make_shared<CubeImmediateMode>();
-	//GraphicObject cubeA(cubeDraw);
-	//GraphicObject cubeB(cubeDraw);
-	//GraphicObject cubeC(cubeDraw);
-
-	//cubeA.addChild(&cubeB);
-	//cubeB.addChild(&cubeC);
-	//cubeB.pos().y = 2.5;
-	//cubeC.pos().x = 2.5;
-	//
-	//cubeA.rotate(glm::radians(angle), vec3(0, 1, 0));
-	//cubeB.rotate(glm::radians(angle), vec3(1, 0, 0));
-	//cubeC.rotate(glm::radians(angle), vec3(0, 0, 1));
-
-	//cubeA.paint();
 
 #pragma endregion
 	assert(glGetError() == GL_NONE);

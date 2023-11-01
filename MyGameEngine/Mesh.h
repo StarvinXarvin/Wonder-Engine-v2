@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "Graphic.h"
+#include "Texture2D.h"
 
 #include <vector>
 #include <memory>
@@ -33,12 +34,14 @@ public:
 	void drawComponent();
 
 	using Ptr = std::shared_ptr<Mesh>;
-	Mesh* createMesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data = nullptr, uint numIndexs = 0);
+	Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data = nullptr, uint numIndexs = 0);
+
+	Texture2D::Ptr texture;
+
 
 private:
-	Mesh operator=(const Mesh&);
+	//Mesh operator=(const Mesh&);
 
-private:
 	component_type type = component_type::MESH;
 
 	std::string extension = "fbx";

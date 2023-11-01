@@ -83,6 +83,9 @@
     <ClInclude Include="Texture.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WonderEngine.cpp">
@@ -129,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

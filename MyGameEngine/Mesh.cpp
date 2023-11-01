@@ -42,7 +42,7 @@ Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 		string texPath = folderPath + aiScene::GetShortFilename(aiPath.C_Str());
 
 		auto mesh_ptr = make_shared<Mesh>(0, path, Formats::F_V3T2, vertex_data.data(), vertex_data.size(), index_data.data(), index_data.size());
-		mesh_ptr->texture = make_shared<Texture>(texPath);
+		mesh_ptr->texture = make_shared<Texture2D>(texPath);
 
 		mesh_ptrs.push_back(mesh_ptr);
 	}
@@ -51,13 +51,13 @@ Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 }
 
 // SEPARATE TEXTURE AND MESH LOAD
-Mesh* Mesh::createMesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data = nullptr, uint numIndexs = 0)
+Mesh::Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data = nullptr, uint numIndexs = 0) : Component(MESH, owner)
 {
 	extension = ".fbx";
-	this->path = ASSETS_PATH + std::to_string(ID) + extension;
+	//this->path = ASSETS_PATH + std::to_string(ID) + extension;
 
-	glGenBuffers(1, &vertex_buffer_id);
-	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_id);
+	glGenBuffers(1, &_vertex_buffer_id);
+	glBindBuffer(GL_ARRAY_BUFFER, _vertex_buffer_id);
 
 	switch (format) {
 	case Formats::F_V3:
@@ -72,15 +72,21 @@ Mesh* Mesh::createMesh(Formats format, const void* vertex_data, uint numVerts, c
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	if (index_data) {
-		glGenBuffers(1, &indexs_buffer_id);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexs_buffer_id);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * numIndexs, index_data, GL_STATIC_DRAW);
+	if (indexs_data) {
+		glGenBuffers(1, &_indexs_buffer_id);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexs_buffer_id);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * numIndexs, indexs_data, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 	else {
-		indexs_buffer_id = 0;
+		_indexs_buffer_id = 0;
 	}
+}
+
+Mesh::~Mesh()
+{
+	if (_vertex_buffer_id) glDeleteBuffers(1, &_vertex_buffer_id);
+	if (_indexs_buffer_id) glDeleteBuffers(1, &_indexs_buffer_id);
 }
 
 // SEPARATE TEXTURE AND MESH DRAW

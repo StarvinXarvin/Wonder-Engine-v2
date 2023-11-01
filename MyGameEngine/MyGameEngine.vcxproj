@@ -25,6 +25,7 @@
     <ClInclude Include="GraphicObject.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="EngineModule.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="WonderEngine.h" />
@@ -43,6 +44,7 @@
     <ClCompile Include="GraphicObject.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WonderEngine.cpp" />

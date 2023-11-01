@@ -5,8 +5,10 @@
 WonderEngine::WonderEngine()
 {
 	renderer = new Renderer(this);
+	scene = new Scene(this);
 
 	AddModule(renderer);
+	AddModule(scene);
 
 	ilInit();
 }
