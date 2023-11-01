@@ -4,11 +4,11 @@
 #include "Graphic.h"
 #include "Texture2D.h"
 
+#include "types.h"
+
 #include <vector>
 #include <memory>
 #include <string>
-
-class GameObject;
 
 class Mesh : public Component
 {
@@ -29,12 +29,12 @@ private:
 
 public:
 	Mesh(const std::string& path, GameObject* owner);
+	Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data, uint numIndexs);
 	virtual ~Mesh();
 	
 	void drawComponent();
 
 	using Ptr = std::shared_ptr<Mesh>;
-	Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data = nullptr, uint numIndexs = 0);
 
 	Texture2D::Ptr texture;
 

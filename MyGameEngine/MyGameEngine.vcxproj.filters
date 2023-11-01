@@ -14,12 +14,15 @@
     <Filter Include="VisualLoader\Cube Loader">
       <UniqueIdentifier>{5b21cc35-9099-4c92-8cdf-6c6d7f0471dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{f892b8e5-9c9d-42b9-ad04-9b3d06aa1b3c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{25cac00d-8fc8-4294-bba6-452ad7f7f417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Components">
+      <UniqueIdentifier>{f892b8e5-9c9d-42b9-ad04-9b3d06aa1b3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -50,9 +53,6 @@
     <ClInclude Include="Renderer.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CubeWireframeIVBO.h">
       <Filter>VisualLoader\Cube Loader</Filter>
     </ClInclude>
@@ -72,19 +72,22 @@
       <Filter>VisualLoader\Cube Loader</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>Components</Filter>
+      <Filter>GameObject\Components</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Components</Filter>
+      <Filter>GameObject\Components</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>Components</Filter>
+      <Filter>GameObject\Components</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Components</Filter>
+      <Filter>GameObject\Components</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -102,9 +105,6 @@
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>VisualLoader\Cube Loader</Filter>
@@ -125,16 +125,19 @@
       <Filter>VisualLoader\Cube Loader</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>Components</Filter>
+      <Filter>GameObject\Components</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Components</Filter>
+      <Filter>GameObject\Components</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Components</Filter>
+      <Filter>GameObject\Components</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

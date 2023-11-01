@@ -1,4 +1,6 @@
 #include "Component.h"
+#include "Globals.h"
+#include "types.h"
 
 class Transform : public Component
 {
@@ -7,7 +9,7 @@ public:
 	virtual ~Transform();
 
 	void Enable();
-	update_statusE Update();
+
 	void Disable();
 
 	// Getters
@@ -41,6 +43,8 @@ public:
 private:
 	component_type type = TRANSFORM;
 	GameObject* owner;
+
+	bool active;
 
 	vec3 Position;
 	vec3 Rotation;

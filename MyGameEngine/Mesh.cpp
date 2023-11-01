@@ -19,7 +19,7 @@ Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 		auto faces = mesh->mFaces;
 		vec3f* verts = (vec3f*)mesh->mVertices;
 		vec3f* texCoords = (vec3f*)mesh->mTextureCoords[0];
-
+		
 		vector<V3T2> vertex_data;
 		vector<unsigned int> index_data;
 
@@ -41,7 +41,7 @@ Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 		string folderPath = "Assets\\";
 		string texPath = folderPath + aiScene::GetShortFilename(aiPath.C_Str());
 
-		auto mesh_ptr = make_shared<Mesh>(0, path, Formats::F_V3T2, vertex_data.data(), vertex_data.size(), index_data.data(), index_data.size());
+		auto mesh_ptr = make_shared<Mesh>(Formats::F_V3T2, vertex_data.data(), vertex_data.size(), index_data.data(), index_data.size());
 		mesh_ptr->texture = make_shared<Texture2D>(texPath);
 
 		mesh_ptrs.push_back(mesh_ptr);

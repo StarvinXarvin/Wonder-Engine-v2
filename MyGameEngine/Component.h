@@ -1,6 +1,9 @@
 #pragma once
-#include "GameObject.h"
+
 #include "Globals.h"
+#include <string>
+
+class GameObject;
 
 enum component_type
 {
@@ -10,10 +13,11 @@ enum component_type
 	UNKNOWN
 };
 
+
 class Component
 {
 public:
-	GameObject* gameObj;
+	GameObject* gObj;
 
 	Component(component_type type, GameObject* owner) : type(type), active(true)
 	{}

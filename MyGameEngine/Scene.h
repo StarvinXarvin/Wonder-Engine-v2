@@ -5,6 +5,8 @@
 
 #include <list>
 
+class GameObject;
+
 class Scene : public EngineModule
 {
 public:

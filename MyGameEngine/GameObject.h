@@ -1,6 +1,8 @@
+#pragma once
 #include "glm/glm.hpp"
-#include "Component.h"
+
 #include "types.h"
+#include "Component.h"
 
 #include <vector>
 #include <list>
@@ -13,7 +15,7 @@ public:
 	GameObject(std::string meshPath, std::string texturePath = "");
 	~GameObject();
 
-	Component* createComponent(component_type type, std::string path = "");
+	Component* createComponent(GameObject* owner, component_type type, std::string path = "");
 	void addComponent(Component* component);
 	
 	std::list<Component*> component_list;
