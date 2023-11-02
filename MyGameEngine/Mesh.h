@@ -6,6 +6,10 @@
 
 #include "types.h"
 
+#include <assimp/postprocess.h>
+#include <assimp/cimport.h>
+#include <assimp/scene.h>
+
 #include <vector>
 #include <memory>
 #include <string>
@@ -28,7 +32,7 @@ private:
 	unsigned int _numIndexs;
 
 public:
-	Mesh(const std::string& path, GameObject* owner);
+	Mesh(const std::string& path, GameObject* owner); //scene pointer
 	Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data, uint numIndexs);
 	virtual ~Mesh();
 	
@@ -44,7 +48,7 @@ private:
 
 	component_type type = component_type::MESH;
 
-	std::string extension = "fbx";
+	std::string extension = ".fbx";
 	std::string name = "";
 
 	GameObject* owner;

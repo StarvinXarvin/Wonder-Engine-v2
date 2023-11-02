@@ -12,7 +12,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-
+// struct to fill the span of meshes in an object (aiScene IS the object)
 struct aiMeshExt : aiMesh {
 	auto verts() const { return span((vec3f*)mVertices, mNumVertices); }
 	auto texCoords() const { return span((vec3f*)mTextureCoords[0], mNumVertices); }
@@ -24,12 +24,12 @@ struct aiSceneExt : aiScene {
 	auto meshes() const { return span((aiMeshExt**)mMeshes, mNumMeshes); }
 };
 
-
-
 Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 {
-	const auto scene_ptr = aiImportFile(path.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
-	const aiSceneExt& scene = *(aiSceneExt*)scene_ptr;
+	const string realPath = "Assets/" + path + extension;
+
+	const auto importedFile_ptr = aiImportFile(realPath.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
+	const aiSceneExt& scene = *(aiSceneExt*)importedFile_ptr;
 
 	//load textures
 	vector<Texture2D::Ptr> texture_ptrs;
@@ -65,14 +65,12 @@ Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 		mesh_ptrs.push_back(mesh_sptr);
 	}
 
-	aiReleaseImport(scene_ptr);
+	aiReleaseImport(importedFile_ptr);
 }
 
 // SEPARATE TEXTURE AND MESH LOAD
 Mesh::Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data = nullptr, uint numIndexs = 0) : Component(MESH, owner)
 {
-	extension = ".fbx";
-	//this->path = ASSETS_PATH + std::to_string(ID) + extension;
 
 	glGenBuffers(1, &_vertex_buffer_id);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertex_buffer_id);

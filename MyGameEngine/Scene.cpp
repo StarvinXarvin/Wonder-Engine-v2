@@ -8,6 +8,13 @@ Scene::~Scene()
 {
 }
 
+bool Scene::Init()
+{
+	//define assimp scene to add meshes and materials there
+
+	return true;
+}
+
 bool Scene::Start()
 {
 	GameObject* defaultHouse = new GameObject("BakerHouse", "Baker_house");
@@ -19,22 +26,22 @@ bool Scene::Start()
 
 update_statusE Scene::PostUpdate()
 {
-	for (GameObject* gObjs : gameObj_list)
+	// Draw all gameObjects in the vector
+	for (GameObject* gObjs : gameObj_vector)
 	{
 		gObjs->draw();
 	}
-
 	return UPDATE_CONTINUEE;
 }
 
 bool Scene::CleanUp()
 {
-	gameObj_list.clear();
+	gameObj_vector.clear();
 
 	return true;
 }
 
 void Scene::addGameObj(GameObject* newGameObj)
 {
-	gameObj_list.push_back(newGameObj);
+	gameObj_vector.push_back(newGameObj);
 }

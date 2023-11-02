@@ -9,7 +9,6 @@
 
 #include <GL/glew.h>
 #include <glm/ext/matrix_transform.hpp>
-#include <vector>
 
 Renderer::Renderer(WonderEngine* engine, bool start_enabled) : EngineModule(engine, start_enabled)
 {
@@ -55,9 +54,6 @@ update_statusE Renderer::PostUpdate()
 	drawGrid(100, 1);
 	drawAxis();
 
-#pragma region Draw Sandbox
-
-#pragma endregion
 	assert(glGetError() == GL_NONE);
 
 	return UPDATE_CONTINUEE;

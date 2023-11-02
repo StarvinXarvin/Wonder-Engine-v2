@@ -3,7 +3,11 @@
 #include "EngineModule.h"
 #include "GameObject.h"
 
-#include <list>
+#include <assimp/postprocess.h>
+#include <assimp/cimport.h>
+#include <assimp/scene.h>
+
+#include <vector>
 
 class GameObject;
 
@@ -13,6 +17,7 @@ public:
 	Scene(WonderEngine* engine, bool start_enabled = true);
 	virtual ~Scene();
 
+	bool Init();
 	bool Start();
 
 	update_statusE PostUpdate();
@@ -21,5 +26,5 @@ public:
 
 	void addGameObj(GameObject* newGameObject);
 private:
-	std::list<GameObject*> gameObj_list;
+	std::vector<GameObject*> gameObj_vector;
 };

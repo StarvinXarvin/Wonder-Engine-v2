@@ -4,9 +4,8 @@
 #include "types.h"
 #include "Component.h"
 
-#include <vector>
-#include <list>
 #include <string>
+#include <vector>
 
 // GameObjects are imported, primitives are loaded independently
 class GameObject
@@ -18,7 +17,7 @@ public:
 	Component* createComponent(GameObject* owner, component_type type, std::string path = "");
 	void addComponent(Component* component);
 	
-	std::list<Component*> component_list;
+	std::vector<Component*> component_vector;
 
 	void draw();
 };

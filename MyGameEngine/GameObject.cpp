@@ -42,16 +42,15 @@ Component* GameObject::createComponent(GameObject* owner, component_type type, s
 }
 void GameObject::addComponent(Component* component)
 {
-	component_list.push_back(component);
+	component_vector.push_back(component);
 }
 
 void GameObject::draw()
 {
-	if (component_list.front() != nullptr)
+	// Draws all the components in the vector of an object
+	for (Component* item : component_vector)
 	{
-		for (Component* item : component_list)
-		{
-			if (item->getActive()) item->drawComponent();
-		}
+		if (item->getActive()) item->drawComponent();
 	}
+
 }
