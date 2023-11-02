@@ -8,6 +8,7 @@
 
 #include <span>
 #include <filesystem>
+#include <fstream>
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -27,13 +28,21 @@ struct aiSceneExt : aiScene {
 Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 {
 	const string realPath = "Assets/" + path + extension;
+	ifstream file(realPath);
+
+	if (file.good()) {
+		LOG("import works");
+	}
+	else {
+		LOG("import not works");
+	}
 
 	const auto importedFile_ptr = aiImportFile(realPath.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
-	const aiSceneExt& scene = *(aiSceneExt*)importedFile_ptr;
+	const aiSceneExt& object = *(aiSceneExt*)importedFile_ptr;
 
 	//load textures
 	vector<Texture2D::Ptr> texture_ptrs;
-	for (const auto& material : scene.materials()) {
+	for (const auto& material : object.materials()) {
 		aiString aiPath;
 		material->GetTexture(aiTextureType_DIFFUSE, 0, &aiPath);
 		fs::path texPath = fs::path(path).parent_path() / fs::path(aiPath.C_Str()).filename();
@@ -43,7 +52,7 @@ Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 
 	//load meshes
 	vector<Mesh::Ptr> mesh_ptrs;
-	for (const auto& mesh_ptr : scene.meshes()) {
+	for (const auto& mesh_ptr : object.meshes()) {
 
 		const auto& mesh = *mesh_ptr;
 
@@ -64,6 +73,8 @@ Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 		mesh_sptr->texture = texture_ptrs[mesh.mMaterialIndex];
 		mesh_ptrs.push_back(mesh_sptr);
 	}
+
+	mesh_vector = mesh_ptrs;
 
 	aiReleaseImport(importedFile_ptr);
 }
@@ -105,8 +116,49 @@ Mesh::~Mesh()
 	if (_indexs_buffer_id) glDeleteBuffers(1, &_indexs_buffer_id);
 }
 
+void Mesh::draw()
+{
+}
+
 // SEPARATE TEXTURE AND MESH DRAW
 void Mesh::drawComponent()
 {
+	glColor4ub(255, 255, 255, 255);
 
+	glBindBuffer(GL_ARRAY_BUFFER, _vertex_buffer_id);
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+	switch (_format) {
+	case Formats::F_V3:
+		glVertexPointer(3, GL_FLOAT, 0, nullptr);
+		break;
+	case Formats::F_V3C4:
+		glEnableClientState(GL_COLOR_ARRAY);
+		glVertexPointer(3, GL_FLOAT, sizeof(V3C4), nullptr);
+		glColorPointer(4, GL_FLOAT, sizeof(V3C4), (void*)sizeof(V3));
+		break;
+	case Formats::F_V3T2:
+		glEnable(GL_TEXTURE_2D);
+		if (texture.get()) texture->bind();
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glVertexPointer(3, GL_FLOAT, sizeof(V3T2), nullptr);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(V3T2), (void*)sizeof(V3));
+		break;
+	}
+
+	if (_indexs_buffer_id) {
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexs_buffer_id);
+		glDrawElements(GL_TRIANGLES, _numIndexs, GL_UNSIGNED_INT, nullptr);
+	}
+	else {
+		glDrawArrays(GL_TRIANGLES, 0, _numVerts);
+	}
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisable(GL_TEXTURE_2D);
 }

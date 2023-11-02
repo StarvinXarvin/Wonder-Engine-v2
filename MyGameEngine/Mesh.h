@@ -14,7 +14,7 @@
 #include <memory>
 #include <string>
 
-class Mesh : public Component
+class Mesh : public Graphic, public Component
 {
 public:
 	enum Formats { F_V3, F_V3C4, F_V3T2 };
@@ -32,16 +32,18 @@ private:
 	unsigned int _numIndexs;
 
 public:
-	Mesh(const std::string& path, GameObject* owner); //scene pointer
+	Mesh(const std::string& path, GameObject* owner);
 	Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data, uint numIndexs);
 	virtual ~Mesh();
 	
 	void drawComponent();
+	void draw();
 
 	using Ptr = std::shared_ptr<Mesh>;
 
 	Texture2D::Ptr texture;
 
+	std::vector<Ptr> mesh_vector;
 
 private:
 	//Mesh operator=(const Mesh&);
