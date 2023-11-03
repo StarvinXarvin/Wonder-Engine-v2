@@ -6,10 +6,8 @@
 
 #include "Transform.h"
 
-Transform::Transform(GameObject* owner) : Component(TRANSFORM, owner)
-{
-	this->owner = owner;
-	
+Transform::Transform() : Component(TRANSFORM)
+{	
 	active = true;
 
 	Position = (vec3)(0, 0, 0);

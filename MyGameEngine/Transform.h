@@ -5,7 +5,7 @@
 class Transform : public Component
 {
 public:
-	Transform(GameObject* owner);
+	Transform();
 	virtual ~Transform();
 
 	void Enable();
@@ -42,7 +42,6 @@ public:
 
 private:
 	component_type type = TRANSFORM;
-	GameObject* owner;
 
 	bool active;
 

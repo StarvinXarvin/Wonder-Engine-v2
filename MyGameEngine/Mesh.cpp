@@ -25,7 +25,7 @@ struct aiSceneExt : aiScene {
 	auto meshes() const { return span((aiMeshExt**)mMeshes, mNumMeshes); }
 };
 
-Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
+Mesh::Mesh(const std::string& path) : Component(MESH)
 {
 	const string realPath = "Assets/" + path + extension;
 	ifstream file(realPath);
@@ -80,7 +80,7 @@ Mesh::Mesh(const std::string& path, GameObject* owner) : Component(MESH, owner)
 }
 
 // SEPARATE TEXTURE AND MESH LOAD
-Mesh::Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data = nullptr, uint numIndexs = 0) : Component(MESH, owner)
+Mesh::Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data = nullptr, uint numIndexs = 0) : Component(MESH)
 {
 
 	glGenBuffers(1, &_vertex_buffer_id);

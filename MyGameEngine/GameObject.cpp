@@ -6,8 +6,8 @@
 
 GameObject::GameObject(std::string meshPath, std::string texturePath)
 {
-	Component* transform = createComponent(this, TRANSFORM);
-	Component* mesh = createComponent(this, MESH, meshPath);
+	Component* transform = createComponent(TRANSFORM);
+	Component* mesh = createComponent(MESH, meshPath);
 	//Component* texture = createComponent(TEXTURE, texturePath);
 
 	addComponent(transform);
@@ -19,18 +19,18 @@ GameObject::~GameObject()
 {
 }
 
-Component* GameObject::createComponent(GameObject* owner, component_type type, std::string path)
+Component* GameObject::createComponent(component_type type, std::string path)
 {
 	Component* newComponent = nullptr;
 
 	switch (type)
 	{
 	case TRANSFORM:
-		newComponent = new Transform(owner);
+		newComponent = new Transform();
 		break;
 
 	case MESH:
-		newComponent = new Mesh(path, owner);
+		newComponent = new Mesh(path);
 		break;
 
 	case TEXTURE:

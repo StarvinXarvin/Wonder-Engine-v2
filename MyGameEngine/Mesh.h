@@ -32,7 +32,7 @@ private:
 	unsigned int _numIndexs;
 
 public:
-	Mesh(const std::string& path, GameObject* owner);
+	Mesh(const std::string& path);
 	Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data, uint numIndexs);
 	virtual ~Mesh();
 	
@@ -52,8 +52,6 @@ private:
 
 	std::string extension = ".fbx";
 	std::string name = "";
-
-	GameObject* owner;
 
 	bool active = true;
 };

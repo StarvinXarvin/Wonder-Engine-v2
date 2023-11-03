@@ -3,8 +3,6 @@
 #include "Globals.h"
 #include <string>
 
-class GameObject;
-
 enum component_type
 {
 	TRANSFORM = 0,
@@ -17,9 +15,7 @@ enum component_type
 class Component
 {
 public:
-	GameObject* gObj;
-
-	Component(component_type type, GameObject* owner) : type(type), active(true)
+	Component(component_type type) : type(type), active(true)
 	{}
 	virtual ~Component()
 	{}
@@ -44,10 +40,6 @@ public:
 	{
 		return type;
 	}
-	GameObject* getOwner()
-	{
-		return owner;
-	}
 	bool getActive()
 	{
 		return active;
@@ -55,8 +47,6 @@ public:
 
 private:
 	component_type type = component_type::UNKNOWN;
-	
-	GameObject* owner = nullptr;
 	
 	std::string extension = "";
 	std::string name = "";

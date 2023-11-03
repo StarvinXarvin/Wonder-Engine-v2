@@ -45,6 +45,7 @@ private:
 
 	glm::vec3 fobjPos;
 	glm::vec3 fobjRot;
+	glm::vec3 fobjSca;
 
 	const char posxlabel[11] = "Pos x axis";
 	const char posylabel[11] = "Pos y axis";

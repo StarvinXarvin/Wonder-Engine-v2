@@ -14,7 +14,7 @@ public:
 	GameObject(std::string meshPath, std::string texturePath = "");
 	~GameObject();
 
-	Component* createComponent(GameObject* owner, component_type type, std::string path = "");
+	Component* createComponent(component_type type, std::string path = "");
 	void addComponent(Component* component);
 	
 	std::vector<Component*> component_vector;
