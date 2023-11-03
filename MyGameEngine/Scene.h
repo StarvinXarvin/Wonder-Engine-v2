@@ -1,5 +1,4 @@
 #pragma once
-
 #include "EngineModule.h"
 #include "GameObject.h"
 
@@ -8,6 +7,8 @@
 #include <assimp/scene.h>
 
 #include <vector>
+
+using namespace std;
 
 class GameObject;
 
@@ -25,6 +26,11 @@ public:
 	bool CleanUp();
 
 	void addGameObj(GameObject* newGameObject);
+
+	vector<GameObject*> getGameObjVec()
+	{
+		return gameObj_vector;
+	}
 private:
-	std::vector<GameObject*> gameObj_vector;
+	vector<GameObject*> gameObj_vector;
 };

@@ -1,5 +1,6 @@
 #include "Scene.h"
 
+
 Scene::Scene(WonderEngine* engine, bool start_enabled) : EngineModule(engine, start_enabled)
 {
 }
@@ -17,7 +18,7 @@ bool Scene::Init()
 
 bool Scene::Start()
 {
-	GameObject* defaultHouse = new GameObject("BakerHouse", "Baker_house");
+	GameObject* defaultHouse = new GameObject("BakerHouse.fbx", "Baker_house.png");
 
 	addGameObj(defaultHouse);
 

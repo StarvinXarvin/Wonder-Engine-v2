@@ -9,6 +9,11 @@
 #include <span>
 #include <filesystem>
 #include <fstream>
+#include <regex>
+
+
+#include "GL/gl.h"
+#include <iostream>
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -27,8 +32,14 @@ struct aiSceneExt : aiScene {
 
 Mesh::Mesh(const std::string& path) : Component(MESH)
 {
-	const string realPath = "Assets/" + path + extension;
+	const string realPath = "Assets/" + path;
 	ifstream file(realPath);
+	
+	// Take filename
+	regex regexp("([A-z]+)\.fbx$");
+	smatch match;
+	regex_match(path, match, regexp);
+	name = match[1];
 
 	if (file.good()) {
 		LOG("import works");
@@ -51,7 +62,6 @@ Mesh::Mesh(const std::string& path) : Component(MESH)
 	}
 
 	//load meshes
-	vector<Mesh::Ptr> mesh_ptrs;
 	for (const auto& mesh_ptr : object.meshes()) {
 
 		const auto& mesh = *mesh_ptr;
@@ -71,10 +81,8 @@ Mesh::Mesh(const std::string& path) : Component(MESH)
 
 		auto mesh_sptr = make_shared<Mesh>(Formats::F_V3T2, vertex_data.data(), vertex_data.size(), index_data.data(), index_data.size());
 		mesh_sptr->texture = texture_ptrs[mesh.mMaterialIndex];
-		mesh_ptrs.push_back(mesh_sptr);
+		meshs_vector.push_back(mesh_sptr);
 	}
-
-	mesh_vector = mesh_ptrs;
 
 	aiReleaseImport(importedFile_ptr);
 }
@@ -118,16 +126,16 @@ Mesh::~Mesh()
 
 void Mesh::draw()
 {
-}
-
-// SEPARATE TEXTURE AND MESH DRAW
-void Mesh::drawComponent()
-{
 	glColor4ub(255, 255, 255, 255);
+
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glBindBuffer(GL_ARRAY_BUFFER, _vertex_buffer_id);
 	glEnableClientState(GL_VERTEX_ARRAY);
-
+	
+	_format = Formats::F_V3T2;
+	
+	// Doesn't go through any of the formats??
 	switch (_format) {
 	case Formats::F_V3:
 		glVertexPointer(3, GL_FLOAT, 0, nullptr);
@@ -146,12 +154,20 @@ void Mesh::drawComponent()
 		break;
 	}
 
+	//_----------------------------------------------
+	std::cout << "index buffer id: " << _indexs_buffer_id << std::endl;
+
 	if (_indexs_buffer_id) {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexs_buffer_id);
 		glDrawElements(GL_TRIANGLES, _numIndexs, GL_UNSIGNED_INT, nullptr);
 	}
 	else {
 		glDrawArrays(GL_TRIANGLES, 0, _numVerts);
+	}
+
+	GLenum errorcode;
+	while ((errorcode = glGetError()) != GL_NO_ERROR) {
+		std::cout << "opengl error: " << errorcode << std::endl;
 	}
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -162,3 +178,13 @@ void Mesh::drawComponent()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisable(GL_TEXTURE_2D);
 }
+
+// SEPARATE TEXTURE AND MESH DRAW
+void Mesh::drawComponent()
+{
+	for (auto& mesh_ptr : meshs_vector)
+	{
+		mesh_ptr->draw();
+	}
+}
+

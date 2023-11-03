@@ -40,6 +40,8 @@ public:
 		Scale = newScale;
 	}
 
+	void drawComponent();
+
 private:
 	component_type type = TRANSFORM;
 

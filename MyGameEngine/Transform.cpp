@@ -7,7 +7,7 @@
 #include "Transform.h"
 
 Transform::Transform() : Component(TRANSFORM)
-{	
+{
 	active = true;
 
 	Position = (vec3)(0, 0, 0);
@@ -19,6 +19,9 @@ Transform::~Transform()
 {
 }
 
+void Transform::drawComponent()
+{
+}
 void Transform::Enable()
 {
 	active = true;

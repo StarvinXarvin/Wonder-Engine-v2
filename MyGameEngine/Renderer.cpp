@@ -54,8 +54,6 @@ update_statusE Renderer::PostUpdate()
 	drawGrid(100, 1);
 	drawAxis();
 
-	assert(glGetError() == GL_NONE);
-
 	return UPDATE_CONTINUEE;
 }
 

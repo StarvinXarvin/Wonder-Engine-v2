@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Module.h"
+#include <vector>
 #include "../MyGameEngine/WonderEngine.h"
 
 class Application;
@@ -23,6 +24,8 @@ private:
 
 	float camSensitivity = 1.0f;
 
+
 public:
 	float frame_ratef;
+	std::vector<GameObject*> gObjVec;
 };

@@ -17,7 +17,7 @@
 class Mesh : public Graphic, public Component
 {
 public:
-	enum Formats { F_V3, F_V3C4, F_V3T2 };
+	enum Formats { F_V3 = 0, F_V3C4, F_V3T2 };
 	struct V3 { vec3f v; };
 	struct V3C4 { vec3f v; vec4f c; };
 	struct V3T2 { vec3f v; vec2f t; };
@@ -43,7 +43,7 @@ public:
 
 	Texture2D::Ptr texture;
 
-	std::vector<Ptr> mesh_vector;
+	std::vector<Ptr> meshs_vector;
 
 private:
 	//Mesh operator=(const Mesh&);
