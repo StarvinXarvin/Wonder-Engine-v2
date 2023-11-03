@@ -28,18 +28,17 @@ void Camera::cameraMove(int id) {
 		center += xAxis;
 		eye += xAxis;
 		break;
-	case ZOOMIN:
-		center += zAxis;
-		eye += zAxis;
-		break;
-	case ZOOMOUT:
-		center -= zAxis;
-		eye -= zAxis;
-		break;
 
 		//Va con matrices
 		//Para rotar, probar a hacer que rotes con las flechas direccionales moviendo el center, en teoria eso deberia crear la rotacion
 	}
+}
+
+void Camera::CameraZoom(int zoom) {
+	vec3 zoomAxis = zAxis;
+	zoomAxis *= zoom;
+	center -= zoomAxis;
+	eye -= zoomAxis;
 }
 
 void Camera::computeAxis() {
@@ -47,7 +46,7 @@ void Camera::computeAxis() {
 	//yAxis tiene que ser coplanario al eje y ortonormal y simultaneamente perpendicular a zAxis
 	//El determinante de yAxis, zAxis y (0, 1, 0) debe ser 0 + El producto escalar de yAxis y zAxis debe ser 0
 	yAxis = vec3f((zAxis.x / zAxis.z), ((-((zAxis.x * zAxis.x) / zAxis.z) - zAxis.z) / zAxis.y), 1);
-	xAxis = glm::cross(zAxis, yAxis);\
+	xAxis = glm::cross(zAxis, yAxis);
 	glm::normalize(zAxis);
 	glm::normalize(yAxis);
 	glm::normalize(xAxis);

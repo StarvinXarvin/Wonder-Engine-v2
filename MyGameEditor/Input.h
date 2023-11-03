@@ -61,6 +61,11 @@ public:
 		return mouse_y_motion;
 	}
 
+	int GetMousewheel() const
+	{
+		return mouse_z;
+	}
+
 private:
 	KEY_STATE* keyboard;
 	KEY_STATE mouse_buttons[MAX_MOUSE_BUTTONS];

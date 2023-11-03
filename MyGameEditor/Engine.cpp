@@ -77,22 +77,25 @@ update_status GameEngine::PostUpdate()
 void GameEngine::detectCameraInput() {
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		(engine.renderer->camera.cameraMove(CameraDirection::LEFT));
+		engine.renderer->camera.cameraMove(CameraDirection::LEFT);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		(engine.renderer->camera.cameraMove(CameraDirection::UP));
+		engine.renderer->camera.cameraMove(CameraDirection::UP);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		(engine.renderer->camera.cameraMove(CameraDirection::DOWN));
+		engine.renderer->camera.cameraMove(CameraDirection::DOWN);
 	}
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		(engine.renderer->camera.cameraMove(CameraDirection::RIGHT));
+		engine.renderer->camera.cameraMove(CameraDirection::RIGHT);
 	}
-	if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT) {
-		(engine.renderer->camera.cameraMove(CameraDirection::ZOOMIN));
+	if (App->input->GetMousewheel() != 0) {
+		engine.renderer->camera.CameraZoom(App->input->GetMousewheel());
 	}
-	if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT) {
-		(engine.renderer->camera.cameraMove(CameraDirection::ZOOMOUT));
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN) {
+		engine.renderer->camera.cameraSpeed *= 3;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_UP) {
+		engine.renderer->camera.cameraSpeed /= 3;
 	}
 	engine.renderer->camera.computeAxis();
 }
