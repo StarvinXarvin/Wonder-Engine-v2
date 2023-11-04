@@ -29,7 +29,6 @@ void Camera::cameraMove(int id) {
 		center += xAxis;
 		eye += xAxis;
 		break;
-
 		//Va con matrices
 		//Para rotar, probar a hacer que rotes con las flechas direccionales moviendo el center, en teoria eso deberia crear la rotacion
 	}
@@ -40,14 +39,32 @@ void Camera::ResetCenter() {
 	prevMouseX = 0;
 	prevMouseY = 0;
 }
+
 void Camera::cameraRotate(double x, double y) {
-	vec2 mouseDir = { x-prevMouseX, y-prevMouseY };
-	eye.x += mouseDir.x * 0.1;
-	eye.y += mouseDir.y * 0.1;
-	LOG("MousePos: x: %f, y: %f", mouseDir.x, mouseDir.y);
+	if (prevMouseX != 0 && prevMouseY != 0) {
+		vec2 mouseDir = { x - prevMouseX, y - prevMouseY };
+		//eye.x += mouseDir.x * 0.05;
+		//eye.y += mouseDir.y * 0.05;
+		LOG("MousePos: x: %f, y: %f", mouseDir.x, mouseDir.y);
+		vec3 axisX(glm::normalize(yAxis));
+		vec3 axisY(glm::normalize(xAxis));
+		float angleX = (0.01f * mouseDir.x);
+		float angleY = (0.01f * mouseDir.y);
+		RotateCameraAroundObject(center, eye, up, angleY, axisY);
+		RotateCameraAroundObject(center, eye, up, angleX, axisX);
+	}
 	prevMouseX = x;
 	prevMouseY = y;
 }
+
+void Camera::RotateCameraAroundObject(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis) {
+	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), angleInRadians, axis);
+	vec3 translatedEye = eye - center;
+	vec3 rotatedEye = vec3(rotation * vec4(translatedEye, 1.0f));
+	eye = rotatedEye + center;
+	up = glm::mat3(rotation) * up;
+}
+
 void Camera::CameraZoom(int zoom) {
 	vec3 zoomAxis = zAxis;
 	zoomAxis *= zoom;
@@ -67,7 +84,6 @@ void Camera::computeAxis() {
 	zAxis *= cameraSpeed*0.35;
 	yAxis *= cameraSpeed*0.15;
 	xAxis *= cameraSpeed*0.02;
-
 	//xAxis tiene que ser perpendicular a yAxis y a zAxis (Producto vectorial)
 }
 

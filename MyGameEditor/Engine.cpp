@@ -81,10 +81,14 @@ void GameEngine::detectCameraInput() {
 			engine.renderer->camera.ResetCenter();
 		}
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT) {
-			engine.renderer->camera.cameraRotate(App->input->GetMouseXMotion(), App->input->GetMouseYMotion());
+			engine.renderer->camera.cameraRotate(App->input->GetMouseX(), App->input->GetMouseY());
+		}
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP) {
+			engine.renderer->camera.computeAxis();
 		}
 	}
 	else {
+		engine.renderer->camera.computeAxis();
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			(engine.renderer->camera.cameraMove(CameraDirection::LEFT));
 		}
@@ -109,8 +113,9 @@ void GameEngine::detectCameraInput() {
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_UP) {
 			engine.renderer->camera.cameraSpeed /= 3;
 		}
-		engine.renderer->camera.computeAxis();
 	}
+	
+
 }
 
 
