@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Globals.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
@@ -40,6 +41,21 @@ void Camera::cameraMove(int id) {
 		//Va con matrices
 		//Para rotar, probar a hacer que rotes con las flechas direccionales moviendo el center, en teoria eso deberia crear la rotacion
 	}
+}
+
+void Camera::ResetCenter() {
+	center = { 0, 1, 0 };
+	prevMouseX = 0;
+	prevMouseY = 0;
+}
+
+void Camera::cameraRotate(double x, double y) {
+	vec2 mouseDir = { x-prevMouseX, y-prevMouseY };
+	eye.x += mouseDir.x * 0.1;
+	eye.y += mouseDir.y * 0.1;
+	LOG("MousePos: x: %f, y: %f", mouseDir.x, mouseDir.y);
+	prevMouseX = x;
+	prevMouseY = y;
 }
 
 void Camera::computeAxis() {

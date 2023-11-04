@@ -51,12 +51,12 @@ public:
 		return mouse_z;
 	}
 
-	int GetMouseXMotion() const
+	double GetMouseXMotion() const
 	{
 		return mouse_x_motion;
 	}
 
-	int GetMouseYMotion() const
+	double GetMouseYMotion() const
 	{
 		return mouse_y_motion;
 	}

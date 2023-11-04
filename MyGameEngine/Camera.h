@@ -2,6 +2,8 @@
 
 #include "types.h"
 
+class Application;
+
 enum CameraDirection {
 	UP = 0,
 	DOWN,
@@ -25,9 +27,16 @@ struct Camera
 	vec3 yAxis;
 	vec3 zAxis;
 
+	int prevMouseX;
+	int prevMouseY;
+	int mouseX;
+	int mouseY;
+
 	float cameraSpeed = 0.1f;
 
+	void ResetCenter();
 	void cameraMove(int id);
+	void cameraRotate(double x, double y);
 
 	mat4 computeLookAt() const;
 
