@@ -18,7 +18,6 @@ public:
 	Scene(WonderEngine* engine, bool start_enabled = true);
 	virtual ~Scene();
 
-	bool Init();
 	bool Start();
 
 	update_statusE PostUpdate();
@@ -27,10 +26,13 @@ public:
 
 	void addGameObj(GameObject* newGameObject);
 
+	void createGameObject(string meshPath, string texturePath);
+
 	vector<GameObject*> getGameObjVec()
 	{
 		return gameObj_vector;
 	}
+
 private:
 	vector<GameObject*> gameObj_vector;
 };

@@ -3,8 +3,9 @@
 #include "Transform.h"
 #include "Mesh.h"
 
+using namespace std;
 
-GameObject::GameObject(std::string meshPath, std::string texturePath)
+GameObject::GameObject(string meshPath = "", string texturePath = "")
 {
 	Component* transform = createComponent(TRANSFORM);
 	Component* mesh = createComponent(MESH, meshPath);
@@ -19,7 +20,7 @@ GameObject::~GameObject()
 {
 }
 
-Component* GameObject::createComponent(component_type type, std::string path)
+Component* GameObject::createComponent(component_type type, string path)
 {
 	Component* newComponent = nullptr;
 
@@ -52,5 +53,4 @@ void GameObject::drawObj()
 	{
 		if (item->getActive()) item->drawComponent();
 	}
-
 }

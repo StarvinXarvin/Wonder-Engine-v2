@@ -7,29 +7,30 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 // GameObjects are imported, primitives are loaded independently
 class GameObject
 {
 public:
-	GameObject(std::string meshPath, std::string texturePath = "");
+	GameObject(string meshPath, string texturePath);
 	~GameObject();
 
-	Component* createComponent(component_type type, std::string path = "");
+	Component* createComponent(component_type type, string path = "");
 	void addComponent(Component* component);
 	
-	std::vector<Component*> component_vector;
+	vector<Component*> component_vector;
 
 	void drawObj();
 
-	void setName(const std::string name)
-	{
-		this->name = name;
-	}
-	std::string getName()
+	string getName()
 	{
 		return name;
 	}
-
+	void setName(string name)
+	{
+		this->name = name;
+	}
 private:
-	std::string name = "";
+	string name = "defaultName";
 };

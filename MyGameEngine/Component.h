@@ -2,6 +2,8 @@
 
 #include "Globals.h"
 #include <string>
+#include <regex>
+using namespace std;
 
 enum component_type
 {
@@ -36,19 +38,21 @@ public:
 	virtual void drawComponent()
 	{}
 
-	component_type getType()
+	virtual void extractName(std::string path)
+	{}
+
+	virtual component_type getType()
 	{
 		return type;
 	}
-	bool getActive()
+	virtual bool getActive()
 	{
 		return active;
 	}
 
-
 private:
 	component_type type = component_type::UNKNOWN;
-	std::string regex_origin = "([A-z]+)";
+
 	std::string extension = "";
 	std::string name = "";
 	

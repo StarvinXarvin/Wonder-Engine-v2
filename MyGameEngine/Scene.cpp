@@ -1,5 +1,10 @@
 #include "Scene.h"
 
+#include <string>
+#include <fstream>
+#include <filesystem>
+
+using namespace std;
 
 Scene::Scene(WonderEngine* engine, bool start_enabled) : EngineModule(engine, start_enabled)
 {
@@ -7,13 +12,6 @@ Scene::Scene(WonderEngine* engine, bool start_enabled) : EngineModule(engine, st
 
 Scene::~Scene()
 {
-}
-
-bool Scene::Init()
-{
-	//define assimp scene to add meshes and materials there
-
-	return true;
 }
 
 bool Scene::Start()
@@ -45,4 +43,19 @@ bool Scene::CleanUp()
 void Scene::addGameObj(GameObject* newGameObj)
 {
 	gameObj_vector.push_back(newGameObj);
+}
+
+void Scene::createGameObject(string meshPath = "", string texturePath = "")
+{
+	GameObject* newgObj = new GameObject(meshPath, texturePath);
+
+	int temp = 0;
+	for (GameObject* gObj : gameObj_vector)
+	{
+		temp++;
+	}
+	stringstream gObjName;
+	gObjName << "GameObject_" << temp;
+
+	newgObj->setName(gObjName.str());
 }

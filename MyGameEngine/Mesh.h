@@ -21,6 +21,8 @@ public:
 
 	void drawComponent();
 
+	void extractName(string path);
+
 private:
 	vector<MeshImporter::Ptr> meshs_vector;
 	

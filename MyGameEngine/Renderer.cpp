@@ -6,6 +6,7 @@
 
 #include "Renderer.h"
 #include "Mesh.h"
+#include "GameObject.h"
 
 #include <GL/glew.h>
 #include <glm/ext/matrix_transform.hpp>
@@ -16,27 +17,6 @@ Renderer::Renderer(WonderEngine* engine, bool start_enabled) : EngineModule(engi
 
 Renderer::~Renderer()
 {
-}
-
-bool Renderer::Init()
-{
-	return true;
-}
-
-bool Renderer::Start()
-{
-	// Load GameObjects
-	return true;
-}
-
-update_statusE Renderer::PreUpdate()
-{
-	return UPDATE_CONTINUEE;
-}
-
-update_statusE Renderer::Update()
-{
-	return UPDATE_CONTINUEE;
 }
 
 update_statusE Renderer::PostUpdate()
@@ -53,6 +33,10 @@ update_statusE Renderer::PostUpdate()
 
 	drawGrid(100, 1);
 	drawAxis();
+
+#pragma region Object Render
+
+#pragma endregion
 
 	return UPDATE_CONTINUEE;
 }

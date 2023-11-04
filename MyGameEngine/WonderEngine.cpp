@@ -17,8 +17,6 @@ WonderEngine::WonderEngine()
 
 WonderEngine::~WonderEngine()
 {
-	std::list<EngineModule*>::iterator item = list_modulesE.end();
-
 	list_modulesE.clear();
 }
 

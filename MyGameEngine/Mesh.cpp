@@ -16,8 +16,10 @@ Mesh::Mesh(const string path) : Component(MESH)
 		meshs_vector = MeshImporter::loadFromFile(ss.str());
 	}
 	else {
-		LOG("incorrect path");
+		LOG("File not found");
 	}
+
+	extractName(path);
 }
 
 void Mesh::drawComponent()
@@ -28,4 +30,14 @@ void Mesh::drawComponent()
 			item->draw();
 		}
 	}
+}
+
+void Mesh::extractName(string path)
+{
+	stringstream regexss;
+	regexss << REGEXORIGIN << extension;
+	regex nameExtractor(regexss.str());
+	smatch extractedName;
+	regex_match(path, extractedName, nameExtractor);
+	this->name = extractedName[1];
 }
