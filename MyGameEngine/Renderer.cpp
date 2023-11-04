@@ -5,12 +5,11 @@
 #include <thread>
 
 #include "Renderer.h"
-//#include "GraphicObject.h"
 #include "Mesh.h"
+#include "GameObject.h"
 
 #include <GL/glew.h>
 #include <glm/ext/matrix_transform.hpp>
-#include <vector>
 
 Renderer::Renderer(WonderEngine* engine, bool start_enabled) : EngineModule(engine, start_enabled)
 {
@@ -18,28 +17,6 @@ Renderer::Renderer(WonderEngine* engine, bool start_enabled) : EngineModule(engi
 
 Renderer::~Renderer()
 {
-}
-
-bool Renderer::Init()
-{
-	return true;
-}
-
-bool Renderer::Start()
-{
-	mesh_list.push_back(Mesh::loadFromFile("Assets/BakerHouse.fbx"));
-
-	return true;
-}
-
-update_statusE Renderer::PreUpdate()
-{
-	return UPDATE_CONTINUEE;
-}
-
-update_statusE Renderer::Update()
-{
-	return UPDATE_CONTINUEE;
 }
 
 update_statusE Renderer::PostUpdate()
@@ -57,35 +34,9 @@ update_statusE Renderer::PostUpdate()
 	drawGrid(100, 1);
 	drawAxis();
 
-#pragma region Draw Sandbox
-	//auto cubeDraw = make_shared<CubeImmediateMode>();
-	//GraphicObject cubeA(cubeDraw);
-	//GraphicObject cubeB(cubeDraw);
-	//GraphicObject cubeC(cubeDraw);
-
-	//cubeA.addChild(&cubeB);
-	//cubeB.addChild(&cubeC);
-	//cubeB.pos().y = 2.5;
-	//cubeC.pos().x = 2.5;
-	//
-	//cubeA.rotate(glm::radians(angle), vec3(0, 1, 0));
-	//cubeB.rotate(glm::radians(angle), vec3(1, 0, 0));
-	//cubeC.rotate(glm::radians(angle), vec3(0, 0, 1));
-
-	//cubeA.paint();
-
-
-	for (const auto& mesh_list_item : mesh_list)
-	{
-		for (const auto& mesh_ptr_vector : mesh_list_item)
-		{
-			mesh_ptr_vector->draw();
-		}
-	}
-
+#pragma region Object Render
 
 #pragma endregion
-	assert(glGetError() == GL_NONE);
 
 	return UPDATE_CONTINUEE;
 }

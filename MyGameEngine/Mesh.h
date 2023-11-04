@@ -1,48 +1,36 @@
 #pragma once
+#include "Component.h"
+#include "Globals.h"
+#include "MeshImporter.h"
 
-#include <vector>
 #include <memory>
 #include <string>
-
-#include "Graphic.h"
-#include "Texture2D.h"
-#include "types.h"
+#include <vector>
 
 using namespace std;
 
-
-class Mesh : public Graphic
+class Mesh : public Component
 {
 public:
-	enum Formats { F_V3, F_V3C4, F_V3T2 };
-	struct V3 { vec3f v; };
-	struct V3C4 { vec3f v; vec4f c; };
-	struct V3T2 { vec3f v; vec2f t; };
+	Mesh(const string path);
+	virtual ~Mesh(){}
+
+	void Enable() { active = true; }
+	update_statusE Update() { return UPDATE_CONTINUEE; }
+	void Disable() { active = false; }
+
+	void drawComponent();
+
+	void extractName(string path);
 
 private:
-	const enum Formats _format;
+	vector<MeshImporter::Ptr> meshs_vector;
+	
+	component_type type = MESH;
 
-	unsigned int _vertex_buffer_id;
-	const unsigned int _numVerts;
+	string regex_origin;
+	string extension = ".fbx";
+	string name = "";
 
-	unsigned int _indexs_buffer_id;
-	const unsigned int _numIndexs;
-
-public:
-	using Ptr = std::shared_ptr<Mesh>;
-
-	static std::vector<Ptr> loadFromFile(const std::string& path);
-
-	Texture2D::Ptr texture;
-
-	Mesh(Formats format, const void* vertex_data, unsigned int numVerts, const unsigned int* indexs_data = nullptr, unsigned int numIndexs = 0);
-	Mesh(Mesh&& b) noexcept;
-	void draw();
-	~Mesh();
-
-private:
-	Mesh(const Mesh& cpy);
-	Mesh& operator=(const Mesh&);
+	bool active = true;
 };
-
-//Añadido Mesh.h

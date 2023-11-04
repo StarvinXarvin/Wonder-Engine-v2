@@ -5,19 +5,24 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Modules">
       <UniqueIdentifier>{73bc4bf2-3f9c-49cf-9a50-45d0154d34cc}</UniqueIdentifier>
     </Filter>
     <Filter Include="VisualLoader">
       <UniqueIdentifier>{1b0a6986-fe41-4bfa-944a-f7525d3376b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VisualLoader\Cube Loader">
+      <UniqueIdentifier>{5b21cc35-9099-4c92-8cdf-6c6d7f0471dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{25cac00d-8fc8-4294-bba6-452ad7f7f417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Components">
+      <UniqueIdentifier>{f892b8e5-9c9d-42b9-ad04-9b3d06aa1b3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -25,24 +30,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeImmediateMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeVertexArray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeVertexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeInterleavedVBO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CubeWireframeIVBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EngineModule.h">
@@ -57,9 +44,6 @@
     <ClInclude Include="Texture2D.h">
       <Filter>VisualLoader</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>VisualLoader</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicObject.h">
       <Filter>VisualLoader</Filter>
     </ClInclude>
@@ -69,34 +53,52 @@
     <ClInclude Include="Renderer.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="CubeWireframeIVBO.h">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeImmediateMode.h">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeInterleavedVBO.h">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeVertexArray.h">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeVertexBuffer.h">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshImporter.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>GameObject\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WonderEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CubeImmediateMode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CubeVertexArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CubeVertexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CubeInterleavedVBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CubeWireframeIVBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>VisualLoader</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">
       <Filter>VisualLoader</Filter>
@@ -106,6 +108,42 @@
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeImmediateMode.cpp">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeInterleavedVBO.cpp">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeVertexArray.cpp">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeVertexBuffer.cpp">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeWireframeIVBO.cpp">
+      <Filter>VisualLoader\Cube Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshImporter.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>GameObject\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

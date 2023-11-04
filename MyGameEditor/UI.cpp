@@ -128,9 +128,9 @@ void UI::setupINSPECTOR()
 			ImGui::DragFloat(anglezlabel, &fobjRot.z);
 			
 			ImGui::SeparatorText("Scale");
-			ImGui::DragFloat(scalexlabel, &fobjRot.x);
-			ImGui::DragFloat(scaleylabel, &fobjRot.y);
-			ImGui::DragFloat(scalezlabel, &fobjRot.z);
+			ImGui::DragFloat(scalexlabel, &fobjSca.x);
+			ImGui::DragFloat(scaleylabel, &fobjSca.y);
+			ImGui::DragFloat(scalezlabel, &fobjSca.z);
 		}
 		if (ImGui::CollapsingHeader("Mesh"))
 		{
@@ -185,6 +185,7 @@ bool UI::Init()
 {
 	fobjPos.x = 3; fobjPos.y = 3; fobjPos.z = 3;
 	fobjRot.x = 10; fobjRot.y = 10; fobjRot.z = 10;
+	fobjSca.x = 10; fobjSca.y = 10; fobjSca.z = 10;
 
 	showDemo = false;
 	showHier = true;

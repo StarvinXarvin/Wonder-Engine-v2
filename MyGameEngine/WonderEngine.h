@@ -2,12 +2,13 @@
 
 #include "EngineModule.h"
 #include "Renderer.h"
+#include "Scene.h"
 
 class WonderEngine
 {
 public:
 	Renderer* renderer;
-
+	Scene* scene;
 private:
 	std::list<EngineModule*> list_modulesE;
 
