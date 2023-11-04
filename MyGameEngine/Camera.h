@@ -38,6 +38,8 @@ struct Camera
 	void cameraMove(int id);
 	void cameraRotate(double x, double y);
 
+	void CameraZoom(int zoom);
+
 	mat4 computeLookAt() const;
 
 	void computeAxis();
