@@ -19,6 +19,8 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
+	void detectCameraInput();
+
 private:
 	WonderEngine engine;
 

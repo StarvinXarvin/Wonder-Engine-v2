@@ -35,9 +35,10 @@ bool GameEngine::Init()
 	engine.renderer->camera.aspect = static_cast<double>(WINDOW_WIDTH) / WINDOW_HEIGHT;
 	engine.renderer->camera.zNear = 0.1;
 	engine.renderer->camera.zFar = 100;
-	engine.renderer->camera.eye = vec3(5, 1.75, 5);
+	engine.renderer->camera.eye = vec3(5, 2, 5);
 	engine.renderer->camera.center = vec3(0, 1, 0);
 	engine.renderer->camera.up = vec3(0, 1, 0);
+	engine.renderer->camera.computeAxis();
 
 	return true;
 }
@@ -52,6 +53,9 @@ update_status GameEngine::Update()
 update_status GameEngine::PostUpdate()
 {
 	const auto frame_start = steady_clock::now();
+
+	detectCameraInput();
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	engine.Update();
 	const auto frame_end = steady_clock::now();
@@ -66,6 +70,46 @@ update_status GameEngine::PostUpdate()
 
 	return UPDATE_CONTINUE;
 }
+
+void GameEngine::detectCameraInput() {
+
+	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) {
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
+			engine.renderer->camera.ResetCenter();
+		}
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT) {
+			engine.renderer->camera.cameraRotate(App->input->GetMouseXMotion(), App->input->GetMouseYMotion());
+		}
+	}
+	else {
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			(engine.renderer->camera.cameraMove(CameraDirection::LEFT));
+		}
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			(engine.renderer->camera.cameraMove(CameraDirection::UP));
+		}
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			(engine.renderer->camera.cameraMove(CameraDirection::DOWN));
+		}
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			(engine.renderer->camera.cameraMove(CameraDirection::RIGHT));
+		}
+		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+			engine.renderer->camera.ResetCenter();
+		}
+		if (App->input->GetMousewheel() != 0) {
+			engine.renderer->camera.CameraZoom(App->input->GetMousewheel());
+		}
+		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN) {
+			engine.renderer->camera.cameraSpeed *= 3;
+		}
+		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_UP) {
+			engine.renderer->camera.cameraSpeed /= 3;
+		}
+		engine.renderer->camera.computeAxis();
+	}
+}
+
 
 bool GameEngine::CleanUp()
 {
