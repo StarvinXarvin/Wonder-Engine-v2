@@ -1,11 +1,14 @@
 #pragma once
 #include "Component.h"
+#include <string>
+
+using namespace std;
 
 class GameObject;
 
 class Texture : Component
 {
-	Texture(GameObject* parent, bool start_enabled = true);
+	Texture(string path);
 	virtual ~Texture();
 
 	void Enable();
@@ -14,5 +17,4 @@ class Texture : Component
 
 private:
 	component_type type = TEXTURE;
-	GameObject* owner;
 };
