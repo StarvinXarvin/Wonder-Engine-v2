@@ -1,57 +1,34 @@
 #pragma once
-
 #include "Component.h"
-#include "Graphic.h"
-#include "Texture2D.h"
+#include "Globals.h"
+#include "MeshImporter.h"
 
-#include "types.h"
-
-#include <assimp/postprocess.h>
-#include <assimp/cimport.h>
-#include <assimp/scene.h>
-
-#include <vector>
 #include <memory>
 #include <string>
+#include <vector>
 
-class Mesh : public Graphic, public Component
+using namespace std;
+
+class Mesh : public Component
 {
 public:
-	enum Formats { F_V3 = 0, F_V3C4, F_V3T2 };
-	struct V3 { vec3f v; };
-	struct V3C4 { vec3f v; vec4f c; };
-	struct V3T2 { vec3f v; vec2f t; };
+	Mesh(const string path);
+	virtual ~Mesh(){}
 
-private:
-	enum Formats _format;
+	void Enable() { active = true; }
+	update_statusE Update() { return UPDATE_CONTINUEE; }
+	void Disable() { active = false; }
 
-	unsigned int _vertex_buffer_id;
-	unsigned int _numVerts;
-
-	unsigned int _indexs_buffer_id;
-	unsigned int _numIndexs;
-
-public:
-	Mesh(const std::string& path);
-	Mesh(Formats format, const void* vertex_data, uint numVerts, const uint* indexs_data, uint numIndexs);
-	virtual ~Mesh();
-	
 	void drawComponent();
-	void draw();
-
-	using Ptr = std::shared_ptr<Mesh>;
-
-	Texture2D::Ptr texture;
-
-	std::vector<Ptr> meshs_vector;
 
 private:
-	//Mesh operator=(const Mesh&);
+	vector<MeshImporter::Ptr> meshs_vector;
+	
+	component_type type = MESH;
 
-	component_type type = component_type::MESH;
-
-	std::string extension = ".fbx";
-	std::string name = "";
+	string regex_origin;
+	string extension = ".fbx";
+	string name = "";
 
 	bool active = true;
 };

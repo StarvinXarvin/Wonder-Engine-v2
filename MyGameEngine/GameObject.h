@@ -19,5 +19,17 @@ public:
 	
 	std::vector<Component*> component_vector;
 
-	void draw();
+	void drawObj();
+
+	void setName(const std::string name)
+	{
+		this->name = name;
+	}
+	std::string getName()
+	{
+		return name;
+	}
+
+private:
+	std::string name = "";
 };

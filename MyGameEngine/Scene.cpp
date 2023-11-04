@@ -30,7 +30,7 @@ update_statusE Scene::PostUpdate()
 	// Draw all gameObjects in the vector
 	for (GameObject* gObjs : gameObj_vector)
 	{
-		gObjs->draw();
+		gObjs->drawObj();
 	}
 	return UPDATE_CONTINUEE;
 }

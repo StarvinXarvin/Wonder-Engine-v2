@@ -45,9 +45,10 @@ public:
 		return active;
 	}
 
+
 private:
 	component_type type = component_type::UNKNOWN;
-	
+	std::string regex_origin = "([A-z]+)";
 	std::string extension = "";
 	std::string name = "";
 	

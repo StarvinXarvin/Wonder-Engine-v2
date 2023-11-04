@@ -45,7 +45,7 @@ void GameObject::addComponent(Component* component)
 	component_vector.push_back(component);
 }
 
-void GameObject::draw()
+void GameObject::drawObj()
 {
 	// Draws all the components in the vector of an object
 	for (Component* item : component_vector)
