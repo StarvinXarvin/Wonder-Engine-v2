@@ -148,15 +148,17 @@ void GameEngine::createDroppedFile(string path)
 	{
 	case _FBX:
 		LOG("FBX DROPPED");
-
 		engine.scene->createGameObject(pathArr[1]);
 		break;
+
 	case _PNG:
 		LOG("PNG DROPPED");
 		break;
+
 	case NOTADMITTED:
 		LOG("NOT ADMITTED FILE TYPE DROPPED");
 		break;
+
 	default:
 		break;
 	}
