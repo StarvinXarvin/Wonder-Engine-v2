@@ -32,7 +32,7 @@ public:
 
 	void detectCameraInput();
 
-	static void createDroppedFile(string path);
+	void createDroppedFile(string path);
 
 private:
 	WonderEngine engine;

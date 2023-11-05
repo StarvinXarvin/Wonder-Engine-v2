@@ -116,7 +116,7 @@ update_status Input::PreUpdate()
 		case SDL_DROPFILE:
 			string path = e.drop.file;
 			LOG(path.c_str());
-			GameEngine::createDroppedFile(path);
+			App->Gengine->createDroppedFile(path);
 			break;
 		}
 

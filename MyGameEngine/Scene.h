@@ -26,7 +26,7 @@ public:
 
 	void addGameObj(GameObject* newGameObject);
 
-	void createGameObject(string meshPath, string texturePath);
+	void createGameObject(string meshPath, string texturePath = "");
 
 	vector<GameObject*> getGameObjVec()
 	{

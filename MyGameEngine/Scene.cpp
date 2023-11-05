@@ -16,8 +16,7 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
-	createGameObject("BakerHouse.fbx", "Baker_house.png");
-	createGameObject("BakerHouse.fbx", "Baker_house.png");
+	//createGameObject("BakerHouse.fbx", "Baker_house.png");
 
 	return true;
 }
@@ -44,7 +43,7 @@ void Scene::addGameObj(GameObject* newGameObj)
 	gameObj_vector.push_back(newGameObj);
 }
 
-void Scene::createGameObject(string meshPath = "", string texturePath = "")
+void Scene::createGameObject(string meshPath, string texturePath)
 {
 	GameObject* newgObj = new GameObject(meshPath, texturePath);
 

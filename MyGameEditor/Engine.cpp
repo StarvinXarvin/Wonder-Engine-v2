@@ -124,7 +124,7 @@ void GameEngine::createDroppedFile(string path)
 	regex_match(path, fileEnding, extractorRegex);
 
 	string fileType = fileEnding[1];
-	LOG(fileType.c_str()); 
+	LOG(fileType.c_str());
 	admittedFileTypes type;
 
 	if (fileType == "fbx")
@@ -139,11 +139,17 @@ void GameEngine::createDroppedFile(string path)
 	{
 		type = NOTADMITTED;
 	}
+	regex pathExtractor(".*Assets\\\\(.*)$");
+
+	smatch pathArr;
+	regex_match(path, pathArr, pathExtractor);
 
 	switch (type)
 	{
 	case _FBX:
 		LOG("FBX DROPPED");
+
+		engine.scene->createGameObject(pathArr[1]);
 		break;
 	case _PNG:
 		LOG("PNG DROPPED");
