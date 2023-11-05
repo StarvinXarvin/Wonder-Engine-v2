@@ -34,7 +34,7 @@ private:
 	component_type type = MESH;
 
 	string regex_origin;
-	string extension = ".fbx";
+	string extension = "\.fbx";
 	string name = "";
 
 	bool active = true;

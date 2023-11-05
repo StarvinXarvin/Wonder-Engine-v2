@@ -7,6 +7,7 @@
 #include "Application.h"
 #include "Globals.h"
 #include "Input.h"
+#include "Engine.h"
 
 #include <SDL2/SDL.h>
 #include <imgui_impl_sdl2.h>
@@ -110,6 +111,12 @@ update_status Input::PreUpdate()
 
 		case SDL_QUIT:
 			quit = true;
+			break;
+
+		case SDL_DROPFILE:
+			string path = e.drop.file;
+			LOG(path.c_str());
+			GameEngine::createDroppedFile(path);
 			break;
 		}
 

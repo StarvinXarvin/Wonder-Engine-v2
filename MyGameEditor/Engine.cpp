@@ -3,6 +3,9 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include <regex>
+#include <fstream>
+#include <filesystem>
 
 #include "Application.h"
 #include "Globals.h"
@@ -29,6 +32,8 @@ GameEngine::~GameEngine()
 
 bool GameEngine::Init()
 {
+
+
 	engine.Init();
 
 	engine.renderer->camera.fov = 60;
@@ -110,6 +115,47 @@ void GameEngine::detectCameraInput() {
 	}
 }
 
+void GameEngine::createDroppedFile(string path)
+{
+	// check file type and act accordingly
+	regex extractorRegex(".*\\.(.+)$");
+
+	smatch fileEnding;
+	regex_match(path, fileEnding, extractorRegex);
+
+	string fileType = fileEnding[1];
+	LOG(fileType.c_str()); 
+	admittedFileTypes type;
+
+	if (fileType == "fbx")
+	{
+		type = _FBX;
+	}
+	else if (fileType == "png")
+	{
+		type = _PNG;
+	}
+	else
+	{
+		type = NOTADMITTED;
+	}
+
+	switch (type)
+	{
+	case _FBX:
+		LOG("FBX DROPPED");
+		break;
+	case _PNG:
+		LOG("PNG DROPPED");
+		break;
+	case NOTADMITTED:
+		LOG("NOT ADMITTED FILE TYPE DROPPED");
+		break;
+	default:
+		break;
+	}
+
+}
 
 bool GameEngine::CleanUp()
 {

@@ -20,6 +20,10 @@ bool Scene::Start()
 
 	addGameObj(defaultHouse);
 
+	defaultHouse = new GameObject("BakerHouse.fbx", "Baker_house.png");
+
+	addGameObj(defaultHouse);
+
 	return true;
 }
 

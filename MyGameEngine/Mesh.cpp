@@ -35,7 +35,7 @@ void Mesh::drawComponent()
 void Mesh::extractName(string path)
 {
 	stringstream regexss;
-	regexss << REGEXORIGIN << extension;
+	regexss << REGEXORIGIN << extension << "$";
 	regex nameExtractor(regexss.str());
 	smatch extractedName;
 	regex_match(path, extractedName, nameExtractor);

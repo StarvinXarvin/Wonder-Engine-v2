@@ -107,6 +107,7 @@ void UI::setupHIERARCHY()
 						MenuItem(comp->getName().c_str());
 					}
 				}
+				TreePop();
 			}
 		}
 		End();
@@ -196,9 +197,9 @@ update_status UI::setUpUI()
 
 bool UI::Init()
 {
-	fobjPos.x = 3; fobjPos.y = 3; fobjPos.z = 3;
-	fobjRot.x = 10; fobjRot.y = 10; fobjRot.z = 10;
-	fobjSca.x = 10; fobjSca.y = 10; fobjSca.z = 10;
+	fobjPos.x = 0; fobjPos.y = 0; fobjPos.z = 0;
+	fobjRot.x = 0; fobjRot.y = 0; fobjRot.z = 0;
+	fobjSca.x = 1; fobjSca.y = 1; fobjSca.z = 1;
 
 	showDemo = false;
 	showHier = true;
