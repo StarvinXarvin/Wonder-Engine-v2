@@ -42,6 +42,15 @@ public:
 
 	void drawComponent();
 
+	vector<vec3> getData()
+	{
+		vector<vec3> transformInfo;
+		transformInfo.push_back(Position);
+		transformInfo.push_back(Rotation);
+		transformInfo.push_back(Scale);
+		return transformInfo;
+	}
+
 private:
 	component_type type = TRANSFORM;
 

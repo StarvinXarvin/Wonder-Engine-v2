@@ -1,8 +1,5 @@
 #include "GameObject.h"
 
-#include "Transform.h"
-#include "Mesh.h"
-
 using namespace std;
 
 GameObject::GameObject(string meshPath = "", string texturePath = "")

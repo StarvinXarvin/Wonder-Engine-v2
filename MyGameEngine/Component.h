@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Globals.h"
+#include "types.h"
+#include <vector>
 #include <string>
 #include <regex>
 using namespace std;
@@ -49,12 +51,22 @@ public:
 	{
 		return active;
 	}
+	virtual string getName()
+	{
+		return name;
+	}
+
+	virtual vector<vec3> getData()
+	{
+		vector<vec3> empty;
+		return empty;
+	}
 
 private:
 	component_type type = component_type::UNKNOWN;
 
-	std::string extension = "";
-	std::string name = "";
+	string extension = "";
+	string name = "";
 	
 	bool active = true;
 };

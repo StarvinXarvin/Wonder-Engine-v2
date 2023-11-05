@@ -23,6 +23,11 @@ public:
 
 	void extractName(string path);
 
+	string getName()
+	{
+		return this->name;
+	}
+
 private:
 	vector<MeshImporter::Ptr> meshs_vector;
 	
