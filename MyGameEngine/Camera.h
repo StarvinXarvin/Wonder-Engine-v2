@@ -38,12 +38,15 @@ struct Camera
 	void cameraMove(int id);
 	void cameraRotate(double x, double y);
 	void RotateCameraAroundObject(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis);
+	void RotateDirection(int id);
 
 	void CameraZoom(int zoom);
 
 	mat4 computeLookAt() const;
 
 	void computeAxis();
+
+	void PrintVector(vec3 vector, const char* name);
 
 	Camera();
 };
