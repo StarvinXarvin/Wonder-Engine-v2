@@ -4,6 +4,9 @@
 #include "Renderer.h"
 #include "Scene.h"
 
+#include <string>
+#include <vector>
+
 class WonderEngine
 {
 public:
@@ -24,4 +27,20 @@ private:
 	void AddModule(EngineModule* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
+
 };
+
+vector<string> EngineLog;
+
+void addEngineLog(string newLog)
+{
+	EngineLog.push_back(newLog);
+}
+void deleteEngineLogs()
+{
+	EngineLog.clear();
+}
+vector<string> getEngineLogs()
+{
+	return EngineLog;
+}

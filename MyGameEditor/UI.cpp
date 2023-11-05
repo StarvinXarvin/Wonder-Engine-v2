@@ -121,11 +121,10 @@ void UI::setupCONSOLE()
 {
 	if (Begin("Console"))
 	{
-		//for (all items in log list)
-		//{
-		//	// Find a better way to print a prettier and less heavy log
-		//	ImGui::MenuItem("HH:MM:SS  Log description", NULL, false, false);
-		//}
+		for (auto log : App->Gengine->LOGS)
+		{
+			MenuItem(log.c_str());
+		}
 		End();
 	}
 }

@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "MeshImporter.h"
+#include "WonderEngine.h"
 
 #include <filesystem>
 #include <fstream>
@@ -16,7 +17,7 @@ Mesh::Mesh(const string path) : Component(MESH)
 		meshs_vector = MeshImporter::loadFromFile(ss.str());
 	}
 	else {
-		LOG("File not found");
+		addEngineLog("File not found");
 	}
 
 	extractName(path);

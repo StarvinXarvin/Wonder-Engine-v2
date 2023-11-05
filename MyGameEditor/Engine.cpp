@@ -32,8 +32,6 @@ GameEngine::~GameEngine()
 
 bool GameEngine::Init()
 {
-
-
 	engine.Init();
 
 	engine.renderer->camera.fov = 60;
@@ -63,6 +61,11 @@ update_status GameEngine::PostUpdate()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	engine.Update();
+	
+	// Engine LOGS
+	addEngineLogstoEditor();
+	deleteEngineLogs();
+	
 	const auto frame_end = steady_clock::now();
 	const auto frame_duration = frame_end - frame_start;
 	if (frame_duration < FDT) this_thread::sleep_for(FDT - frame_duration);
@@ -167,5 +170,6 @@ void GameEngine::createDroppedFile(string path)
 
 bool GameEngine::CleanUp()
 {
+	LOGS.clear();
 	return true;
 }

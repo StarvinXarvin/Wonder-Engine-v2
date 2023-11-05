@@ -33,7 +33,7 @@ bool WonderEngine::Init()
 
 	// After all Init calls we call Start() in all modules
 	//
-	LOG("Engine Start --------------");
+	addEngineLog("Engine Start --------------");
 	for (const auto& item : list_modulesE)
 	{
 		ret = item->Start();
@@ -83,6 +83,7 @@ update_statusE WonderEngine::Update()
 
 bool WonderEngine::CleanUp()
 {
+	addEngineLog("Engine Clean Up --------------");
 	bool ret = true;
 	for (const auto& item : list_modulesE)
 	{
