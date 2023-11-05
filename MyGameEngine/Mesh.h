@@ -28,6 +28,11 @@ public:
 		return this->name;
 	}
 
+	vector<MeshImporter::Ptr> getMeshData()
+	{
+		return meshs_vector;
+	}
+
 private:
 	vector<MeshImporter::Ptr> meshs_vector;
 	

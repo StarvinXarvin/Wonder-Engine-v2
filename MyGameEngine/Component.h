@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Globals.h"
+#include "MeshImporter.h"
 #include "types.h"
 #include <vector>
 #include <string>
@@ -56,9 +57,14 @@ public:
 		return name;
 	}
 
-	virtual vector<vec3> getData()
+	virtual vector<vec3> getTransformData()
 	{
 		vector<vec3> empty;
+		return empty;
+	}
+	virtual vector<MeshImporter::Ptr> getMeshData()
+	{
+		vector<MeshImporter::Ptr> empty;
 		return empty;
 	}
 

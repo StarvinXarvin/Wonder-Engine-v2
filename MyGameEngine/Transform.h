@@ -42,7 +42,7 @@ public:
 
 	void drawComponent();
 
-	vector<vec3> getData()
+	vector<vec3> getTransformData()
 	{
 		vector<vec3> transformInfo;
 		transformInfo.push_back(Position);

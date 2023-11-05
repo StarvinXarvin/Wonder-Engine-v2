@@ -102,9 +102,13 @@ void UI::setupHIERARCHY()
 				updateObjTransform();
 				for (auto comp : gObj->component_vector)
 				{
-					if (comp->getType() == MESH)
+					int temp = 0;
+					if (comp->getType() != TRANSFORM)
 					{
-						MenuItem(comp->getName().c_str());
+						stringstream compname;
+						compname << comp->getName() << "_" << temp;
+						MenuItem(compname.str().c_str());
+						temp++;
 					}
 				}
 				TreePop();
@@ -255,10 +259,10 @@ void UI::updateObjTransform()
 {
 	for (auto comp : selectedObj->component_vector)
 	{
-		if (comp->getType() == TRANSFORM) {
-			fobjPos = comp->getData()[0];
-			fobjRot = comp->getData()[1];
-			fobjSca = comp->getData()[2];
+		if (comp->getType() == TRANSFORM && comp->getActive()) {
+			fobjPos = comp->getTransformData()[0];
+			fobjRot = comp->getTransformData()[1];
+			fobjSca = comp->getTransformData()[2];
 		}
 	}
 }
