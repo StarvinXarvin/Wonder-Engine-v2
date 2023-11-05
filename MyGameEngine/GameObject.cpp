@@ -1,8 +1,5 @@
 #include "GameObject.h"
 
-#include "Transform.h"
-#include "Mesh.h"
-
 using namespace std;
 
 GameObject::GameObject(string meshPath = "", string texturePath = "")
@@ -14,6 +11,8 @@ GameObject::GameObject(string meshPath = "", string texturePath = "")
 	addComponent(transform);
 	addComponent(mesh);
 	//addComponent(texture);
+
+	this->name = "defaultName";
 }
 
 GameObject::~GameObject()

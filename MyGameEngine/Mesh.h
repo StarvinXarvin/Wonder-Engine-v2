@@ -23,13 +23,23 @@ public:
 
 	void extractName(string path);
 
+	string getName()
+	{
+		return this->name;
+	}
+
+	vector<MeshImporter::Ptr> getMeshData()
+	{
+		return meshs_vector;
+	}
+
 private:
 	vector<MeshImporter::Ptr> meshs_vector;
 	
 	component_type type = MESH;
 
 	string regex_origin;
-	string extension = ".fbx";
+	string extension = "\.fbx";
 	string name = "";
 
 	bool active = true;

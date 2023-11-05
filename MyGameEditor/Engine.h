@@ -2,9 +2,20 @@
 
 #include "Module.h"
 #include <vector>
+#include <string>
+
 #include "../MyGameEngine/WonderEngine.h"
 
+using namespace std;
+
 class Application;
+
+enum admittedFileTypes
+{
+	_FBX = 0,
+	_PNG,
+	NOTADMITTED,
+};
 
 class GameEngine : public Module
 {
@@ -21,11 +32,12 @@ public:
 
 	void detectCameraInput();
 
+	void createDroppedFile(string path);
+
 private:
 	WonderEngine engine;
 
 	float camSensitivity = 1.0f;
-
 
 public:
 	float frame_ratef;

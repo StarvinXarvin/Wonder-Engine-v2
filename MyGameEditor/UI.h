@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.h"
+#include "../MyGameEngine/GameObject.h"
 #include <vector>
 
 class Application;
@@ -27,6 +28,8 @@ private:
 	void setupCONFIG();
 
 	void calculateFramerate();
+
+	void updateObjTransform();
 
 private:
 	float frame_rate;
@@ -56,4 +59,6 @@ private:
 	const char scalexlabel[13] = "Scale x axis";
 	const char scaleylabel[13] = "Scale y axis";
 	const char scalezlabel[13] = "Scale z axis";
+
+	GameObject* selectedObj;
 };

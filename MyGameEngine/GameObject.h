@@ -3,6 +3,9 @@
 
 #include "types.h"
 #include "Component.h"
+#include "Transform.h"
+#include "Mesh.h"
+
 
 #include <string>
 #include <vector>
@@ -31,6 +34,7 @@ public:
 	{
 		this->name = name;
 	}
+
 private:
-	string name = "defaultName";
+	string name = "";
 };
