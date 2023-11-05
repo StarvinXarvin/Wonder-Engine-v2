@@ -16,13 +16,8 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
-	GameObject* defaultHouse = new GameObject("BakerHouse.fbx", "Baker_house.png");
-
-	addGameObj(defaultHouse);
-
-	defaultHouse = new GameObject("BakerHouse.fbx", "Baker_house.png");
-
-	addGameObj(defaultHouse);
+	createGameObject("BakerHouse.fbx", "Baker_house.png");
+	createGameObject("BakerHouse.fbx", "Baker_house.png");
 
 	return true;
 }
@@ -30,7 +25,7 @@ bool Scene::Start()
 update_statusE Scene::PostUpdate()
 {
 	// Draw all gameObjects in the vector
-	for (GameObject* gObjs : gameObj_vector)
+	for (auto gObjs : gameObj_vector)
 	{
 		gObjs->drawObj();
 	}
@@ -54,7 +49,7 @@ void Scene::createGameObject(string meshPath = "", string texturePath = "")
 	GameObject* newgObj = new GameObject(meshPath, texturePath);
 
 	int temp = 0;
-	for (GameObject* gObj : gameObj_vector)
+	for (auto gObj : gameObj_vector)
 	{
 		temp++;
 	}
@@ -62,4 +57,6 @@ void Scene::createGameObject(string meshPath = "", string texturePath = "")
 	gObjName << "GameObject_" << temp;
 
 	newgObj->setName(gObjName.str());
+
+	addGameObj(newgObj);
 }

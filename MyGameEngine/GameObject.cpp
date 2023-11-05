@@ -11,6 +11,8 @@ GameObject::GameObject(string meshPath = "", string texturePath = "")
 	addComponent(transform);
 	addComponent(mesh);
 	//addComponent(texture);
+
+	this->name = "defaultName";
 }
 
 GameObject::~GameObject()

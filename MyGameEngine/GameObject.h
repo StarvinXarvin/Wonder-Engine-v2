@@ -34,6 +34,7 @@ public:
 	{
 		this->name = name;
 	}
+
 private:
-	string name = "defaultName";
+	string name = "";
 };
