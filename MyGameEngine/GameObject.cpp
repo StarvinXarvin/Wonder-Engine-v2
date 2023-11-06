@@ -30,6 +30,9 @@ void GameObject::createComponent(component_type type, string meshPath, string te
 
 	ifstream file(ssfilePath.str());
 	
+	smatch match;
+	regex filenamerg(".*(.+)\.fbx");
+
 	if (file.good()) {
 		switch (type)
 		{
@@ -47,9 +50,10 @@ void GameObject::createComponent(component_type type, string meshPath, string te
 				newComponent = new MeshComp(item, ssfilePath.str());
 				component_vector.push_back(newComponent);
 			}
-			regex filenamerg(".*(.+)\.fbx");
-			smatch match;
-			meshName = 
+			
+			
+			//regex_search(ssfilePath.str(), match, filenamerg);
+			//meshName = 
 				break;
 
 		case TEXTURE:
