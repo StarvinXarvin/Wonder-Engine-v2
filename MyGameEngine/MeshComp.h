@@ -13,7 +13,7 @@ class MeshComp : public Component
 {
 public:
 	MeshComp(Mesh::Ptr mesh, string pathToSetName);
-	virtual ~MeshComp(){}
+	virtual ~MeshComp() {}
 
 	void Enable() { active = true; }
 	update_statusE Update() { return UPDATE_CONTINUEE; }
@@ -36,9 +36,14 @@ public:
 		return _mesh;
 	}
 
+	void drawComponent()
+	{
+		_mesh.get()->draw();
+	}
+
 private:
 	Mesh::Ptr _mesh;
-	
+
 	component_type type = MESH;
 
 	string extension = "\.fbx";

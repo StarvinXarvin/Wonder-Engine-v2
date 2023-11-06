@@ -1,6 +1,4 @@
 #include "MeshComp.h"
-#include "Mesh.h"
-#include "WonderEngine.h"
 
 #include <filesystem>
 #include <fstream>
@@ -17,7 +15,7 @@ MeshComp::MeshComp(Mesh::Ptr mesh, string pathToSetName) : Component(MESH)
 void MeshComp::extractName(string path)
 {
 	stringstream regexss;
-	regexss << REGEXORIGIN << extension << "$";
+	regexss << ".*\\\\(.+)" << extension << "$";
 	regex nameExtractor(regexss.str());
 	smatch extractedName;
 	regex_match(path, extractedName, nameExtractor);

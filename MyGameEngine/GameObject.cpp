@@ -1,6 +1,10 @@
 #include "GameObject.h"
+#include <iostream>
+#include <filesystem>
+#include <fstream>
 
 using namespace std;
+namespace fs = filesystem;
 
 GameObject::GameObject(string meshPath = "", string texturePath = "")
 {
@@ -21,11 +25,19 @@ void GameObject::createComponent(component_type type, string meshPath, string te
 	vector<Mesh::Ptr> mesh_shrdptrs;
 
 	stringstream ssmesh;
-	ssmesh << "..\\\\MyGameEditor\\\\Assets\\\\" << meshPath;
+	ssmesh << "..\\MyGameEditor\\Assets\\" << meshPath;
+
+	ifstream file(ssmesh.str());
+	if (file.good())
+	{
+		cout << "ur mom" << endl;
+	}
+
 	switch (type)
 	{
 	case TRANSFORM:
 		newComponent = new TransformComp();
+		component_vector.push_back(newComponent);
 		break;
 
 	case MESH:
@@ -35,6 +47,7 @@ void GameObject::createComponent(component_type type, string meshPath, string te
 
 		for (auto item : mesh_shrdptrs) {
 			newComponent = new MeshComp(item, ssmesh.str());
+			component_vector.push_back(newComponent);
 		}
 		break;
 
@@ -49,5 +62,8 @@ void GameObject::createComponent(component_type type, string meshPath, string te
 void GameObject::drawObj()
 {
 	// Draws all the components in the vector of an object
-
+	for (auto item : component_vector)
+	{
+		if(item->getType() == MESH)	item->drawComponent();
+	}
 }

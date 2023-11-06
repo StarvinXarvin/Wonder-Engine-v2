@@ -38,4 +38,6 @@ public:
 
 private:
 	string name = "";
+
+	string meshName = "";
 };

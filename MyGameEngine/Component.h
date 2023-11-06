@@ -41,6 +41,9 @@ public:
 	virtual void extractName(std::string path)
 	{}
 
+	virtual void drawComponent()
+	{}
+
 	virtual component_type getType()
 	{
 		return type;
