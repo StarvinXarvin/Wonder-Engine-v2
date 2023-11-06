@@ -114,6 +114,7 @@ void Camera::computeAxis() {
 	PrintVector(yAxis, "yAxis");
 	PrintVector(zAxis, "zAxis");
 	//xAxis tiene que ser perpendicular a yAxis y a zAxis (Producto vectorial)
+	//Debe tenerse en cuenta el up tambien
 }
 
 void Camera::PrintVector(vec3 vector, const char* name) {
