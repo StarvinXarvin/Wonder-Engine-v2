@@ -12,6 +12,8 @@
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_opengl3.h"
 
+using namespace ImGui;
+
 UI::UI(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -23,7 +25,7 @@ UI::~UI()
 bool UI::createImGuiContext()
 {
 	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
+	CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
 	(void)io;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
@@ -57,109 +59,125 @@ void UI::calculateFramerate()
 
 update_status UI::setupMAINMENU()
 {
-	if (ImGui::BeginMainMenuBar()) {
-		if (ImGui::BeginMenu("Menu"))
+	if (BeginMainMenuBar()) {
+		if (BeginMenu("Menu"))
 		{
-			if (ImGui::BeginMenu("Window Toggle"))
+			if (BeginMenu("Window Toggle"))
 			{
-				ImGui::Checkbox("Hierarchy", &showHier);
-				ImGui::Checkbox("Inspector", &showInsp);
-				ImGui::Checkbox("Configuration", &showConf);
-				ImGui::Checkbox("Console", &showCons);
+				Checkbox("Hierarchy", &showHier);
+				Checkbox("Inspector", &showInsp);
+				Checkbox("Configuration", &showConf);
+				Checkbox("Console", &showCons);
 				ImGui::EndMenu();
 			}
 
-			ImGui::Checkbox("Show Demo Window", &showDemo);
+			Checkbox("Show Demo Window", &showDemo);
 
-			if (ImGui::MenuItem("GitHub", NULL, false, true))
+			if (MenuItem("GitHub", NULL, false, true))
 			{
 
 			}
 
-			ImGui::Checkbox("About", &showAbout);
+			Checkbox("About", &showAbout);
 
-			if (ImGui::MenuItem("Quit", "Esc", false, true))
+			if (MenuItem("Quit", "Esc", false, true))
 			{
 				return UPDATE_STOP;
 			}
 			ImGui::EndMenu();
 		}
-		ImGui::EndMainMenuBar();
+		EndMainMenuBar();
 	}
 	return UPDATE_CONTINUE;
 }
 void UI::setupHIERARCHY()
 {
-	if (ImGui::Begin("Hierarchy"))
+	if (Begin("Hierarchy"))
 	{
-		//for (all items in GameObject list)
-		//{
-		//	ImGui::MenuItem("Objectname", NULL, false, false);
-		//}
-		ImGui::End();
+		for (auto gObj : App->Gengine->gObjVec)
+		{
+			if (TreeNode(gObj->getName().c_str()))
+			{
+				selectedObj = gObj;
+				updateObjTransform();
+				for (auto comp : gObj->component_vector)
+				{
+					int temp = 0;
+					if (comp->getType() != TRANSFORM)
+					{
+						stringstream compname;
+						compname << comp->getName() << "_" << temp;
+						MenuItem(compname.str().c_str());
+						temp++;
+					}
+				}
+				TreePop();
+			}
+		}
+		End();
 	}
 }
 void UI::setupCONSOLE()
 {
-	if (ImGui::Begin("Console"))
+	if (Begin("Console"))
 	{
 		//for (all items in log list)
 		//{
 		//	// Find a better way to print a prettier and less heavy log
 		//	ImGui::MenuItem("HH:MM:SS  Log description", NULL, false, false);
 		//}
-		ImGui::End();
+		End();
 	}
 }
 void UI::setupINSPECTOR()
 {
-	if (ImGui::Begin("Inspector"))
+	if (Begin("Inspector"))
 	{
-		if (ImGui::CollapsingHeader("Transform"))
+		if (CollapsingHeader("Transform"))
 		{
-			ImGui::SeparatorText("Position");
-			ImGui::DragFloat(posxlabel, &fobjPos.x);
-			ImGui::DragFloat(posylabel, &fobjPos.y);
-			ImGui::DragFloat(poszlabel, &fobjPos.z);
+			SeparatorText("Position");
+			DragFloat(posxlabel, &fobjPos.x);
+			DragFloat(posylabel, &fobjPos.y);
+			DragFloat(poszlabel, &fobjPos.z);
 
-			ImGui::SeparatorText("Rotation");
-			ImGui::DragFloat(anglexlabel, &fobjRot.x);
-			ImGui::DragFloat(angleylabel, &fobjRot.y);
-			ImGui::DragFloat(anglezlabel, &fobjRot.z);
-			
-			ImGui::SeparatorText("Scale");
-			ImGui::DragFloat(scalexlabel, &fobjRot.x);
-			ImGui::DragFloat(scaleylabel, &fobjRot.y);
-			ImGui::DragFloat(scalezlabel, &fobjRot.z);
+			SeparatorText("Rotation");
+			DragFloat(anglexlabel, &fobjRot.x);
+			DragFloat(angleylabel, &fobjRot.y);
+			DragFloat(anglezlabel, &fobjRot.z);
+
+			SeparatorText("Scale");
+			DragFloat(scalexlabel, &fobjSca.x);
+			DragFloat(scaleylabel, &fobjSca.y);
+			DragFloat(scalezlabel, &fobjSca.z);
 		}
-		if (ImGui::CollapsingHeader("Mesh"))
+		if (CollapsingHeader("Mesh"))
 		{
-			ImGui::MenuItem("Mesh Name", NULL, false, false);
+			MenuItem("Mesh Name", NULL, false, false);
 		}
-		if (ImGui::CollapsingHeader("Texture"))
+		if (CollapsingHeader("Texture"))
 		{
-			ImGui::MenuItem("Texture Name", NULL, false, false);
+			MenuItem("Texture Name", NULL, false, false);
 		}
-		ImGui::End();
+		End();
 	}
 }
 void UI::setupCONFIG()
 {
-	if (ImGui::Begin("Configuration"))
+	if (Begin("Configuration"))
 	{
-		if (ImGui::CollapsingHeader("Application"))
+		if (CollapsingHeader("Application"))
 		{
-			ImGui::PlotHistogram("FPS", &frame_list[0], frame_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
+			PlotHistogram("FPS", &frame_list[0], frame_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
 
-			ImGui::PlotHistogram("Milliseconds", &ms_list[0], ms_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
+			PlotHistogram("Milliseconds", &ms_list[0], ms_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
 		}
 	}
 }
 void UI::setupABOUT()
 {
-	if (ImGui::Begin("About"))
+	if (Begin("About"))
 	{
-		ImGui::Text("Hello test text");
+		Text("Hello test text");
 	}
 }
 
@@ -176,15 +194,16 @@ update_status UI::setUpUI()
 	if (showConf) setupCONFIG();
 
 	if (showAbout) setupABOUT();
-	if (showDemo) ImGui::ShowDemoWindow();
+	if (showDemo) ShowDemoWindow();
 
 	return ret;
 }
 
 bool UI::Init()
 {
-	fobjPos.x = 3; fobjPos.y = 3; fobjPos.z = 3;
-	fobjRot.x = 10; fobjRot.y = 10; fobjRot.z = 10;
+	fobjPos.x = 0; fobjPos.y = 0; fobjPos.z = 0;
+	fobjRot.x = 0; fobjRot.y = 0; fobjRot.z = 0;
+	fobjSca.x = 1; fobjSca.y = 1; fobjSca.z = 1;
 
 	showDemo = false;
 	showHier = true;
@@ -206,13 +225,13 @@ update_status UI::PreUpdate()
 	//setUpUI();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui_ImplOpenGL3_NewFrame();
-	ImGui::NewFrame();
+	NewFrame();
 
 	ImGuiDockNodeFlags dock_flags = 0;
 	dock_flags |= ImGuiDockNodeFlags_PassthruCentralNode;
-	ImGui::DockSpaceOverViewport(0, dock_flags);
+	DockSpaceOverViewport(0, dock_flags);
 
-	ImGui::DockSpaceOverViewport();
+	DockSpaceOverViewport();
 
 	return setUpUI();
 }
@@ -220,8 +239,8 @@ update_status UI::PreUpdate()
 update_status UI::PostUpdate()
 {
 	// Render UI
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	Render();
+	ImGui_ImplOpenGL3_RenderDrawData(GetDrawData());
 
 	return UPDATE_CONTINUE;
 }
@@ -231,7 +250,19 @@ bool UI::CleanUp()
 	// Cleanup
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
-	ImGui::DestroyContext();
+	DestroyContext();
 
 	return true;
+}
+
+void UI::updateObjTransform()
+{
+	for (auto comp : selectedObj->component_vector)
+	{
+		if (comp->getType() == TRANSFORM && comp->getActive()) {
+			fobjPos = comp->getTransformData()[0];
+			fobjRot = comp->getTransformData()[1];
+			fobjSca = comp->getTransformData()[2];
+		}
+	}
 }

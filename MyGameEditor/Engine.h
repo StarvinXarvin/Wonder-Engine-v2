@@ -1,9 +1,21 @@
 #pragma once
 
 #include "Module.h"
+#include <vector>
+#include <string>
+
 #include "../MyGameEngine/WonderEngine.h"
 
+using namespace std;
+
 class Application;
+
+enum admittedFileTypes
+{
+	_FBX = 0,
+	_PNG,
+	NOTADMITTED,
+};
 
 class GameEngine : public Module
 {
@@ -20,6 +32,8 @@ public:
 
 	void detectCameraInput();
 
+	void createDroppedFile(string path);
+
 private:
 	WonderEngine engine;
 
@@ -27,4 +41,5 @@ private:
 
 public:
 	float frame_ratef;
+	std::vector<GameObject*> gObjVec;
 };

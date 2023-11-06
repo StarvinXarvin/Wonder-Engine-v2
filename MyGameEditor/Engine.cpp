@@ -3,6 +3,9 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+#include <regex>
+#include <fstream>
+#include <filesystem>
 
 #include "Application.h"
 #include "Globals.h"
@@ -29,6 +32,8 @@ GameEngine::~GameEngine()
 
 bool GameEngine::Init()
 {
+
+
 	engine.Init();
 
 	engine.renderer->camera.fov = 60;
@@ -45,10 +50,7 @@ bool GameEngine::Init()
 
 update_status GameEngine::Update()
 {
-	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT == KEY_STATE::KEY_REPEAT))
-	{
-		// Camera circular movement here
-	}
+	gObjVec = engine.scene->getGameObjVec();
 
 	return UPDATE_CONTINUE;
 }
@@ -128,6 +130,55 @@ void GameEngine::detectCameraInput() {
 	}
 }
 
+void GameEngine::createDroppedFile(string path)
+{
+	// check file type and act accordingly
+	regex extractorRegex(".*\\.(.+)$");
+
+	smatch fileEnding;
+	regex_match(path, fileEnding, extractorRegex);
+
+	string fileType = fileEnding[1];
+	LOG(fileType.c_str());
+	admittedFileTypes type;
+
+	if (fileType == "fbx")
+	{
+		type = _FBX;
+	}
+	else if (fileType == "png")
+	{
+		type = _PNG;
+	}
+	else
+	{
+		type = NOTADMITTED;
+	}
+	regex pathExtractor(".*Assets\\\\(.*)$");
+
+	smatch pathArr;
+	regex_match(path, pathArr, pathExtractor);
+
+	switch (type)
+	{
+	case _FBX:
+		LOG("FBX DROPPED");
+		engine.scene->createGameObject(pathArr[1]);
+		break;
+
+	case _PNG:
+		LOG("PNG DROPPED");
+		break;
+
+	case NOTADMITTED:
+		LOG("NOT ADMITTED FILE TYPE DROPPED");
+		break;
+
+	default:
+		break;
+	}
+
+}
 
 bool GameEngine::CleanUp()
 {
