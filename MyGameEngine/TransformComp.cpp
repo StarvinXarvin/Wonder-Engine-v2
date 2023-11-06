@@ -4,9 +4,9 @@
 #include <chrono>
 #include <thread>
 
-#include "Transform.h"
+#include "TransformComp.h"
 
-Transform::Transform() : Component(TRANSFORM)
+TransformComp::TransformComp() : Component(TRANSFORM)
 {
 	active = true;
 
@@ -15,18 +15,18 @@ Transform::Transform() : Component(TRANSFORM)
 	Scale = (vec3)(1, 1, 1);
 }
 
-Transform::~Transform()
+TransformComp::~TransformComp()
 {
 }
 
-void Transform::drawComponent()
+void TransformComp::drawComponent()
 {
 }
-void Transform::Enable()
+void TransformComp::Enable()
 {
 	active = true;
 }
-void Transform::Disable()
+void TransformComp::Disable()
 {
 	active = false;
 }

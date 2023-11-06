@@ -2,11 +2,11 @@
 #include "Globals.h"
 #include "types.h"
 
-class Transform : public Component
+class TransformComp : public Component
 {
 public:
-	Transform();
-	virtual ~Transform();
+	TransformComp();
+	virtual ~TransformComp();
 
 	void Enable();
 

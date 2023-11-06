@@ -23,17 +23,18 @@ void Camera::cameraMove(int id) {
 	case DOWN:
 		center += yAxis;
 		eye += yAxis;
-		//LOG("Y axis: (%f, %f, %f)", yAxis.x, yAxis.y, yAxis.z);
+		//("Y axis: (%f, %f, %f)", yAxis.x, yAxis.y, yAxis.z);
 		break;
 	case LEFT:
 		center -= xAxis;
 		eye -= xAxis;
-		//LOG("X axis: (%f, %f, %f)", xAxis.x, xAxis.y, xAxis.z);
+		//("X axis: (%f, %f, %f)", xAxis.x, xAxis.y, xAxis.z);
 		break;
 	case RIGHT:
 		center += xAxis;
 		eye += xAxis;
-		//LOG("X axis: (%f, %f, %f)", xAxis.x, xAxis.y, xAxis.z);
+
+		//("X axis: (%f, %f, %f)", xAxis.x, xAxis.y, xAxis.z);
 		break;
 		//Va con matrices
 		//Para rotar, probar a hacer que rotes con las flechas direccionales moviendo el center, en teoria eso deberia crear la rotacion
@@ -76,10 +77,13 @@ void Camera::MouseRotateAroundObject(double x, double y) {
 
 	if (prevMouseX != 0 && prevMouseY != 0) {
 		vec2 mouseDir = { x - prevMouseX, y - prevMouseY };
+		//eye.x += mouseDir.x * 0.05;
+		//eye.y += mouseDir.y * 0.05;
+		//LOG("MousePos: x: %f, y: %f", mouseDir.x, mouseDir.y);
 		float angleX = (0.01f * mouseDir.x);
 		float angleY = (0.01f * mouseDir.y);
 		RotateCameraAroundObject(center, eye, angleY, -xAxis, angleX, yAxis);
-		//Falta añadirle un tope al eye. Cuando el modulo se acerque a (0, 1, 0) o (0, -1, 0), no incrementar mas
+		//Falta aï¿½adirle un tope al eye. Cuando el modulo se acerque a (0, 1, 0) o (0, -1, 0), no incrementar mas
 	}
 	prevMouseX = x;
 	prevMouseY = y;
@@ -142,5 +146,5 @@ void Camera::computeAxis() {
 }
 
 void Camera::PrintVector(vec3 vector, const char* name) {
-	LOG("%s vector: (%f, %f, %f)", name, vector.x, vector.y, vector.z);
+	//LOG("%s vector: (%f, %f, %f)", name, vector.x, vector.y, vector.z);
 }

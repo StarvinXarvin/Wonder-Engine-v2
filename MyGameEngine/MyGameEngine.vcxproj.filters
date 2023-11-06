@@ -41,9 +41,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Texture2D.h">
-      <Filter>VisualLoader</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicObject.h">
       <Filter>VisualLoader</Filter>
     </ClInclude>
@@ -74,10 +71,10 @@
     <ClInclude Include="Component.h">
       <Filter>GameObject\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="TransformComp.h">
       <Filter>GameObject\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
+    <ClInclude Include="TextureComp.h">
       <Filter>GameObject\Components</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
@@ -86,11 +83,14 @@
     <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="MeshImporter.h">
+    <ClInclude Include="Mesh.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
+    <ClInclude Include="MeshComp.h">
       <Filter>GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +99,6 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture2D.cpp">
-      <Filter>VisualLoader</Filter>
     </ClCompile>
     <ClCompile Include="GraphicObject.cpp">
       <Filter>VisualLoader</Filter>
@@ -127,10 +124,10 @@
     <ClCompile Include="CubeWireframeIVBO.cpp">
       <Filter>VisualLoader\Cube Loader</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="TransformComp.cpp">
       <Filter>GameObject\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
+    <ClCompile Include="TextureComp.cpp">
       <Filter>GameObject\Components</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
@@ -139,11 +136,14 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="MeshImporter.cpp">
+    <ClCompile Include="Mesh.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
+    <ClCompile Include="MeshComp.cpp">
       <Filter>GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

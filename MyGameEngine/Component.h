@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Globals.h"
-#include "MeshImporter.h"
+#include "Mesh.h"
 #include "types.h"
 #include <vector>
 #include <string>
@@ -13,7 +13,7 @@ enum component_type
 	TRANSFORM = 0,
 	MESH,
 	TEXTURE,
-	UNKNOWN
+	UNKNOWN,
 };
 
 
@@ -38,10 +38,10 @@ public:
 		active = false;
 	}
 
-	virtual void drawComponent()
+	virtual void extractName(std::string path)
 	{}
 
-	virtual void extractName(std::string path)
+	virtual void drawComponent()
 	{}
 
 	virtual component_type getType()
@@ -62,9 +62,9 @@ public:
 		vector<vec3> empty;
 		return empty;
 	}
-	virtual vector<MeshImporter::Ptr> getMeshData()
+	virtual Mesh::Ptr getMeshData()
 	{
-		vector<MeshImporter::Ptr> empty;
+		Mesh::Ptr empty;
 		return empty;
 	}
 

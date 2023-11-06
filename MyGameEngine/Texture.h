@@ -1,20 +1,34 @@
 #pragma once
-#include "Component.h"
+
+#include "Graphic.h"
+#include "types.h"
+
 #include <string>
+#include <vector>
+#include <memory>
 
 using namespace std;
 
-class GameObject;
+#define CHECKERTEXT_HEIGHT 100
+#define CHECKERTEXT_WIDTH 100
 
-class Texture : Component
+class Texture
 {
-	Texture(string path);
-	virtual ~Texture();
+private:
+	unsigned int _id;
 
-	void Enable();
-	update_statusE Update();
-	void Disable();
+public:
+	using Ptr = shared_ptr<Texture>;
+
+	explicit Texture(const string& path);
+	Texture(Texture&& tex) noexcept;
+	Texture();
+	void bind() const;
+	~Texture();
+
+	unsigned int getID() { return _id; }
 
 private:
-	component_type type = TEXTURE;
+	Texture(const Texture&);
+	Texture operator=(const Texture&);
 };
