@@ -42,4 +42,29 @@ private:
 public:
 	float frame_ratef;
 	std::vector<GameObject*> gObjVec;
+
+	vector<string> LOGS;
+
+	void addEngineLogstoEditor()
+	{
+		for (auto log : engine.EngineLog)
+		{
+			LOGS.push_back(log);
+		}
+		engine.deleteEngineLogs();
+	}
+	void addLOG(string log)
+	{
+		LOGS.push_back(log);
+	}
+
+	vector<string> getEditorLogs()
+	{
+		return LOGS;
+	}
+
+	void deleteLOG()
+	{
+		LOGS.clear();
+	}
 };

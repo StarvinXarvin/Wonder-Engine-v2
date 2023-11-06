@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "Globals.h"
+#include "WonderEngine.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
@@ -48,6 +49,7 @@ void Camera::ResetCenter() {
 }
 
 void Camera::cameraRotate(double x, double y) {
+
 	if (prevMouseX != 0 && prevMouseY != 0) {
 		vec2 mouseDir = { x - prevMouseX, y - prevMouseY };
 		//eye.x += mouseDir.x * 0.05;

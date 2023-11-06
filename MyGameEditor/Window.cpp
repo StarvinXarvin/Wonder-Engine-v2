@@ -72,6 +72,8 @@ void Window::initOpenGL() {
 
 bool Window::Init()
 {
+	App->Gengine->addLOG("Window Initialization");
+	
 	window = initSDLWindowWithOpenGL();
 	GLContext = createSdlGlContext(window);
 	initOpenGL();
@@ -81,7 +83,7 @@ bool Window::Init()
 
 bool Window::CleanUp()
 {
-	LOG("Destroying SDL window and quitting all SDL systems");
+	App->Gengine->addLOG("Destroying SDL window and quitting all SDL systems");
 
 	//Destroy window
 	if (window != NULL)

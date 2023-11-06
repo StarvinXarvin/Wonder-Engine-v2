@@ -25,16 +25,19 @@ Input::~Input()
 
 bool Input::Init()
 {
+	App->Gengine->addLOG("Input Initialization");
+	
 	keyboard = new KEY_STATE[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KEY_STATE) * MAX_KEYS);
 
-	LOG("Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
 
 	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
-		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
+		stringstream ss;
+		ss << "SDL_EVENTS could not initialize! SDL_Error: " << SDL_GetError();
+		App->Gengine->addLOG(ss.str());
 		ret = false;
 	}
 
@@ -115,7 +118,9 @@ update_status Input::PreUpdate()
 
 		case SDL_DROPFILE:
 			string path = e.drop.file;
-			LOG(path.c_str());
+			stringstream ss;
+			ss << "File with path: " << path << " dropped";
+			App->Gengine->addLOG(ss.str());
 			App->Gengine->createDroppedFile(path);
 			break;
 		}
@@ -132,7 +137,7 @@ update_status Input::PreUpdate()
 bool Input::CleanUp()
 {
 	delete[] keyboard;
-	LOG("Quitting SDL input event subsystem");
+	App->Gengine->addLOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }

@@ -34,7 +34,7 @@ bool Application::Init()
 
 	// After all Init calls we call Start() in all modules
 	//
-	LOG("Application Start --------------");
+	Gengine->addLOG("Application Start --------------");
 	for (const auto& item : list_modules)
 	{
 		ret = item->Start();
@@ -86,6 +86,7 @@ update_status Application::Update()
 
 bool Application::CleanUp()
 {
+	Gengine->addLOG("App CleanUp --------------");
 	bool ret = true;
 	for (const auto& item : list_modules)
 	{

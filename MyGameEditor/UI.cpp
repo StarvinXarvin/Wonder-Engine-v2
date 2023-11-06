@@ -121,11 +121,10 @@ void UI::setupCONSOLE()
 {
 	if (Begin("Console"))
 	{
-		//for (all items in log list)
-		//{
-		//	// Find a better way to print a prettier and less heavy log
-		//	ImGui::MenuItem("HH:MM:SS  Log description", NULL, false, false);
-		//}
+		for (auto log : App->Gengine->LOGS)
+		{
+			MenuItem(log.c_str());
+		}
 		End();
 	}
 }
@@ -201,6 +200,8 @@ update_status UI::setUpUI()
 
 bool UI::Init()
 {
+	App->Gengine->addLOG("UI Initialization");
+
 	fobjPos.x = 0; fobjPos.y = 0; fobjPos.z = 0;
 	fobjRot.x = 0; fobjRot.y = 0; fobjRot.z = 0;
 	fobjSca.x = 1; fobjSca.y = 1; fobjSca.z = 1;
