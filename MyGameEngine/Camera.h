@@ -9,8 +9,8 @@ enum CameraDirection {
 	DOWN,
 	LEFT,
 	RIGHT,
-	ZOOMIN,
-	ZOOMOUT
+	FORWARD,
+	BACKWARD
 };
 
 struct Camera
@@ -34,11 +34,17 @@ struct Camera
 
 	float cameraSpeed = 0.1f;
 
-	void ResetCenter();
+	void ResetCenter(int id);
 	void cameraMove(int id);
 	void cameraRotate(double x, double y);
 	void RotateCameraAroundObject(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis);
 	void RotateDirection(int id);
+
+	void FPSMovement(int id);
+
+	void MousePointLookAt(double x, double y);
+
+	void RotateCameraAroundItself(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis);
 
 	void CameraZoom(int zoom);
 
