@@ -47,11 +47,11 @@ public:
 
 	void addEngineLogstoEditor()
 	{
-		for (auto log : EngineLog)
+		for (auto log : engine.EngineLog)
 		{
 			LOGS.push_back(log);
 		}
-		deleteEngineLogs();
+		engine.deleteEngineLogs();
 	}
 	void addLOG(string log)
 	{

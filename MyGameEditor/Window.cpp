@@ -81,7 +81,7 @@ bool Window::Init()
 
 bool Window::CleanUp()
 {
-	LOG("Destroying SDL window and quitting all SDL systems");
+	App->Gengine->addLOG("Destroying SDL window and quitting all SDL systems");
 
 	//Destroy window
 	if (window != NULL)

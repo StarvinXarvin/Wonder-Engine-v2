@@ -28,19 +28,19 @@ private:
 	void PrepareUpdate();
 	void FinishUpdate();
 
+public:
+	vector<string> EngineLog;
+
+	void addEngineLog(string newLog)
+	{
+		EngineLog.push_back(newLog);
+	}
+	void deleteEngineLogs()
+	{
+		EngineLog.clear();
+	}
+	vector<string> getEngineLogs()
+	{
+		return EngineLog;
+	}
 };
-
-vector<string> EngineLog;
-
-void addEngineLog(string newLog)
-{
-	EngineLog.push_back(newLog);
-}
-void deleteEngineLogs()
-{
-	EngineLog.clear();
-}
-vector<string> getEngineLogs()
-{
-	return EngineLog;
-}

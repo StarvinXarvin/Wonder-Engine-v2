@@ -17,7 +17,7 @@ Mesh::Mesh(const string path) : Component(MESH)
 		meshs_vector = MeshImporter::loadFromFile(ss.str());
 	}
 	else {
-		addEngineLog("File not found");
+		//addEngineLog("File not found");
 	}
 
 	extractName(path);

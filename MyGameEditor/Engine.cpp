@@ -64,7 +64,8 @@ update_status GameEngine::PostUpdate()
 	
 	// Engine LOGS
 	addEngineLogstoEditor();
-	deleteEngineLogs();
+	engine.deleteEngineLogs();
+	getEditorLogs();
 	
 	const auto frame_end = steady_clock::now();
 	const auto frame_duration = frame_end - frame_start;
@@ -127,7 +128,6 @@ void GameEngine::createDroppedFile(string path)
 	regex_match(path, fileEnding, extractorRegex);
 
 	string fileType = fileEnding[1];
-	LOG(fileType.c_str());
 	admittedFileTypes type;
 
 	if (fileType == "fbx")
@@ -146,20 +146,22 @@ void GameEngine::createDroppedFile(string path)
 
 	smatch pathArr;
 	regex_match(path, pathArr, pathExtractor);
-
+	stringstream ss;
 	switch (type)
 	{
 	case _FBX:
-		LOG("FBX DROPPED");
+		addLOG("FBX DROPPED");
 		engine.scene->createGameObject(pathArr[1]);
+		ss << "Mesh with name: " << pathArr[1] << " loaded";
+		addLOG(ss.str());
 		break;
 
 	case _PNG:
-		LOG("PNG DROPPED");
+		addLOG("PNG DROPPED");
 		break;
 
 	case NOTADMITTED:
-		LOG("NOT ADMITTED FILE TYPE DROPPED");
+		addLOG("NOT ADMITTED FILE TYPE DROPPED");
 		break;
 
 	default:
