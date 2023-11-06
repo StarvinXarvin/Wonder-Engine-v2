@@ -29,7 +29,7 @@ private:
 
 	void calculateFramerate();
 
-	void updateObjTransform();
+	void updateObjInspector();
 
 private:
 	float frame_rate;

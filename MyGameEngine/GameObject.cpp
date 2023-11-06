@@ -2,6 +2,7 @@
 #include <iostream>
 #include <filesystem>
 #include <fstream>
+#include <regex>
 
 using namespace std;
 namespace fs = filesystem;
@@ -24,38 +25,41 @@ void GameObject::createComponent(component_type type, string meshPath, string te
 	Component* newComponent = nullptr;
 	vector<Mesh::Ptr> mesh_shrdptrs;
 
-	stringstream ssmesh;
-	ssmesh << "..\\MyGameEditor\\Assets\\" << meshPath;
+	stringstream ssfilePath;
+	ssfilePath << "..\\MyGameEditor\\Assets\\" << meshPath;
 
-	ifstream file(ssmesh.str());
-	if (file.good())
-	{
-		cout << "ur mom" << endl;
-	}
-
-	switch (type)
-	{
-	case TRANSFORM:
-		newComponent = new TransformComp();
-		component_vector.push_back(newComponent);
-		break;
-
-	case MESH:
-		// Check if files exist before loading
-		if (textPath != "") mesh_shrdptrs = Mesh::loadFromFile(meshPath, textPath);
-		else mesh_shrdptrs = Mesh::loadFromFile(ssmesh.str());
-
-		for (auto item : mesh_shrdptrs) {
-			newComponent = new MeshComp(item, ssmesh.str());
+	ifstream file(ssfilePath.str());
+	
+	if (file.good()) {
+		switch (type)
+		{
+		case TRANSFORM:
+			newComponent = new TransformComp();
 			component_vector.push_back(newComponent);
-		}
-		break;
+			break;
 
-	case TEXTURE:
-		//newComponent = new TextureComp();
-		//component_vector.push_back(newComponent);
-		break;
+		case MESH:
+			// Check if files exist before loading
+			if (textPath != "") mesh_shrdptrs = Mesh::loadFromFile(meshPath, textPath);
+			else mesh_shrdptrs = Mesh::loadFromFile(ssfilePath.str());
+
+			for (auto item : mesh_shrdptrs) {
+				newComponent = new MeshComp(item, ssfilePath.str());
+				component_vector.push_back(newComponent);
+			}
+			regex filenamerg(".*(.+)\.fbx");
+			smatch match;
+			meshName = 
+				break;
+
+		case TEXTURE:
+			//newComponent = new TextureComp();
+			//component_vector.push_back(newComponent);
+			break;
+		}
 	}
+	else{}
+	
 	mesh_shrdptrs.clear();
 }
 

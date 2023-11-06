@@ -45,13 +45,13 @@ void UI::calculateFramerate()
 	milliseconds = App->Gengine->frame_ratef * 0.000001f;
 
 	frame_list.push_back(frame_rate);
-	if (frame_list.size() > 100)
+	if (frame_list.size() > 80)
 	{
 		frame_list.erase(frame_list.begin());
 	}
 
 	ms_list.push_back(milliseconds);
-	if (ms_list.size() > 100)
+	if (ms_list.size() > 80)
 	{
 		ms_list.erase(ms_list.begin());
 	}
@@ -96,7 +96,6 @@ void UI::setupHIERARCHY()
 	{
 		for (auto& gObj : App->Gengine->gObjVec)
 		{
-			updateObjTransform();
 			if (TreeNode(gObj->getName().c_str()))
 			{
 				selectedObj = gObj;
@@ -123,7 +122,7 @@ void UI::setupCONSOLE()
 	{
 		for (auto log : App->Gengine->LOGS)
 		{
-			MenuItem(log.c_str());
+			Text(log.c_str());
 		}
 		End();
 	}
@@ -187,6 +186,8 @@ update_status UI::setUpUI()
 	ret = setupMAINMENU();
 	if (showHier) setupHIERARCHY();
 	if (showCons) setupCONSOLE();
+	
+	updateObjInspector();
 	if (showInsp) setupINSPECTOR();
 
 	calculateFramerate();
@@ -256,16 +257,18 @@ bool UI::CleanUp()
 	return true;
 }
 
-void UI::updateObjTransform()
+void UI::updateObjInspector()
 {
 	if (selectedObj != nullptr) {
 		for (auto& comp : selectedObj->component_vector)
 		{
-			if (comp->getType() == TRANSFORM && comp->getActive()) {
+			if (comp->getType() == TRANSFORM) {
 				fobjPos = comp->getTransformData()[0];
 				fobjRot = comp->getTransformData()[1];
 				fobjSca = comp->getTransformData()[2];
 			}
+			
 		}
+
 	}
 }

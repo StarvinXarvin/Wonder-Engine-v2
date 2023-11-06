@@ -40,4 +40,5 @@ private:
 	string name = "";
 
 	string meshName = "";
+	string textureName = "";
 };
