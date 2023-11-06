@@ -25,10 +25,11 @@ Input::~Input()
 
 bool Input::Init()
 {
+	App->Gengine->addLOG("Input Initialization");
+	
 	keyboard = new KEY_STATE[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KEY_STATE) * MAX_KEYS);
 
-	App->Gengine->addLOG("Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
 

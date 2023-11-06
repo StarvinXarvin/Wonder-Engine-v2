@@ -200,6 +200,8 @@ update_status UI::setUpUI()
 
 bool UI::Init()
 {
+	App->Gengine->addLOG("UI Initialization");
+
 	fobjPos.x = 0; fobjPos.y = 0; fobjPos.z = 0;
 	fobjRot.x = 0; fobjRot.y = 0; fobjRot.z = 0;
 	fobjSca.x = 1; fobjSca.y = 1; fobjSca.z = 1;

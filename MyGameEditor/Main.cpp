@@ -42,13 +42,13 @@ int main(int argc, char** argv)
 		case MAIN_CREATION:
 
 			App = new Application();
-			App->Gengine->addLOG("-------------- Application Creation --------------");
+			App->Gengine->addLOG("Application Creation --------------");
 			state = MAIN_START;
 			break;
 
 		case MAIN_START:
 
-			App->Gengine->addLOG("-------------- Application Init --------------");
+			App->Gengine->addLOG("Application Init--------------");
 			if (App->Init() == false)
 			{
 				App->Gengine->addLOG("Application Init exits with ERROR");
@@ -57,7 +57,6 @@ int main(int argc, char** argv)
 			else
 			{
 				state = MAIN_UPDATE;
-				//App->Gengine->addLOG("-------------- Application Update --------------");
 			}
 
 			break;
@@ -79,7 +78,7 @@ int main(int argc, char** argv)
 
 		case MAIN_FINISH:
 
-			App->Gengine->addLOG("-------------- Application CleanUp --------------");
+			App->Gengine->addLOG("Application CleanUp --------------");
 			if (App->CleanUp() == false)
 			{
 				App->Gengine->addLOG("Application CleanUp exits with ERROR");

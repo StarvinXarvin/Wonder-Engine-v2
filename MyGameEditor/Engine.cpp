@@ -32,6 +32,7 @@ GameEngine::~GameEngine()
 
 bool GameEngine::Init()
 {
+	App->Gengine->addLOG("Engine Initialization");
 	engine.Init();
 
 	engine.renderer->camera.fov = 60;

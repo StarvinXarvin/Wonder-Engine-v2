@@ -72,6 +72,8 @@ void Window::initOpenGL() {
 
 bool Window::Init()
 {
+	App->Gengine->addLOG("Window Initialization");
+	
 	window = initSDLWindowWithOpenGL();
 	GLContext = createSdlGlContext(window);
 	initOpenGL();
