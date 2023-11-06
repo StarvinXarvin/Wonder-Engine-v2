@@ -43,6 +43,7 @@ void Camera::cameraMove(int id) {
 }
 
 void Camera::FPSMovement(int id) {
+	computeAxis();
 	switch (id) {
 	case FORWARD:
 		center -= zAxis;
@@ -77,9 +78,7 @@ void Camera::MouseRotateAroundObject(double x, double y) {
 		vec2 mouseDir = { x - prevMouseX, y - prevMouseY };
 		float angleX = (0.01f * mouseDir.x);
 		float angleY = (0.01f * mouseDir.y);
-		PrintVector(eye, "eye");
-		RotateCameraAroundObject(center, eye, angleY, -xAxis);
-		RotateCameraAroundObject(center, eye, angleX, yAxis);
+		RotateCameraAroundObject(center, eye, angleY, -xAxis, angleX, yAxis);
 		//Falta añadirle un tope al eye. Cuando el modulo se acerque a (0, 1, 0) o (0, -1, 0), no incrementar mas
 	}
 	prevMouseX = x;
@@ -87,11 +86,18 @@ void Camera::MouseRotateAroundObject(double x, double y) {
 	computeAxis();
 }
 
-void Camera::RotateCameraAroundObject(vec3& center, vec3& eye, float angleInRadians, const glm::vec3& axis) {
-	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), angleInRadians, axis);
-	vec3 translatedEye = eye - center;
-	vec3 rotatedEye = vec3(rotation * vec4(translatedEye, 1.0f));
-	eye = rotatedEye + center;
+void Camera::RotateCameraAroundObject(vec3& center, vec3& eye, float angleInRadiansX, const glm::vec3& axisX, float angleInRadiansY, const glm::vec3& axisY) {
+	glm::mat4 rotationX = glm::rotate(glm::mat4(1.0f), angleInRadiansX, axisX);
+	vec3 translatedEyeX = eye - center;
+	vec3 rotatedEyeX = vec3(rotationX * vec4(translatedEyeX, 1.0f));
+	if (glm::normalize(rotatedEyeX + center).y <= 0.99f && glm::normalize(rotatedEyeX + center).y >= -0.99f) {
+		eye = rotatedEyeX + center;
+	}
+
+	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), angleInRadiansY, axisY);
+	vec3 translatedEyeY = eye - center;
+	vec3 rotatedEyeY = vec3(rotationY * vec4(translatedEyeY, 1.0f));
+		eye = rotatedEyeY + center;
 }
 
 void Camera::MousePointLookAt(double x, double y) {
