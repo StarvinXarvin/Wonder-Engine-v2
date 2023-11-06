@@ -60,7 +60,6 @@ void Camera::cameraRotate(double x, double y) {
 	}
 	prevMouseX = x;
 	prevMouseY = y;
-	
 }
 
 void Camera::RotateCameraAroundObject(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis) {
@@ -108,5 +107,3 @@ void Camera::computeAxis() {
 void Camera::PrintVector(vec3 vector, const char* name) {
 	LOG("%s vector: (%f, %f, %f)", name, vector.x, vector.y, vector.z);
 }
-
-
