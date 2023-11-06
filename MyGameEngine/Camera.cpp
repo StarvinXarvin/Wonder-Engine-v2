@@ -53,16 +53,14 @@ void Camera::cameraRotate(double x, double y) {
 		//eye.x += mouseDir.x * 0.05;
 		//eye.y += mouseDir.y * 0.05;
 		LOG("MousePos: x: %f, y: %f", mouseDir.x, mouseDir.y);
-		vec3 axisX(glm::normalize(yAxis));
-		vec3 axisY(glm::normalize(xAxis));
 		float angleX = (0.01f * mouseDir.x);
 		float angleY = (0.01f * mouseDir.y);
-		RotateCameraAroundObject(center, eye, up, angleY, axisY);
-		RotateCameraAroundObject(center, eye, up, angleX, axisX);
+		RotateCameraAroundObject(center, eye, up, angleY, -xAxis);
+		RotateCameraAroundObject(center, eye, up, angleX, yAxis);
 	}
 	prevMouseX = x;
 	prevMouseY = y;
-	computeAxis();
+	
 }
 
 void Camera::RotateCameraAroundObject(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis) {
@@ -99,22 +97,12 @@ void Camera::CameraZoom(int zoom) {
 }
 
 void Camera::computeAxis() {
-	zAxis = eye - center;
-	//yAxis tiene que ser coplanario al eje y ortonormal y simultaneamente perpendicular a zAxis
-	//El determinante de yAxis, zAxis y (0, 1, 0) debe ser 0 + El producto escalar de yAxis y zAxis debe ser 0
-	yAxis = vec3f((zAxis.x / zAxis.z), ((-((zAxis.x * zAxis.x) / zAxis.z) - zAxis.z) / zAxis.y), 1);
-	xAxis = glm::cross(zAxis, yAxis);
-	glm::normalize(zAxis);
-	glm::normalize(yAxis);
-	glm::normalize(xAxis);
-	zAxis *= cameraSpeed*0.35;
-	yAxis *= cameraSpeed*0.15;
-	xAxis *= cameraSpeed*0.02;
-	PrintVector(xAxis, "xAxis");
-	PrintVector(yAxis, "yAxis");
-	PrintVector(zAxis, "zAxis");
-	//xAxis tiene que ser perpendicular a yAxis y a zAxis (Producto vectorial)
-	//Debe tenerse en cuenta el up tambien
+	zAxis = normalize(eye - center);
+	xAxis = normalize(cross(up, zAxis));
+	yAxis = normalize(cross(xAxis, zAxis));
+	zAxis *= cameraSpeed;
+	xAxis *= cameraSpeed;
+	yAxis *= cameraSpeed;
 }
 
 void Camera::PrintVector(vec3 vector, const char* name) {
