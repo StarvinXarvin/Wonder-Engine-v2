@@ -43,6 +43,7 @@ public:
 	float frame_ratef;
 	std::vector<GameObject*> gObjVec;
 
+	// LOGS
 	vector<string> LOGS;
 
 	void addEngineLogstoEditor()

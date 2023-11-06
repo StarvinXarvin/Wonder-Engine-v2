@@ -94,12 +94,12 @@ void UI::setupHIERARCHY()
 {
 	if (Begin("Hierarchy"))
 	{
-		for (auto gObj : App->Gengine->gObjVec)
+		for (auto& gObj : App->Gengine->gObjVec)
 		{
+			updateObjTransform();
 			if (TreeNode(gObj->getName().c_str()))
 			{
 				selectedObj = gObj;
-				updateObjTransform();
 				for (auto comp : gObj->component_vector)
 				{
 					int temp = 0;
@@ -258,12 +258,14 @@ bool UI::CleanUp()
 
 void UI::updateObjTransform()
 {
-	for (auto comp : selectedObj->component_vector)
-	{
-		if (comp->getType() == TRANSFORM && comp->getActive()) {
-			fobjPos = comp->getTransformData()[0];
-			fobjRot = comp->getTransformData()[1];
-			fobjSca = comp->getTransformData()[2];
+	if (selectedObj != nullptr) {
+		for (auto& comp : selectedObj->component_vector)
+		{
+			if (comp->getType() == TRANSFORM && comp->getActive()) {
+				fobjPos = comp->getTransformData()[0];
+				fobjRot = comp->getTransformData()[1];
+				fobjSca = comp->getTransformData()[2];
+			}
 		}
 	}
 }
