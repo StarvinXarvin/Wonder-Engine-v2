@@ -35,16 +35,18 @@ struct Camera
 	float cameraSpeed = 0.1f;
 
 	void ResetCenter(int id);
+
 	void cameraMove(int id);
-	void cameraRotate(double x, double y);
-	void RotateCameraAroundObject(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis);
-	void RotateDirection(int id);
+
+	void MouseRotateAroundObject(double x, double y);
+
+	void RotateCameraAroundObject(vec3& center, vec3& eye, float angleInRadians, const glm::vec3& axis);
 
 	void FPSMovement(int id);
 
 	void MousePointLookAt(double x, double y);
 
-	void RotateCameraAroundItself(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis);
+	void RotateCameraFPS(vec3& center, vec3& eye, float angleInRadiansX, const glm::vec3& axisX, float angleInRadiansY, const glm::vec3& axisY);
 
 	void CameraZoom(int zoom);
 

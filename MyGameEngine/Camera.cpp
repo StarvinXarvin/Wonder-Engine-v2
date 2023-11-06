@@ -42,30 +42,6 @@ void Camera::cameraMove(int id) {
 	}
 }
 
-void Camera::RotateDirection(int id) {
-	switch (id) {
-	case UP:
-		RotateCameraAroundObject(center, eye, up, 0.1f, vec3(1.0f, 0.0f, 0.0f));
-		break;
-	case DOWN:
-		RotateCameraAroundObject(center, eye, up, -0.1f, vec3(1.0f, 0.0f, 0.0f));
-		break;
-	case LEFT:
-		RotateCameraAroundObject(center, eye, up, -0.1f, vec3(0.0f, 1.0f, 0.0f));
-		break;
-	case RIGHT:
-		RotateCameraAroundObject(center, eye, up, 0.1f, vec3(0.0f, 1.0f, 0.0f));
-		break;
-	case FORWARD:
-		RotateCameraAroundObject(center, eye, up, 0.1f, vec3(0.0f, 0.0f, 1.0f));
-		break;
-	case BACKWARD:
-		RotateCameraAroundObject(center, eye, up, -0.1f, vec3(0.0f, 0.0f, 1.0f));
-		break;
-	}
-	
-}
-
 void Camera::FPSMovement(int id) {
 	switch (id) {
 	case FORWARD:
@@ -95,26 +71,27 @@ void Camera::ResetCenter(int id) {
 	prevMouseY = 0;
 }
 
-void Camera::cameraRotate(double x, double y) {
+void Camera::MouseRotateAroundObject(double x, double y) {
 
 	if (prevMouseX != 0 && prevMouseY != 0) {
 		vec2 mouseDir = { x - prevMouseX, y - prevMouseY };
 		float angleX = (0.01f * mouseDir.x);
 		float angleY = (0.01f * mouseDir.y);
-		RotateCameraAroundObject(center, eye, up, angleY, -xAxis);
-		RotateCameraAroundObject(center, eye, up, angleX, yAxis);
+		PrintVector(eye, "eye");
+		RotateCameraAroundObject(center, eye, angleY, -xAxis);
+		RotateCameraAroundObject(center, eye, angleX, yAxis);
+		//Falta añadirle un tope al eye. Cuando el modulo se acerque a (0, 1, 0) o (0, -1, 0), no incrementar mas
 	}
 	prevMouseX = x;
 	prevMouseY = y;
+	computeAxis();
 }
 
-void Camera::RotateCameraAroundObject(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis) {
+void Camera::RotateCameraAroundObject(vec3& center, vec3& eye, float angleInRadians, const glm::vec3& axis) {
 	glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), angleInRadians, axis);
 	vec3 translatedEye = eye - center;
 	vec3 rotatedEye = vec3(rotation * vec4(translatedEye, 1.0f));
 	eye = rotatedEye + center;
-	up = glm::mat3(rotation) * up;
-	//PrintVector(up, "up");
 }
 
 void Camera::MousePointLookAt(double x, double y) {
@@ -122,20 +99,24 @@ void Camera::MousePointLookAt(double x, double y) {
 		vec2 mouseDir = { x - prevMouseX, y - prevMouseY };
 		float angleX = (0.01f * mouseDir.x);
 		float angleY = (0.01f * mouseDir.y);
-		RotateCameraAroundItself(center, eye, up, angleY, -xAxis);
-		RotateCameraAroundItself(center, eye, up, angleX, yAxis);
+		RotateCameraFPS(center, eye, angleX, yAxis, angleY, -xAxis);
 	}
 	prevMouseX = x;
 	prevMouseY = y;
 	computeAxis();
 }
 
-void Camera::RotateCameraAroundItself(vec3& center, vec3& eye, vec3& up, float angleInRadians, const glm::vec3& axis) {
-	mat4 rotation = rotate(glm::mat4(1.0f), angleInRadians, axis);
+void Camera::RotateCameraFPS(vec3& center, vec3& eye, float angleInRadiansX, const glm::vec3& axisX, float angleInRadiansY, const glm::vec3& axisY) {
+	
+	mat4 rotation = rotate(glm::mat4(1.0f), angleInRadiansX, axisX);
 	center -= eye;
 	center = glm::mat3(rotation) * center;
 	center += eye;
-	up = glm::mat3(rotation) * up;
+
+	rotation = rotate(glm::mat4(1.0f), angleInRadiansY, axisY);
+	center -= eye;
+	center = glm::mat3(rotation) * center;
+	center += eye;
 }
 
 void Camera::CameraZoom(int zoom) {
@@ -155,5 +136,5 @@ void Camera::computeAxis() {
 }
 
 void Camera::PrintVector(vec3 vector, const char* name) {
-	//LOG("%s vector: (%f, %f, %f)", name, vector.x, vector.y, vector.z);
+	LOG("%s vector: (%f, %f, %f)", name, vector.x, vector.y, vector.z);
 }
