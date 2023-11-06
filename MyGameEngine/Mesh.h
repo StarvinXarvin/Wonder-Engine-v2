@@ -1,46 +1,51 @@
 #pragma once
-#include "Component.h"
-#include "Globals.h"
-#include "MeshImporter.h"
 
+#include <vector>
 #include <memory>
 #include <string>
-#include <vector>
+
+#include "types.h"
+#include "Graphic.h"
+#include "Texture.h"
 
 using namespace std;
 
-class Mesh : public Component
+class Mesh : public Graphic
 {
 public:
-	Mesh(const string path);
-	virtual ~Mesh(){}
-
-	void Enable() { active = true; }
-	update_statusE Update() { return UPDATE_CONTINUEE; }
-	void Disable() { active = false; }
-
-	void drawComponent();
-
-	void extractName(string path);
-
-	string getName()
-	{
-		return this->name;
-	}
-
-	vector<MeshImporter::Ptr> getMeshData()
-	{
-		return meshs_vector;
-	}
+	enum Formats { F_V3, F_V3C4, F_V3T2 };
+	struct V3 { vec3f v; };
+	struct V3C4 { vec3f v; vec4f c; };
+	struct V3T2 { vec3f v; vec2f t; };
 
 private:
-	vector<MeshImporter::Ptr> meshs_vector;
-	
-	component_type type = MESH;
+	const enum Formats _format;
 
-	string regex_origin;
-	string extension = "\.fbx";
-	string name = "";
+	unsigned int _vertex_buffer_id;
+	const unsigned int _numVerts;
 
-	bool active = true;
+	unsigned int _indexs_buffer_id;
+	const unsigned int _numIndexs;
+
+public:
+	using Ptr = shared_ptr<Mesh>;
+
+	static vector<Ptr> loadFromFile(const std::string& path);
+	static vector<Ptr> loadFromFile(const string& meshPath, const string& texturePath);
+
+	// Load a texture to an already loaded mesh
+	void loadTextureToMesh(const string& textPath);
+	Texture::Ptr texture;
+
+	Texture::Ptr checkboard = shared_ptr<Texture>(new Texture);
+	bool drawChecker = false;
+
+	Mesh(Formats format, const void* vertex_data, unsigned int numVerts, const unsigned int* indexs_data = nullptr, unsigned int numIndexs = 0);
+	Mesh(Mesh&& b) noexcept;
+	void draw();
+	~Mesh();
+
+private:
+	Mesh(const Mesh& cpy) = delete;
+	Mesh& operator=(const Mesh&) = delete;
 };

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Cube.h"
-#include "Texture2D.h"
+#include "Texture.h"
 
 struct CubeImmediateMode : public Cube
 {
-	Texture2D texture;
+	Texture texture;
 	void draw();
 
 	CubeImmediateMode();
