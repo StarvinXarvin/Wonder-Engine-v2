@@ -31,6 +31,8 @@ private:
 
 	void updateObjInspector();
 
+	void OsOpenInShell(const char* path);
+
 private:
 	float frame_rate;
 	float milliseconds;
