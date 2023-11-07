@@ -12,12 +12,21 @@ using namespace std;
 class TextureComp : public Component
 {
 public:
-	TextureComp(GameObject* owner, Texture::Ptr texture, string path);
-	virtual ~TextureComp();
+	TextureComp(GameObject* owner);
+	virtual ~TextureComp() {}
 
-	void Enable();
-	update_statusE Update();
-	void Disable();
+	void Enable()
+	{
+		active = true;
+	}
+	update_statusE Update()
+	{
+		return UPDATE_CONTINUEE;
+	}
+	void Disable()
+	{
+		active = false;
+	}
 
 	void extractName(string path);
 
@@ -38,7 +47,7 @@ public:
 
 private:
 	Texture::Ptr _texture;
-	
+
 	component_type type = TEXTURE;
 
 	string extension = "\.png";
@@ -47,5 +56,4 @@ private:
 	bool active = true;
 
 	GameObject* _owner;
-
 };

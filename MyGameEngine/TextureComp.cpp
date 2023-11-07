@@ -7,11 +7,9 @@
 
 using namespace std;
 
-TextureComp::TextureComp(GameObject* owner, Texture::Ptr texture, string path) : Component(owner, TEXTURE)
+TextureComp::TextureComp(GameObject* owner) : Component(owner, TEXTURE)
 {
 	_owner = owner;
-	setTexture(texture);
-	extractName(path);
 }
 
 void TextureComp::extractName(string path)

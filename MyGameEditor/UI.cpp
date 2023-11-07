@@ -74,7 +74,8 @@ update_status UI::setupMAINMENU()
 			Checkbox("Show Demo Window", &showDemo);
 
 			if (MenuItem("GitHub", NULL, false, true))
-			{}
+			{
+			}
 			if (IsItemClicked()) {
 				OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
 			}
@@ -99,17 +100,16 @@ void UI::setupHIERARCHY()
 		{
 			if (TreeNode(gObj->getName().c_str()))
 			{
-				selectedObj = gObj;
-				for (auto comp : gObj->component_vector)
+				for (auto child : gObj->getChildren())
 				{
-					int temp = 0;
-					if (comp->getType() != TRANSFORM)
+					if (MenuItem(child->getName().c_str()))
 					{
-						MenuItem(comp->getName().c_str());
+						selectedObj = child;
 					}
 				}
 				TreePop();
 			}
+
 		}
 		End();
 	}
@@ -200,7 +200,7 @@ void UI::setupABOUT()
 		NewLine();
 		Text("Developed by");
 		SameLine();
-		TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),"Pau Fusco");
+		TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Pau Fusco");
 		if (IsItemClicked()) {
 			OsOpenInShell("https://github.com/PauFusco");
 		}
@@ -226,7 +226,6 @@ void UI::setupABOUT()
 		Text("Asset management:");
 		SameLine();
 		TextColored(colorGray, "assimp");
-
 	}
 }
 
@@ -310,15 +309,19 @@ bool UI::CleanUp()
 
 void UI::updateObjInspector()
 {
+	TransformComp* transcomp = nullptr;
 	if (selectedObj != nullptr) {
 		for (auto& comp : selectedObj->component_vector)
 		{
-			if (comp->getType() == TRANSFORM) {
-				fobjPos = comp->getTransformData()[0];
-				fobjRot = comp->getTransformData()[1];
-				fobjSca = comp->getTransformData()[2];
+			if (comp->getType() == TRANSFORM)
+			{
+				transcomp = (TransformComp*)comp;
 			}
 		}
+
+		fobjPos = transcomp->getTransformData()[0];
+		fobjRot = transcomp->getTransformData()[1];
+		fobjSca = transcomp->getTransformData()[2];
 	}
 }
 

@@ -173,13 +173,24 @@ void GameEngine::createDroppedFile(string path)
 	{
 	case _FBX:
 		addLOG("FBX DROPPED");
-		engine.scene->createGameObject(pathArr[1]);
+		engine.scene->createGameObject(path);
 		ss << "Mesh with name: " << pathArr[1] << " loaded";
 		addLOG(ss.str());
 		break;
 
 	case _PNG:
 		addLOG("PNG DROPPED");
+		if (App->ui->getSelectedObj() != nullptr)
+		{
+			engine.scene->changeTextureofObj(App->ui->getSelectedObj(), path);
+			ss << "Texture with name: " << pathArr[1] << " loaded on object: " << App->ui->getSelectedObj()->getName();
+		}
+		else
+		{
+			ss << "No GameObject selected, could not load texture from" << pathArr[1];
+		}
+
+		addLOG(ss.str());
 		break;
 
 	case NOTADMITTED:

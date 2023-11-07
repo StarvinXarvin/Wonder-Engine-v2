@@ -9,7 +9,9 @@
 
 #include <vector>
 #include <array>
-
+#include <sstream>
+#include <regex>
+#include <fstream>
 #include <filesystem>
 namespace fs = std::filesystem;
 
@@ -112,6 +114,12 @@ std::vector <Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const st
 
 void Mesh::loadTextureToMesh(const std::string& textPath)
 {
+	stringstream ssfilePath;
+	ssfilePath << "..\\MyGameEditor\\Assets\\" << textPath;
+	ifstream file(ssfilePath.str());
+	smatch match;
+	regex filenamerg(".*(.+)\.fbx");
+
 	aiString aiPath(textPath);
 	fs::path texPath = fs::path(textPath).parent_path() / fs::path(aiPath.C_Str()).filename();
 	auto texture_ptr = make_shared<Texture>(texPath.string());

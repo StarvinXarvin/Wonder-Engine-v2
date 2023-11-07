@@ -12,7 +12,7 @@ using namespace std;
 class MeshComp : public Component
 {
 public:
-	MeshComp(GameObject* owner, Mesh::Ptr mesh, string pathToSetName);
+	MeshComp(GameObject* owner);
 	virtual ~MeshComp() {}
 
 	void Enable() { active = true; }

@@ -60,7 +60,7 @@ public:
 		return name;
 	}
 
-	virtual vector<vec3> getTransformData()
+	/*virtual vector<vec3> getTransformData()
 	{
 		vector<vec3> empty;
 		return empty;
@@ -69,7 +69,7 @@ public:
 	{
 		Mesh::Ptr empty;
 		return empty;
-	}
+	}*/
 
 	//virtual getMeshFormat
 
