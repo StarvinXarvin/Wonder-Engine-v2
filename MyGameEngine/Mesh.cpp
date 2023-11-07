@@ -7,6 +7,7 @@
 
 #include <span>
 
+#include <iostream>
 #include <vector>
 #include <array>
 #include <sstream>
@@ -70,7 +71,8 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 	return mesh_ptrs;
 }
 
-std::vector <Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const std::string& textPath) {
+std::vector <Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const std::string& textPath)
+{
 	const auto scene_ptr = aiImportFile(meshPath.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
 	const aiSceneExt& scene = *(aiSceneExt*)scene_ptr;
 
@@ -114,12 +116,6 @@ std::vector <Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const st
 
 void Mesh::loadTextureToMesh(const std::string& textPath)
 {
-	stringstream ssfilePath;
-	ssfilePath << "..\\MyGameEditor\\Assets\\" << textPath;
-	ifstream file(ssfilePath.str());
-	smatch match;
-	regex filenamerg(".*(.+)\.fbx");
-
 	aiString aiPath(textPath);
 	fs::path texPath = fs::path(textPath).parent_path() / fs::path(aiPath.C_Str()).filename();
 	auto texture_ptr = make_shared<Texture>(texPath.string());

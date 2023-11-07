@@ -3,6 +3,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 
+#include <iostream>
 #include <string>
 #include <fstream>
 #include <filesystem>
@@ -19,7 +20,7 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
-	createGameObject("../MyGameEditor/Assets/BakerHouse.fbx"/*, "Baker_house"*/);
+	createGameObject("../MyGameEditor/Assets/BakerHouse.fbx", "../MyGameEditor/Assets/Baker_house.png");
 
 	return true;
 }
@@ -54,6 +55,20 @@ void Scene::createGameObject(string meshPath, string texturePath)
 	TextureComp* textcomp = nullptr;
 	if (meshPath != "")
 	{
+		string meshname;
+		string meshcompname;
+
+		// Correct \ in the path when using drag and drop
+		size_t found = meshPath.find("\\");
+		while (found != string::npos)
+		{
+			meshPath.replace(found, 1, "/");
+			found = meshPath.find("\\", found + 1);
+		}
+
+		size_t slashplace = meshPath.find_last_of("/");
+		meshname = meshPath.substr(slashplace + 1, meshPath.size() - slashplace - 5);
+		meshcompname = meshPath.substr(slashplace + 1, meshPath.size());
 		// Load meshs to a vector
 		vector<Mesh::Ptr> mesh_ptrs;
 		if (texturePath != "")
@@ -67,7 +82,6 @@ void Scene::createGameObject(string meshPath, string texturePath)
 
 		// Create components for the new gameobject
 		// Create all meshes as new gameobjects, childs of the newgObj
-
 		for (auto mesh : mesh_ptrs)
 		{
 			GameObject* newGOchild = new GameObject();
@@ -85,6 +99,13 @@ void Scene::createGameObject(string meshPath, string texturePath)
 					textcomp = (TextureComp*)comp;
 					textcomp->setTexture(mesh->texture);
 				}
+				newGOchild->setName(meshname);
+				newGOchild->getComponent(MESH)->setName(meshcompname);
+				newGOchild->getComponent(MESH)->setFilePath(meshPath);
+
+				newGOchild->setName(meshname);
+				newGOchild->getComponent(MESH)->setName(meshcompname);
+				newGOchild->getComponent(MESH)->setFilePath(meshPath);
 			}
 		}
 	}
@@ -107,12 +128,12 @@ void Scene::changeTextureofObj(GameObject* gObj, string path)
 	MeshComp* meshcomp = nullptr;
 	TextureComp* textcomp = nullptr;
 
-
 	for (auto comp : gObj->component_vector)
 	{
 		if (comp->getType() == TEXTURE)
 		{
 			textcomp = (TextureComp*)comp;
+			break;
 		}
 	}
 	for (auto comp : gObj->component_vector)
@@ -124,5 +145,4 @@ void Scene::changeTextureofObj(GameObject* gObj, string path)
 			textcomp->setTexture(meshcomp->getMeshData()->texture);
 		}
 	}
-
 }

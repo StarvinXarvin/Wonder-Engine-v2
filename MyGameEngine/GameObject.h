@@ -36,6 +36,15 @@ public:
 		this->name = name;
 	}
 
+	Component* getComponent(component_type type)
+	{
+		for (auto comp : this->component_vector)
+		{
+			if (comp->getType() == type)
+				return comp;
+		}
+	}
+
 	void addChild(GameObject* child)
 	{
 		if (child->_parent == this) return;

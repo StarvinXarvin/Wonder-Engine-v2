@@ -27,20 +27,6 @@ void GameObject::createComponent(GameObject* owner, component_type type)
 {
 	Component* newComponent = nullptr;
 
-	/*	MeshComp* meshcomp = nullptr;
-	TextureComp* textcomp = nullptr;
-
-	vector<Mesh::Ptr> mesh_shrdptrs;
-	vector<Texture::Ptr> texture_shrdptrs;
-
-	stringstream ssmeshPath;
-	ssmeshPath << "..\\MyGameEditor\\Assets\\" << meshPath;
-	ifstream file(ssmeshPath.str());
-	stringstream ssextPath;
-	ssextPath << "..\\MyGameEditor\\Assets\\" << textPath;
-	smatch match;
-	regex filenamerg(".*(.+)\.fbx"); */
-
 	switch (type)
 	{
 	case TRANSFORM:

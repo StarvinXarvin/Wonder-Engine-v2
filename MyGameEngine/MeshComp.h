@@ -26,11 +26,6 @@ public:
 		_mesh = mesh;
 	}
 
-	string getName()
-	{
-		return this->name;
-	}
-
 	Mesh::Ptr getMeshData()
 	{
 		return _mesh;
@@ -48,6 +43,7 @@ private:
 
 	string extension = "\.fbx";
 	string name = "";
+	string filePath = "";
 
 	bool active = true;
 
