@@ -16,6 +16,6 @@ public:
 
 private:
 	component_type type = TEXTURE;
-	
+
 	GameObject* _owner;
 };

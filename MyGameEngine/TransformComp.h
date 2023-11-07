@@ -59,6 +59,6 @@ private:
 	vec3 Position;
 	vec3 Rotation;
 	vec3 Scale;
-	
+
 	GameObject* _owner;
 };

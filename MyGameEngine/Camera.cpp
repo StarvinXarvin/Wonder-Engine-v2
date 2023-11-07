@@ -4,9 +4,7 @@
 
 #include <glm/ext/matrix_transform.hpp>
 
-Camera::Camera() : fov(60), aspect(4.0/3.0), zNear(0.1), zFar(100), eye(10, 2, 10), center(0, 1, 0), up(0, 1, 0) {}
-
-
+Camera::Camera() : fov(60), aspect(4.0 / 3.0), zNear(0.1), zFar(100), eye(10, 2, 10), center(0, 1, 0), up(0, 1, 0) {}
 
 glm::dmat4 Camera::computeLookAt() const {
 	return glm::lookAt(eye, center, up);
@@ -74,7 +72,6 @@ void Camera::ResetCenter(int id) {
 }
 
 void Camera::MouseRotateAroundObject(double x, double y) {
-
 	if (prevMouseX != 0 && prevMouseY != 0) {
 		vec2 mouseDir = { x - prevMouseX, y - prevMouseY };
 		//eye.x += mouseDir.x * 0.05;
@@ -101,7 +98,7 @@ void Camera::RotateCameraAroundObject(vec3& center, vec3& eye, float angleInRadi
 	glm::mat4 rotationY = glm::rotate(glm::mat4(1.0f), angleInRadiansY, axisY);
 	vec3 translatedEyeY = eye - center;
 	vec3 rotatedEyeY = vec3(rotationY * vec4(translatedEyeY, 1.0f));
-		eye = rotatedEyeY + center;
+	eye = rotatedEyeY + center;
 }
 
 void Camera::MousePointLookAt(double x, double y) {
@@ -117,7 +114,6 @@ void Camera::MousePointLookAt(double x, double y) {
 }
 
 void Camera::RotateCameraFPS(vec3& center, vec3& eye, float angleInRadiansX, const glm::vec3& axisX, float angleInRadiansY, const glm::vec3& axisY) {
-	
 	mat4 rotation = rotate(glm::mat4(1.0f), angleInRadiansX, axisX);
 	center -= eye;
 	center = glm::mat3(rotation) * center;

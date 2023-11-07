@@ -62,12 +62,12 @@ update_status GameEngine::PostUpdate()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	engine.Update();
-	
+
 	// Engine LOGS
 	addEngineLogstoEditor();
 	engine.deleteEngineLogs();
 	getEditorLogs();
-	
+
 	const auto frame_end = steady_clock::now();
 	const auto frame_duration = frame_end - frame_start;
 	if (frame_duration < FDT) this_thread::sleep_for(FDT - frame_duration);
@@ -82,7 +82,6 @@ update_status GameEngine::PostUpdate()
 }
 
 void GameEngine::detectCameraInput() {
-
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) {
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
 			engine.renderer->camera.ResetCenter(1);
@@ -120,7 +119,6 @@ void GameEngine::detectCameraInput() {
 			}
 		}
 		else {
-
 			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 				(engine.renderer->camera.cameraMove(CameraDirection::LEFT));
 			}
@@ -191,7 +189,6 @@ void GameEngine::createDroppedFile(string path)
 	default:
 		break;
 	}
-
 }
 
 bool GameEngine::CleanUp()

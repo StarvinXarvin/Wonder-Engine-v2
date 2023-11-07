@@ -7,7 +7,7 @@ GraphicObject::GraphicObject(std::shared_ptr<Graphic> graphic) : _transform(glm:
 void GraphicObject::paint() {
 	glPushMatrix();
 	glMultMatrixd(&_transform[0].x);
-	if(_graphic.get()) _graphic->draw();
+	if (_graphic.get()) _graphic->draw();
 	for (auto child : _children) child->paint();
 	glPopMatrix();
 }

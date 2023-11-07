@@ -6,7 +6,7 @@ class WonderEngine;
 
 class EngineModule
 {
-private :
+private:
 	bool enabled;
 
 public:
@@ -18,9 +18,9 @@ public:
 	virtual ~EngineModule()
 	{}
 
-	virtual bool Init() 
+	virtual bool Init()
 	{
-		return true; 
+		return true;
 	}
 
 	virtual bool Start()
@@ -43,8 +43,8 @@ public:
 		return UPDATE_CONTINUEE;
 	}
 
-	virtual bool CleanUp() 
-	{ 
-		return true; 
+	virtual bool CleanUp()
+	{
+		return true;
 	}
 };

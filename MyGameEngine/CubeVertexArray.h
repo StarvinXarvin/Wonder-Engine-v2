@@ -12,4 +12,3 @@ public:
 	CubeVertexArray();
 	void draw();
 };
-

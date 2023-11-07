@@ -2,7 +2,6 @@
 #include "Cube.h"
 class CubeInterleavedVBO : public Cube
 {
-
 	unsigned int _buffer_id;
 
 public:
@@ -10,5 +9,4 @@ public:
 	void draw();
 
 	~CubeInterleavedVBO();
-
 };

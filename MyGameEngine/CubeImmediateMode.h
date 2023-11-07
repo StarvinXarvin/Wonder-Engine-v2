@@ -10,4 +10,3 @@ struct CubeImmediateMode : public Cube
 
 	CubeImmediateMode();
 };
-
