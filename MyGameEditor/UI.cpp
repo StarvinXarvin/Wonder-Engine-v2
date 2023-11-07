@@ -64,22 +64,23 @@ update_status UI::setupMAINMENU()
 		{
 			if (BeginMenu("Window Toggle"))
 			{
-				Checkbox("Hierarchy", &showHier);
-				Checkbox("Inspector", &showInsp);
-				Checkbox("Configuration", &showConf);
-				Checkbox("Console", &showCons);
+				if (MenuItem("Hierarchy")) showHier = !showHier;
+				if (MenuItem("Inspector")) showInsp = !showInsp;
+				if (MenuItem("Configuration")) showConf = !showConf;
+				if (MenuItem("Console")) showCons = !showCons;
 				ImGui::EndMenu();
 			}
 
 			Checkbox("Show Demo Window", &showDemo);
 
 			if (MenuItem("GitHub", NULL, false, true))
-			{}
+			{
+			}
 			if (IsItemClicked()) {
 				OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
 			}
 
-			Checkbox("About", &showAbout);
+			if (MenuItem("About")) showAbout = !showAbout;
 
 			if (MenuItem("Quit", "Esc", false, true))
 			{
@@ -99,14 +100,16 @@ void UI::setupHIERARCHY()
 		{
 			if (TreeNode(gObj->getName().c_str()))
 			{
-				selectedObj = gObj;
-				for (auto comp : gObj->component_vector)
+				int temp = 0;
+				for (auto child : gObj->getChildren())
 				{
-					int temp = 0;
-					if (comp->getType() != TRANSFORM)
+					stringstream ss;
+					ss << child->getName() << "_" << temp;
+					if (MenuItem(ss.str().c_str()))
 					{
-						MenuItem(comp->getName().c_str());
+						selectedObj = child;
 					}
+					temp++;
 				}
 				TreePop();
 			}
@@ -120,7 +123,7 @@ void UI::setupCONSOLE()
 	{
 		for (auto log : App->Gengine->LOGS)
 		{
-			Text(log.c_str());
+			ImGui::Text(log.c_str());
 		}
 		End();
 	}
@@ -131,24 +134,39 @@ void UI::setupINSPECTOR()
 	{
 		if (CollapsingHeader("Transform"))
 		{
-			SeparatorText("Position");
-			DragFloat(posxlabel, &fobjPos.x);
-			DragFloat(posylabel, &fobjPos.y);
-			DragFloat(poszlabel, &fobjPos.z);
+			if (selectedObj != nullptr) {
+				SeparatorText("Position");
+				DragFloat(posxlabel, &fobjPos.x);
+				DragFloat(posylabel, &fobjPos.y);
+				DragFloat(poszlabel, &fobjPos.z);
 
-			SeparatorText("Rotation");
-			DragFloat(anglexlabel, &fobjRot.x);
-			DragFloat(angleylabel, &fobjRot.y);
-			DragFloat(anglezlabel, &fobjRot.z);
+				SeparatorText("Rotation");
+				DragFloat(anglexlabel, &fobjRot.x);
+				DragFloat(angleylabel, &fobjRot.y);
+				DragFloat(anglezlabel, &fobjRot.z);
 
-			SeparatorText("Scale");
-			DragFloat(scalexlabel, &fobjSca.x);
-			DragFloat(scaleylabel, &fobjSca.y);
-			DragFloat(scalezlabel, &fobjSca.z);
+				SeparatorText("Scale");
+				DragFloat(scalexlabel, &fobjSca.x);
+				DragFloat(scaleylabel, &fobjSca.y);
+				DragFloat(scalezlabel, &fobjSca.z);
+			}
+			else
+				ImGui::Text("No Object selected");
 		}
 		if (CollapsingHeader("Mesh"))
 		{
-			MenuItem("Mesh Name", NULL, false, false);
+			if (selectedObj != nullptr) {
+				stringstream ss;
+				string name = selectedObj->getComponent(MESH)->getName();
+				ss << "Mesh file name: " << name;
+				ImGui::Text(ss.str().c_str());
+				if (IsItemHovered())
+				{
+					SetTooltip("Hello");
+				}
+			}
+			else
+				ImGui::Text("No Object selected");
 		}
 		if (CollapsingHeader("Texture"))
 		{
@@ -196,37 +214,36 @@ void UI::setupABOUT()
 {
 	if (Begin("About"))
 	{
-		Text("WONDER ENGINE");
+		ImGui::Text("WONDER ENGINE");
 		NewLine();
-		Text("Developed by");
-		SameLine();
-		TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),"Pau Fusco");
+		ImGui::Text("Developed by");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Pau Fusco");
 		if (IsItemClicked()) {
 			OsOpenInShell("https://github.com/PauFusco");
 		}
-		SameLine();
-		Text("&");
-		SameLine();
-		TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Xavi Alcaniz");
+		ImGui::SameLine();
+		ImGui::Text("&");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Xavi Alcaniz");
 		if (IsItemClicked()) {
 			OsOpenInShell("https://github.com/StarvinXarvin");
 		}
 		NewLine();
 		ImVec4 colorGray(0.5f, 0.5f, 0.5f, 1.0f);
-		Text("LIBRARIES USED: ");
-		Text("UI:");
-		SameLine();
-		TextColored(colorGray, "ImGui");
-		Text("3D Graphics:");
-		SameLine();
-		TextColored(colorGray, "OpenGL, glew, SDL2");
-		Text("Parser:");
-		SameLine();
-		TextColored(colorGray, "parson");
-		Text("Asset management:");
-		SameLine();
-		TextColored(colorGray, "assimp");
-
+		ImGui::Text("LIBRARIES USED: ");
+		ImGui::Text("UI:");
+		ImGui::SameLine();
+		ImGui::TextColored(colorGray, "ImGui");
+		ImGui::Text("3D Graphics:");
+		ImGui::SameLine();
+		ImGui::TextColored(colorGray, "OpenGL, glew, SDL2");
+		ImGui::Text("Parser:");
+		ImGui::SameLine();
+		ImGui::TextColored(colorGray, "parson");
+		ImGui::Text("Asset management:");
+		ImGui::SameLine();
+		ImGui::TextColored(colorGray, "assimp");
 	}
 }
 
@@ -310,15 +327,19 @@ bool UI::CleanUp()
 
 void UI::updateObjInspector()
 {
+	TransformComp* transcomp = nullptr;
 	if (selectedObj != nullptr) {
 		for (auto& comp : selectedObj->component_vector)
 		{
-			if (comp->getType() == TRANSFORM) {
-				fobjPos = comp->getTransformData()[0];
-				fobjRot = comp->getTransformData()[1];
-				fobjSca = comp->getTransformData()[2];
+			if (comp->getType() == TRANSFORM)
+			{
+				transcomp = (TransformComp*)comp;
 			}
 		}
+
+		fobjPos = transcomp->getTransformData()[0];
+		fobjRot = transcomp->getTransformData()[1];
+		fobjSca = transcomp->getTransformData()[2];
 	}
 }
 

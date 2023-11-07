@@ -29,6 +29,6 @@ public:
 	unsigned int getID() { return _id; }
 
 private:
-	Texture(const Texture&);
-	Texture operator=(const Texture&);
+	Texture(const Texture&) = delete;
+	Texture operator=(const Texture&) = delete;
 };

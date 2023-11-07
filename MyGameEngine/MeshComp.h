@@ -12,7 +12,7 @@ using namespace std;
 class MeshComp : public Component
 {
 public:
-	MeshComp(GameObject* owner, Mesh::Ptr mesh, string pathToSetName);
+	MeshComp(GameObject* owner);
 	virtual ~MeshComp() {}
 
 	void Enable() { active = true; }
@@ -24,11 +24,6 @@ public:
 	void setMesh(Mesh::Ptr mesh)
 	{
 		_mesh = mesh;
-	}
-
-	string getName()
-	{
-		return this->name;
 	}
 
 	Mesh::Ptr getMeshData()
@@ -48,6 +43,7 @@ private:
 
 	string extension = "\.fbx";
 	string name = "";
+	string filePath = "";
 
 	bool active = true;
 

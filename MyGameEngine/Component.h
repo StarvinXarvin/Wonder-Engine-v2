@@ -59,23 +59,24 @@ public:
 	{
 		return name;
 	}
-
-	virtual vector<vec3> getTransformData()
+	virtual void setName(string name)
 	{
-		vector<vec3> empty;
-		return empty;
+		this->name = name;
 	}
-	virtual Mesh::Ptr getMeshData()
+	virtual string getFilePath()
 	{
-		Mesh::Ptr empty;
-		return empty;
+		return filePath;
 	}
-
+	virtual void setFilePath(string filePath)
+	{
+		this->filePath = filePath;
+	}
 private:
 	component_type type = component_type::UNKNOWN;
 
 	string extension;
 	string name;
+	string filePath;
 
 	bool active = true;
 };

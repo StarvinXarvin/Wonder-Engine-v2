@@ -123,7 +123,7 @@ void Camera::computeAxis() {
 	zAxis = normalize(eye - center);
 	xAxis = normalize(cross(up, zAxis));
 	yAxis = normalize(cross(xAxis, zAxis));
-	zAxis *= cameraSpeed*2;
+	zAxis *= cameraSpeed * 2;
 	xAxis *= cameraSpeed;
 	yAxis *= cameraSpeed;
 }

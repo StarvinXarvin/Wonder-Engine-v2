@@ -117,10 +117,14 @@ update_status Input::PreUpdate()
 
 		case SDL_DROPFILE:
 			string path = e.drop.file;
+			size_t lastslash = path.find_last_of("\\");
+			string filename = path.substr(lastslash + 1, path.size());
+			stringstream pathfromengine;
+			pathfromengine << "..\\MyGameEditor\\Assets\\" << filename;
 			stringstream ss;
 			ss << "File with path: " << path << " dropped";
 			App->Gengine->addLOG(ss.str());
-			App->Gengine->createDroppedFile(path);
+			App->Gengine->createDroppedFile(pathfromengine.str());
 			break;
 		}
 

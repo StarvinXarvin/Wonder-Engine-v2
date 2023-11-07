@@ -6,11 +6,9 @@
 
 using namespace std;
 
-MeshComp::MeshComp(GameObject* owner, Mesh::Ptr mesh, string pathToSetName) : Component(owner, MESH)
+MeshComp::MeshComp(GameObject* owner) : Component(owner, MESH)
 {
 	_owner = owner;
-	setMesh(mesh);
-	extractName(pathToSetName);
 }
 
 void MeshComp::extractName(string path)

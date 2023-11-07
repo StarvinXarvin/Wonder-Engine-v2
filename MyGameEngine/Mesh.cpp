@@ -7,9 +7,12 @@
 
 #include <span>
 
+#include <iostream>
 #include <vector>
 #include <array>
-
+#include <sstream>
+#include <regex>
+#include <fstream>
 #include <filesystem>
 namespace fs = std::filesystem;
 
@@ -68,7 +71,8 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 	return mesh_ptrs;
 }
 
-std::vector <Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const std::string& textPath) {
+std::vector <Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const std::string& textPath)
+{
 	const auto scene_ptr = aiImportFile(meshPath.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
 	const aiSceneExt& scene = *(aiSceneExt*)scene_ptr;
 

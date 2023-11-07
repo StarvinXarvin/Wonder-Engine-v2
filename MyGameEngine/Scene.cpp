@@ -1,5 +1,9 @@
 #include "Scene.h"
 
+#include "Mesh.h"
+#include "Texture.h"
+
+#include <iostream>
 #include <string>
 #include <fstream>
 #include <filesystem>
@@ -16,7 +20,7 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
-	createGameObject("BakerHouse.fbx");
+	createGameObject("../MyGameEditor/Assets/BakerHouse.fbx", "../MyGameEditor/Assets/Baker_house.png");
 
 	return true;
 }
@@ -45,7 +49,66 @@ void Scene::addGameObj(GameObject* newGameObj)
 
 void Scene::createGameObject(string meshPath, string texturePath)
 {
-	GameObject* newgObj = new GameObject(meshPath, texturePath);
+	GameObject* newgObj = new GameObject();
+
+	MeshComp* meshcomp = nullptr;
+	TextureComp* textcomp = nullptr;
+	if (meshPath != "")
+	{
+		string meshname;
+		string meshcompname;
+
+		// Correct \ in the path when using drag and drop
+		size_t found = meshPath.find("\\");
+		while (found != string::npos)
+		{
+			meshPath.replace(found, 1, "/");
+			found = meshPath.find("\\", found + 1);
+		}
+
+		size_t slashplace = meshPath.find_last_of("/");
+		meshname = meshPath.substr(slashplace + 1, meshPath.size() - slashplace - 5);
+		meshcompname = meshPath.substr(slashplace + 1, meshPath.size());
+		// Load meshs to a vector
+		vector<Mesh::Ptr> mesh_ptrs;
+		if (texturePath != "")
+		{
+			mesh_ptrs = Mesh::loadFromFile(meshPath, texturePath);
+		}
+		else
+		{
+			mesh_ptrs = Mesh::loadFromFile(meshPath);
+		}
+
+		// Create components for the new gameobject
+		// Create all meshes as new gameobjects, childs of the newgObj
+		for (auto mesh : mesh_ptrs)
+		{
+			GameObject* newGOchild = new GameObject();
+			newgObj->addChild(newGOchild);
+
+			for (auto comp : newGOchild->component_vector)
+			{
+				if (comp->getType() == MESH)
+				{
+					meshcomp = (MeshComp*)comp;
+					meshcomp->setMesh(mesh);
+				}
+				if (comp->getType() == TEXTURE)
+				{
+					textcomp = (TextureComp*)comp;
+					textcomp->setTexture(mesh->texture);
+				}
+				newGOchild->setName(meshname);
+				newGOchild->getComponent(MESH)->setName(meshcompname);
+				newGOchild->getComponent(MESH)->setFilePath(meshPath);
+
+				newGOchild->setName(meshname);
+				newGOchild->getComponent(MESH)->setName(meshcompname);
+				newGOchild->getComponent(MESH)->setFilePath(meshPath);
+			}
+		}
+	}
 
 	int temp = 0;
 	for (auto gObj : gameObj_vector)
@@ -58,4 +121,28 @@ void Scene::createGameObject(string meshPath, string texturePath)
 	newgObj->setName(gObjName.str());
 
 	addGameObj(newgObj);
+}
+
+void Scene::changeTextureofObj(GameObject* gObj, string path)
+{
+	MeshComp* meshcomp = nullptr;
+	TextureComp* textcomp = nullptr;
+
+	for (auto comp : gObj->component_vector)
+	{
+		if (comp->getType() == TEXTURE)
+		{
+			textcomp = (TextureComp*)comp;
+			break;
+		}
+	}
+	for (auto comp : gObj->component_vector)
+	{
+		if (comp->getType() == MESH && textcomp != nullptr)
+		{
+			meshcomp = (MeshComp*)comp;
+			meshcomp->getMeshData()->loadTextureToMesh(path);
+			textcomp->setTexture(meshcomp->getMeshData()->texture);
+		}
+	}
 }

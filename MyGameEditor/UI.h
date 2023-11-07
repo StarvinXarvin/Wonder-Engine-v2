@@ -16,6 +16,11 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
+	GameObject* getSelectedObj()
+	{
+		return selectedObj;
+	}
+
 private:
 	bool createImGuiContext();
 	update_status setUpUI();
