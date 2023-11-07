@@ -113,7 +113,6 @@ void UI::setupHIERARCHY()
 				}
 				TreePop();
 			}
-
 		}
 		End();
 	}

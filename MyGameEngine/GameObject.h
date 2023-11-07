@@ -49,9 +49,9 @@ public:
 	{
 		if (child->_parent == this) return;
 		if (child->_parent) child->_parent->removeChild(child);
-	
+
 		for (auto comp : this->component_vector)	comp->Disable();
-	
+
 		this->_child = child;
 		child->_parent = this;
 		children.push_back(child);
