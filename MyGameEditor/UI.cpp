@@ -161,15 +161,16 @@ void UI::setupCONFIG()
 {
 	if (Begin("Configuration"))
 	{
-		if (CollapsingHeader("Application"))
+		if (TreeNode("Application"))
 		{
 			PlotHistogram("FPS", &frame_list[0], frame_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
 
 			PlotHistogram("ms", &ms_list[0], ms_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
+			TreePop();
 		}
-		if (CollapsingHeader("Modules"))
+		if (TreeNode("Modules"))
 		{
-			if (BeginMenu("Window"))
+			if (TreeNode("Window"))
 			{
 				float windowwidth = App->window->getWindowWidth();
 				float windowheight = App->window->getWindowHeight();
@@ -181,12 +182,13 @@ void UI::setupCONFIG()
 				// VSYNC
 				// Predefined window sizes
 				//    (HD, FHD, 4K)
-				ImGui::EndMenu();
+				TreePop();
 			}
-			if (BeginMenu("Renderer"))
+			if (TreeNode("Renderer"))
 			{
-				ImGui::EndMenu();
+				TreePop();
 			}
+			TreePop();
 		}
 	}
 }
