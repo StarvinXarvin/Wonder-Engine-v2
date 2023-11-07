@@ -74,8 +74,9 @@ update_status UI::setupMAINMENU()
 			Checkbox("Show Demo Window", &showDemo);
 
 			if (MenuItem("GitHub", NULL, false, true))
-			{
-
+			{}
+			if (IsItemClicked()) {
+				OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
 			}
 
 			Checkbox("About", &showAbout);
@@ -196,9 +197,7 @@ void UI::setupABOUT()
 		Text("Link to our");
 		SameLine();
 		TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),"github");
-		if (IsItemClicked()) {
-			OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
-		}
+
 	}
 }
 
