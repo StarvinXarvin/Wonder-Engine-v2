@@ -20,7 +20,7 @@ public:
 	GameObject(string meshPath, string texturePath);
 	~GameObject();
 
-	void createComponent(component_type type, string meshPath = "", string textPath = "");
+	void createComponent(GameObject* owner, component_type type, string meshPath = "", string textPath = "");
 
 	vector<Component*> component_vector;
 

@@ -16,11 +16,14 @@ enum component_type
 	UNKNOWN,
 };
 
+class GameObject;
 
 class Component
 {
 public:
-	Component(component_type type) : type(type), active(true)
+	GameObject* _owner;
+
+	Component(GameObject* owner, component_type type) : _owner(owner), type(type), active(true)
 	{}
 	virtual ~Component()
 	{}
@@ -71,8 +74,8 @@ public:
 private:
 	component_type type = component_type::UNKNOWN;
 
-	string extension = "";
-	string name = "";
+	string extension;
+	string name;
 	
 	bool active = true;
 };

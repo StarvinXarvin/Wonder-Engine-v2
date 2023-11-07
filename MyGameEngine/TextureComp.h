@@ -4,12 +4,10 @@
 
 using namespace std;
 
-class GameObject;
-
 class TextureComp : public Component
 {
 public:
-	TextureComp(string path);
+	TextureComp(GameObject* owner, string path);
 	virtual ~TextureComp();
 
 	void Enable();
@@ -18,4 +16,6 @@ public:
 
 private:
 	component_type type = TEXTURE;
+	
+	GameObject* _owner;
 };

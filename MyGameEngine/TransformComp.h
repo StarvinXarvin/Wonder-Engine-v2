@@ -5,7 +5,7 @@
 class TransformComp : public Component
 {
 public:
-	TransformComp();
+	TransformComp(GameObject* owner);
 	virtual ~TransformComp();
 
 	void Enable();
@@ -59,4 +59,6 @@ private:
 	vec3 Position;
 	vec3 Rotation;
 	vec3 Scale;
+	
+	GameObject* _owner;
 };

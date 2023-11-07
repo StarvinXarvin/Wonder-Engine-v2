@@ -104,10 +104,7 @@ void UI::setupHIERARCHY()
 					int temp = 0;
 					if (comp->getType() != TRANSFORM)
 					{
-						stringstream compname;
-						compname << comp->getName() << "_" << temp;
-						MenuItem(compname.str().c_str());
-						temp++;
+						MenuItem(comp->getName().c_str());
 					}
 				}
 				TreePop();
@@ -167,7 +164,12 @@ void UI::setupCONFIG()
 		{
 			PlotHistogram("FPS", &frame_list[0], frame_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
 
-			PlotHistogram("Milliseconds", &ms_list[0], ms_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
+			PlotHistogram("ms", &ms_list[0], ms_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
+		}
+		if (CollapsingHeader("Modules"))
+		{
+			if (BeginMenu("Window", NULL)){}
+			if (BeginMenu("Renderer", NULL)){}
 		}
 	}
 }
@@ -267,8 +269,6 @@ void UI::updateObjInspector()
 				fobjRot = comp->getTransformData()[1];
 				fobjSca = comp->getTransformData()[2];
 			}
-			
 		}
-
 	}
 }

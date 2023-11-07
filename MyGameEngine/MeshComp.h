@@ -12,7 +12,7 @@ using namespace std;
 class MeshComp : public Component
 {
 public:
-	MeshComp(Mesh::Ptr mesh, string pathToSetName);
+	MeshComp(GameObject* owner, Mesh::Ptr mesh, string pathToSetName);
 	virtual ~MeshComp() {}
 
 	void Enable() { active = true; }
@@ -50,4 +50,6 @@ private:
 	string name = "";
 
 	bool active = true;
+
+	GameObject* _owner;
 };
