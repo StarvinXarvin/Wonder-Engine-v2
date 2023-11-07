@@ -92,6 +92,9 @@
     <ClInclude Include="Texture.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Primitive.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WonderEngine.cpp">
