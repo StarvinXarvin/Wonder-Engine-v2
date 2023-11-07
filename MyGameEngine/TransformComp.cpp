@@ -6,8 +6,10 @@
 
 #include "TransformComp.h"
 
-TransformComp::TransformComp() : Component(TRANSFORM)
+TransformComp::TransformComp(GameObject* owner) : Component(owner, TRANSFORM)
 {
+	_owner = owner;
+
 	active = true;
 
 	Position = (vec3)(0, 0, 0);

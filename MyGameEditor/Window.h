@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Module.h"
+#include "types.h"
 #include <SDL2/SDL.h>
 
 class Application;
@@ -20,6 +21,18 @@ public:
 
 	SDL_Window* initSDLWindowWithOpenGL();
 
+	void resizeWindow(int width, int height);
+
+	float getWindowWidth()
+	{
+		return (float)window_width;
+
+	}
+	float getWindowHeight()
+	{
+		return (float)window_height;
+	}
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;
@@ -29,4 +42,7 @@ public:
 
 	// OpenGL Context creation
 	SDL_GLContext GLContext;
+
+	int window_height;
+	int window_width;
 };

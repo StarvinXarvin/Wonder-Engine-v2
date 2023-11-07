@@ -9,9 +9,9 @@ namespace fs = filesystem;
 
 GameObject::GameObject(string meshPath = "", string texturePath = "")
 {
-	createComponent(TRANSFORM);
-	if (meshPath != "") createComponent(MESH, meshPath);
-	if (texturePath != "") createComponent(TEXTURE, texturePath);
+	createComponent(this, TRANSFORM);
+	if (meshPath != "") createComponent(this, MESH, meshPath);
+	if (texturePath != "") createComponent(this, TEXTURE, texturePath);
 
 	this->name = "defaultName";
 }
@@ -20,7 +20,7 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::createComponent(component_type type, string meshPath, string textPath)
+void GameObject::createComponent(GameObject* owner, component_type type, string meshPath, string textPath)
 {
 	Component* newComponent = nullptr;
 	vector<Mesh::Ptr> mesh_shrdptrs;
@@ -29,15 +29,15 @@ void GameObject::createComponent(component_type type, string meshPath, string te
 	ssfilePath << "..\\MyGameEditor\\Assets\\" << meshPath;
 
 	ifstream file(ssfilePath.str());
-	
+
 	smatch match;
 	regex filenamerg(".*(.+)\.fbx");
 
-	if (file.good()) {
+	if (type == TRANSFORM || file.good()) {
 		switch (type)
 		{
 		case TRANSFORM:
-			newComponent = new TransformComp();
+			newComponent = new TransformComp(owner);
 			component_vector.push_back(newComponent);
 			break;
 
@@ -47,23 +47,21 @@ void GameObject::createComponent(component_type type, string meshPath, string te
 			else mesh_shrdptrs = Mesh::loadFromFile(ssfilePath.str());
 
 			for (auto item : mesh_shrdptrs) {
-				newComponent = new MeshComp(item, ssfilePath.str());
+				newComponent = new MeshComp(owner, item, ssfilePath.str());
 				component_vector.push_back(newComponent);
 			}
-			
-			
-			//regex_search(ssfilePath.str(), match, filenamerg);
-			//meshName = 
-				break;
+			break;
 
 		case TEXTURE:
-			//newComponent = new TextureComp();
+			//newComponent = new TextureComp(owner);
 			//component_vector.push_back(newComponent);
 			break;
 		}
 	}
-	else{}
-	
+	else {
+		// LOG wrong file path
+	}
+
 	mesh_shrdptrs.clear();
 }
 
@@ -72,6 +70,6 @@ void GameObject::drawObj()
 	// Draws all the components in the vector of an object
 	for (auto item : component_vector)
 	{
-		if(item->getType() == MESH)	item->drawComponent();
+		if (item->getType() == MESH)	item->drawComponent();
 	}
 }
