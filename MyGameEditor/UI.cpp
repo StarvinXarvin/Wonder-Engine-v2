@@ -175,7 +175,12 @@ void UI::setupABOUT()
 {
 	if (Begin("About"))
 	{
-		Text("Hello test text");
+		Text("Link to our");
+		SameLine();
+		TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),"github");
+		if (IsItemClicked()) {
+			OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
+		}
 	}
 }
 
@@ -271,4 +276,21 @@ void UI::updateObjInspector()
 		}
 
 	}
+}
+
+void UI::OsOpenInShell(const char* path)
+{
+#ifdef _WIN32
+	// Note: executable path must use backslashes!
+	::ShellExecuteA(NULL, "open", path, NULL, NULL, SW_SHOWDEFAULT);
+#else
+#if __APPLE__
+	const char* open_executable = "open";
+#else
+	const char* open_executable = "xdg-open";
+#endif
+	char command[256];
+	snprintf(command, 256, "%s \"%s\"", open_executable, path);
+	system(command);
+#endif
 }
