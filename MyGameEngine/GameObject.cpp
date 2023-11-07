@@ -24,6 +24,7 @@ void GameObject::createComponent(GameObject* owner, component_type type, string 
 {
 	Component* newComponent = nullptr;
 	vector<Mesh::Ptr> mesh_shrdptrs;
+	vector<Texture::Ptr> texture_shrdptrs;
 
 	stringstream ssfilePath;
 	ssfilePath << "..\\MyGameEditor\\Assets\\" << meshPath;
@@ -53,8 +54,15 @@ void GameObject::createComponent(GameObject* owner, component_type type, string 
 			break;
 
 		case TEXTURE:
-			//newComponent = new TextureComp(owner);
-			//component_vector.push_back(newComponent);
+			texture_shrdptrs = Texture::loadFromFile(ssfilePath.str());
+
+			for (auto item : mesh_shrdptrs) {
+				newComponent = new MeshComp(owner, item, ssfilePath.str());
+				component_vector.push_back(newComponent);
+			}
+
+			newComponent = new TextureComp(owner, );
+			component_vector.push_back(newComponent);
 			break;
 		}
 	}

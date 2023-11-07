@@ -64,10 +64,10 @@ update_status UI::setupMAINMENU()
 		{
 			if (BeginMenu("Window Toggle"))
 			{
-				Checkbox("Hierarchy", &showHier);
-				Checkbox("Inspector", &showInsp);
-				Checkbox("Configuration", &showConf);
-				Checkbox("Console", &showCons);
+				if (MenuItem("Hierarchy")) showHier = !showHier;
+				if (MenuItem("Inspector")) showInsp = !showInsp;
+				if (MenuItem("Configuration")) showConf = !showConf;
+				if (MenuItem("Console")) showCons = !showCons;
 				ImGui::EndMenu();
 			}
 
@@ -79,7 +79,7 @@ update_status UI::setupMAINMENU()
 				OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
 			}
 
-			Checkbox("About", &showAbout);
+			if (MenuItem("About")) showAbout = !showAbout;
 
 			if (MenuItem("Quit", "Esc", false, true))
 			{

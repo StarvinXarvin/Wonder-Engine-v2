@@ -71,6 +71,8 @@ public:
 		return empty;
 	}
 
+	//virtual getMeshFormat
+
 private:
 	component_type type = component_type::UNKNOWN;
 
