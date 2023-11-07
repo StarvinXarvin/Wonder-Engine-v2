@@ -194,9 +194,36 @@ void UI::setupABOUT()
 {
 	if (Begin("About"))
 	{
-		Text("Link to our");
+		Text("WONDER ENGINE");
+		NewLine();
+		Text("Developed by");
 		SameLine();
-		TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),"github");
+		TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f),"Pau Fusco");
+		if (IsItemClicked()) {
+			OsOpenInShell("https://github.com/PauFusco");
+		}
+		SameLine();
+		Text("&");
+		SameLine();
+		TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Xavi Alcaniz");
+		if (IsItemClicked()) {
+			OsOpenInShell("https://github.com/StarvinXarvin");
+		}
+		NewLine();
+		ImVec4 colorGray(0.5f, 0.5f, 0.5f, 1.0f);
+		Text("LIBRARIES USED: ");
+		Text("UI:");
+		SameLine();
+		TextColored(colorGray, "ImGui");
+		Text("3D Graphics:");
+		SameLine();
+		TextColored(colorGray, "OpenGL, glew, SDL2");
+		Text("Parser:");
+		SameLine();
+		TextColored(colorGray, "parson");
+		Text("Asset management:");
+		SameLine();
+		TextColored(colorGray, "assimp");
 
 	}
 }
