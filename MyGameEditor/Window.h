@@ -26,7 +26,6 @@ public:
 	float getWindowWidth()
 	{
 		return (float)window_width;
-
 	}
 	float getWindowHeight()
 	{

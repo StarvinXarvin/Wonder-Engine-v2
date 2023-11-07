@@ -26,9 +26,7 @@ struct aiSceneExt : aiScene {
 	auto meshes() const { return span((aiMeshExt**)mMeshes, mNumMeshes); }
 };
 
-
 std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
-
 	const auto scene_ptr = aiImportFile(path.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
 	const aiSceneExt& scene = *(aiSceneExt*)scene_ptr;
 
@@ -42,11 +40,9 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 		texture_ptrs.push_back(texture_ptr);
 	}
 
-
 	//load meshes
 	vector<Mesh::Ptr> mesh_ptrs;
 	for (const auto& mesh_ptr : scene.meshes()) {
-
 		const auto& mesh = *mesh_ptr;
 
 		vector<V3T2> vertex_data;
@@ -73,7 +69,6 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 }
 
 std::vector <Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const std::string& textPath) {
-
 	const auto scene_ptr = aiImportFile(meshPath.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
 	const aiSceneExt& scene = *(aiSceneExt*)scene_ptr;
 
@@ -89,7 +84,6 @@ std::vector <Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const st
 	//load meshes
 	vector<Mesh::Ptr> mesh_ptrs;
 	for (const auto& mesh_ptr : scene.meshes()) {
-
 		const auto& mesh = *mesh_ptr;
 
 		vector<V3T2> vertex_data;
@@ -122,7 +116,6 @@ void Mesh::loadTextureToMesh(const std::string& textPath)
 	fs::path texPath = fs::path(textPath).parent_path() / fs::path(aiPath.C_Str()).filename();
 	auto texture_ptr = make_shared<Texture>(texPath.string());
 	texture = texture_ptr;
-
 }
 
 Mesh::Mesh(Formats format, const void* vertex_data, unsigned int numVerts, const unsigned int* index_data, unsigned int numIndexs) :
@@ -157,7 +150,6 @@ Mesh::Mesh(Formats format, const void* vertex_data, unsigned int numVerts, const
 	}
 }
 
-
 Mesh::Mesh(Mesh&& b) noexcept :
 	_format(b._format),
 	_vertex_buffer_id(b._vertex_buffer_id),
@@ -168,11 +160,9 @@ Mesh::Mesh(Mesh&& b) noexcept :
 {
 	b._vertex_buffer_id = 0;
 	b._indexs_buffer_id = 0;
-
 }
 
 void Mesh::draw() {
-
 	glColor4ub(255, 255, 255, 255);
 
 	glBindBuffer(GL_ARRAY_BUFFER, _vertex_buffer_id);

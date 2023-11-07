@@ -9,6 +9,4 @@ public:
 	CubeWireframeIVBO();
 	void draw();
 	~CubeWireframeIVBO();
-
 };
-

@@ -27,4 +27,3 @@ struct Cube : Graphic
 
 	Cube();
 };
-

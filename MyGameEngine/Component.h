@@ -76,6 +76,6 @@ private:
 
 	string extension;
 	string name;
-	
+
 	bool active = true;
 };

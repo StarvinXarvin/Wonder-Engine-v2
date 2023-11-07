@@ -73,7 +73,7 @@ void Window::initOpenGL() {
 bool Window::Init()
 {
 	App->Gengine->addLOG("Window Initialization");
-	
+
 	window = initSDLWindowWithOpenGL();
 	GLContext = createSdlGlContext(window);
 	initOpenGL();
@@ -89,7 +89,6 @@ void Window::resizeWindow(int width, int height)
 	SDL_SetWindowSize(window, width, height);
 	window_width = width;
 	window_height = height;
-
 }
 
 bool Window::CleanUp()

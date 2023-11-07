@@ -75,7 +75,6 @@ update_status UI::setupMAINMENU()
 
 			if (MenuItem("GitHub", NULL, false, true))
 			{
-
 			}
 
 			Checkbox("About", &showAbout);
