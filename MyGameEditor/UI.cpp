@@ -168,8 +168,24 @@ void UI::setupCONFIG()
 		}
 		if (CollapsingHeader("Modules"))
 		{
-			if (BeginMenu("Window", NULL)){}
-			if (BeginMenu("Renderer", NULL)){}
+			if (BeginMenu("Window"))
+			{
+				float windowwidth = App->window->getWindowWidth();
+				float windowheight = App->window->getWindowHeight();
+				SeparatorText("Window Size");
+				DragFloat("Width", &windowwidth, 1.0f, 1.0f, 4096.0f);
+				DragFloat("Height", &windowheight, 1.0f, 1.0f, 4096.0f);
+
+				SeparatorText("Markers");
+				// VSYNC
+				// Predefined window sizes
+				//    (HD, FHD, 4K)
+				ImGui::EndMenu();
+			}
+			if (BeginMenu("Renderer"))
+			{
+				ImGui::EndMenu();
+			}
 		}
 	}
 }
@@ -188,7 +204,7 @@ update_status UI::setUpUI()
 	ret = setupMAINMENU();
 	if (showHier) setupHIERARCHY();
 	if (showCons) setupCONSOLE();
-	
+
 	updateObjInspector();
 	if (showInsp) setupINSPECTOR();
 
