@@ -41,9 +41,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicObject.h">
-      <Filter>VisualLoader</Filter>
-    </ClInclude>
     <ClInclude Include="Graphic.h">
       <Filter>VisualLoader</Filter>
     </ClInclude>
@@ -102,9 +99,6 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicObject.cpp">
-      <Filter>VisualLoader</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Modules</Filter>

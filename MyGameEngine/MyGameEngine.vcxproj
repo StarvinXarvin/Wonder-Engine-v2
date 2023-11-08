@@ -22,7 +22,6 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graphic.h" />
-    <ClInclude Include="GraphicObject.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="MeshComp.h" />
     <ClInclude Include="Mesh.h" />
@@ -43,7 +42,6 @@
     <ClCompile Include="CubeVertexArray.cpp" />
     <ClCompile Include="CubeVertexBuffer.cpp" />
     <ClCompile Include="CubeWireframeIVBO.cpp" />
-    <ClCompile Include="GraphicObject.cpp" />
     <ClCompile Include="MeshComp.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -61,6 +59,7 @@
     <ProjectGuid>{0e04f5b4-d4a2-4f7b-b350-a0edcae8a446}</ProjectGuid>
     <RootNamespace>MyGameEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>WonderEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -112,7 +111,7 @@
 $(SolutionDir)\vcpkg\vcpkg.exe install opengl glew glm --recurse --triplet x64-windows</Command>
     </PreBuildEvent>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;GLU32.lib;DevIL.lib;assimp-vc142-mt.lib</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;GLU32.lib;DevIL.lib;assimp-vc143-mt.lib</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)vcpkg\installed\x64-windows\lib\</AdditionalLibraryDirectories>
