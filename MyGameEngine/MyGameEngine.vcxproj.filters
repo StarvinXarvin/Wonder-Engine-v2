@@ -148,5 +148,8 @@
     <ClCompile Include="Texture.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Primitive.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

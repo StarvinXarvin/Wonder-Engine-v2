@@ -47,6 +47,7 @@
     <ClCompile Include="MeshComp.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TextureComp.cpp" />
     <ClCompile Include="Texture.cpp" />
