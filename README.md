@@ -24,3 +24,6 @@ the websites of all the libraries we used.
 
 As a sidenote, the inspector window lets you see the selected Object with a default blank checker texture, see the normals of all vertices and faces, as well as
 check the number of vertices and faces, and the path of the selected mesh, also the size and the path of the texture atributed to it.
+
+The default extra meshes where taken from the following sources:
+- [Sword](https://free3d.com/3d-model/sting-sword-128810.html "Sting Sword")
