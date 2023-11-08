@@ -7,9 +7,9 @@ You can also load your own meshes and textures from any place of your drive. Bew
 Wonder Engine also has a camera, controllable with kb&m:
 - WASD: movement
 - WASD(while RMB): FPS-like movement
+- Shift: Double movement speed
 - RMB: look around
 - Alt + LMB: rotate around
 - F: look at 0, 0, 0 position
 - F(while Object selected): look at selected Object
-
 ### UI
