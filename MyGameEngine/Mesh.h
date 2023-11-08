@@ -42,6 +42,14 @@ public:
 	Texture::Ptr checkboard = shared_ptr<Texture>(new Texture);
 	bool drawChecker = false;
 
+	std::vector<vec3f> meshVerts;
+	std::vector<vec3f> meshNorms;
+	std::vector<vec3f> meshFaceCenters;
+	std::vector<vec3f> meshFaceNorms;
+
+	bool drawNormalsVerts = false;
+	bool drawNormalsFaces = false;
+
 	Mesh(Formats format, const void* vertex_data, unsigned int numVerts, unsigned int numFaces, const unsigned int* indexs_data = nullptr, unsigned int numIndexs = 0);
 	Mesh(Mesh&& b) noexcept;
 	void draw();
@@ -55,6 +63,9 @@ public:
 	{
 		return _numVerts;
 	}
+
+	int normalWidth = 1;
+	float normalLength = 0.3f;
 
 private:
 	Mesh(const Mesh& cpy) = delete;

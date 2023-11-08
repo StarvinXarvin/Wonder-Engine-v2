@@ -110,6 +110,7 @@ void UI::setupHIERARCHY()
 				}
 				TreePop();
 			}
+			Separator();
 		}
 		End();
 	}
@@ -172,6 +173,9 @@ void UI::setupINSPECTOR()
 				Text(meshfacecount.str().c_str());
 				Text(meshvertcount.str().c_str());
 				Separator();
+				ImGui::Checkbox("Use Checkers Texture", &meshcomp->getMeshData()->drawChecker);
+				ImGui::Checkbox("See Vertex Normals", &meshcomp->getMeshData()->drawNormalsVerts);
+				ImGui::Checkbox("See Face Normals", &meshcomp->getMeshData()->drawNormalsFaces);
 			}
 			else
 				ImGui::Text("No Object selected");
@@ -223,14 +227,28 @@ void UI::setupCONFIG()
 			{
 				SeparatorText("Size");
 				PushItemWidth(60.0f);
-				if (DragFloat("Width", &windowwidth, 1.0f, 1.0f, 4096.0f, "%.0f")) App->window->resizeWindow(windowwidth, windowheight);
-				if (DragFloat("Height", &windowheight, 1.0f, 1.0f, 4096.0f, "%.0f")) App->window->resizeWindow(windowwidth, windowheight);
+				if (DragFloat("Width", &windowwidth, 1.0f, 1.0f, 7680, "%.0f")) App->window->resizeWindow(windowwidth, windowheight);
+				if (DragFloat("Height", &windowheight, 1.0f, 1.0f, 4320, "%.0f")) App->window->resizeWindow(windowwidth, windowheight);
 				if (TreeNode("Presets"))
 				{
-					if (MenuItem("1366 x 768"))
+					SeparatorText("EDTV");
+					if (MenuItem("720 x 480"))
 					{
-						windowwidth = 1366;
-						windowheight = 768;
+						windowwidth = 720;
+						windowheight = 480;
+						App->window->resizeWindow(windowwidth, windowheight);
+					}
+					if (MenuItem("720 x 576"))
+					{
+						windowwidth = 720;
+						windowheight = 576;
+						App->window->resizeWindow(windowwidth, windowheight);
+					}
+					SeparatorText("HDTV");
+					if (MenuItem("1280 x 720"))
+					{
+						windowwidth = 1280;
+						windowheight = 720;
 						App->window->resizeWindow(windowwidth, windowheight);
 					}
 					if (MenuItem("1920 x 1080"))
@@ -239,10 +257,11 @@ void UI::setupCONFIG()
 						windowheight = 1080;
 						App->window->resizeWindow(windowwidth, windowheight);
 					}
-					if (MenuItem("2048 x 1080"))
+					SeparatorText("UHDTV");
+					if (MenuItem("3840 x 2160"))
 					{
-						windowwidth = 2048;
-						windowheight = 1080;
+						windowwidth = 3840;
+						windowheight = 2160;
 						App->window->resizeWindow(windowwidth, windowheight);
 					}
 				}
@@ -252,15 +271,9 @@ void UI::setupCONFIG()
 				App->window->handleFullscreen();
 				Checkbox("Resizable", &App->window->resizable);
 				App->window->handleResizable();
-				// VSYNC
-				// Predefined window sizes
-				//    (HD, FHD, 4K)
+
 				TreePop();
 			}
-			//if (TreeNode("Renderer"))
-			//{
-			//	TreePop();
-			//}
 			TreePop();
 		}
 		if (TreeNode("Software and Hardware"))
