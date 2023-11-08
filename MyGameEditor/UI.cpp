@@ -4,6 +4,8 @@
 #include <chrono>
 #include <thread>
 
+#include <GL/glew.h>
+
 #include "Application.h"
 #include "Globals.h"
 #include "UI.h"
@@ -70,7 +72,7 @@ update_status UI::setupMAINMENU()
 				if (MenuItem("Console")) showCons = !showCons;
 				ImGui::EndMenu();
 			}
-			
+
 			if (MenuItem("Show Demo Window")) showDemo = !showDemo;
 
 			if (MenuItem("GitHub", NULL, false, true)) OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
@@ -260,18 +262,69 @@ void UI::setupABOUT()
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Xavi Alcaniz");
 		if (IsItemClicked()) OsOpenInShell("https://github.com/StarvinXarvin");
-		
-		Separator();
-		ImVec4 colorGray(0.5f, 0.5f, 0.5f, 1.0f);
-		Text("LIBRARIES USED: ");
-		Bullet(); if (ImGui::Button("Assimp 5.2.5")) OsOpenInShell("https://assimp-docs.readthedocs.io/");
-		Bullet(); if (ImGui::Button("DevIL 1.8.0#11")) OsOpenInShell("https://openil.sourceforge.net/");
-		Bullet(); if (ImGui::Button("GLEW 2.2.0#3")) OsOpenInShell("https://glew.sourceforge.net/");
-		Bullet(); if (ImGui::Button("GLM 2023-06-08")) OsOpenInShell("https://glm.g-truc.net/0.9.5/index.html");
-		Bullet(); if (ImGui::Button("ImGUI 1.89.9")) OsOpenInShell("https://imgui-test.readthedocs.io/");
-		Bullet(); if (ImGui::Button("jsoncpp 1.9.5")) OsOpenInShell("https://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html");
-		Bullet(); if (ImGui::Button("OpenGL 2022-12-04#3")) OsOpenInShell("https://www.opengl.org/");
-		Bullet(); if (ImGui::Button("SDL2 2.28.3")) OsOpenInShell("https://wiki.libsdl.org/");
+
+		ImVec4 orange = { 209 / 255.0, 119 / 255.0, 100 / 255.0, 255 / 255.0 };
+		ImVec4 porpol = { 187 / 255.0, 156 / 255.0, 238 / 255.0, 255 / 255.0 };
+		ImVec4 red = { 225 / 255.0, 90 / 255.0, 90 / 255.0, 255 / 255.0 };
+		ImVec4 nvidiagreen = { 50 / 255.0, 225 / 255.0, 66 / 255.0, 255 / 255.0 };
+		ImVec4 vramgreen = { 164 / 255.0, 243 / 255.0, 195 / 255.0, 255 / 255.0 };
+		ImVec4 cpublue = { 80 / 255.0, 150 / 255.0, 250 / 255.0, 255 / 255.0 };
+
+		{
+			string text = "";
+			if (CollapsingHeader("Software info"))
+			{
+				Text("SDL version compiled: ");
+				SameLine(); TextColored(orange, info.SDL_version_compiled.c_str());
+				Text("SDL version linked: ");
+				SameLine(); TextColored(orange, info.SDL_version_linked.c_str());
+				Text("OpenGL version: ");
+				SameLine(); TextColored(porpol, info.gl_version.c_str());
+				Text("DevIL version: ");
+				SameLine(); TextColored(red, info.devil_version.c_str());
+			}
+
+			if (CollapsingHeader("Hardware info"))
+			{
+				Text("GPU:");
+				Bullet(); Text("Info: ");
+				SameLine(); TextColored(nvidiagreen, info.GPU.c_str());
+				Bullet(); Text("Vendor: ");
+				SameLine(); TextColored(nvidiagreen, info.GPUVendor.c_str());
+				Bullet(); Text("Driver: ");
+				SameLine(); TextColored(nvidiagreen, info.GPUDriver.c_str());
+
+				Text("VRAM:");
+				Bullet(); Text("Budget: ");
+				text = to_string(info.VRAM_mb_budget) + " MB";
+				SameLine(); TextColored(vramgreen, text.c_str());
+				Bullet(); Text("Usage: ");
+				text = to_string(info.VRAM_mb_usage) + " MB";
+				SameLine(); TextColored(vramgreen, text.c_str());
+				Bullet(); Text("Available: ");
+				text = to_string(info.VRAM_mb_available) + " MB";
+				SameLine(); TextColored(vramgreen, text.c_str());
+
+				Text("CPU:");
+				Bullet(); Text("Cores: ");
+				text = to_string(info.CPU_count);
+				SameLine(); TextColored(cpublue, text.c_str());
+				Bullet(); Text("Cache line size: ");
+				text = to_string(info.l1_cachekb) + " KB";
+				SameLine(); TextColored(cpublue, text.c_str());
+			}
+
+			SeparatorText("Software GitHub links");
+			ImVec4 colorGray(0.5f, 0.5f, 0.5f, 1.0f);
+			Bullet(); if (ImGui::Button("Assimp 5.2.5")) OsOpenInShell("https://assimp-docs.readthedocs.io/");
+			Bullet(); if (ImGui::Button("DevIL 1.8.0#11")) OsOpenInShell("https://openil.sourceforge.net/");
+			Bullet(); if (ImGui::Button("GLEW 2.2.0#3")) OsOpenInShell("https://glew.sourceforge.net/");
+			Bullet(); if (ImGui::Button("GLM 2023-06-08")) OsOpenInShell("https://glm.g-truc.net/0.9.5/index.html");
+			Bullet(); if (ImGui::Button("ImGUI 1.89.9")) OsOpenInShell("https://imgui-test.readthedocs.io/");
+			Bullet(); if (ImGui::Button("jsoncpp 1.9.5")) OsOpenInShell("https://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html");
+			Bullet(); if (ImGui::Button("OpenGL 2022-12-04#3")) OsOpenInShell("https://www.opengl.org/");
+			Bullet(); if (ImGui::Button("SDL2 2.28.3")) OsOpenInShell("https://wiki.libsdl.org/");
+		}
 		ImGui::End();
 	}
 }
@@ -290,6 +343,7 @@ update_status UI::setUpUI()
 	calculateFramerate();
 	if (showConf) setupCONFIG();
 
+	loadHardwareInfo();
 	if (showAbout) setupABOUT();
 	if (showDemo) ShowDemoWindow();
 
@@ -303,6 +357,8 @@ bool UI::Init()
 	fobjPos.x = 0; fobjPos.y = 0; fobjPos.z = 0;
 	fobjRot.x = 0; fobjRot.y = 0; fobjRot.z = 0;
 	fobjSca.x = 1; fobjSca.y = 1; fobjSca.z = 1;
+
+	loadHardwareInfo();
 
 	showDemo = false;
 	showHier = true;
@@ -373,6 +429,41 @@ void UI::updateObjInspector()
 		fobjRot = transcomp->getTransformData()[1];
 		fobjSca = transcomp->getTransformData()[2];
 	}
+}
+
+void UI::loadHardwareInfo()
+{
+	SDL_version compiled;
+	SDL_version linked;
+
+	SDL_VERSION(&compiled);
+	SDL_GetVersion(&linked);
+
+	info.SDL_version_compiled = std::to_string(compiled.major) + "." + std::to_string(compiled.minor) + "." + std::to_string(compiled.patch);
+	info.SDL_version_linked = std::to_string(linked.major) + "." + std::to_string(linked.minor) + "." + std::to_string(linked.patch);
+
+	info.gl_version = App->Gengine->getOpenGLVersion();
+	info.devil_version = App->Gengine->getDevILVersion();
+
+	info.GPUVendor.assign((const char*)glGetString(GL_VENDOR));
+	info.GPU.assign((const char*)glGetString(GL_RENDERER));
+	info.GPUDriver.assign((const char*)glGetString(GL_VERSION));
+
+	GLint vmem_budget = 0;
+	GLint vmem_available = 0;
+	GLint vmem_usage = 0;
+
+	glGetIntegerv(GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX, &vmem_budget);
+	glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &vmem_available);
+
+	vmem_usage = vmem_budget - vmem_available;
+
+	info.VRAM_mb_budget = float(vmem_budget) / 1024.0f;
+	info.VRAM_mb_usage = float(vmem_usage) / 1024.f;
+	info.VRAM_mb_available = float(vmem_available) / 1024.f;
+
+	info.CPU_count = SDL_GetCPUCount();
+	info.l1_cachekb = SDL_GetCPUCacheLineSize();
 }
 
 void UI::OsOpenInShell(const char* path)

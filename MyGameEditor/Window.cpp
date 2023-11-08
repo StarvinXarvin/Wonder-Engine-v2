@@ -86,7 +86,6 @@ bool Window::Init()
 	GLContext = createSdlGlContext(window);
 	initOpenGL();
 
-
 	return true;
 }
 
@@ -95,7 +94,7 @@ void Window::resizeWindow(int width, int height)
 	SDL_SetWindowSize(window, width, height);
 	window_width = width;
 	window_height = height;
-	
+
 	glViewport(0, 0, width, height);
 }
 

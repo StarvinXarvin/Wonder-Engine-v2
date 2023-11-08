@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Module.h"
+#include "GL/glew.h"
+#include <IL/il.h>
+
 #include <vector>
 #include <string>
 
@@ -67,5 +70,14 @@ public:
 	void deleteLOG()
 	{
 		LOGS.clear();
+	}
+
+	string getDevILVersion() {
+		return to_string(ilGetInteger(IL_VERSION_NUM));
+	}
+
+	string getOpenGLVersion() {
+		const GLubyte* version = glGetString(GL_VERSION);
+		return reinterpret_cast<const char*>(version);
 	}
 };
