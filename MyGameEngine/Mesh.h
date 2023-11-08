@@ -27,6 +27,8 @@ private:
 	unsigned int _indexs_buffer_id;
 	const unsigned int _numIndexs;
 
+	const unsigned int _numFaces;
+
 public:
 	using Ptr = shared_ptr<Mesh>;
 
@@ -40,10 +42,19 @@ public:
 	Texture::Ptr checkboard = shared_ptr<Texture>(new Texture);
 	bool drawChecker = false;
 
-	Mesh(Formats format, const void* vertex_data, unsigned int numVerts, const unsigned int* indexs_data = nullptr, unsigned int numIndexs = 0);
+	Mesh(Formats format, const void* vertex_data, unsigned int numVerts, unsigned int numFaces, const unsigned int* indexs_data = nullptr, unsigned int numIndexs = 0);
 	Mesh(Mesh&& b) noexcept;
 	void draw();
 	~Mesh();
+
+	const unsigned int getFaces()
+	{
+		return _numFaces;
+	}
+	const unsigned int getVerts()
+	{
+		return _numVerts;
+	}
 
 private:
 	Mesh(const Mesh& cpy) = delete;

@@ -155,17 +155,23 @@ void UI::setupINSPECTOR()
 		if (CollapsingHeader("Mesh"))
 		{
 			if (selectedObj != nullptr) {
-				stringstream meshnamess;
-				string meshname = selectedObj->getComponent(MESH)->getName();
-				meshnamess << "Mesh file name: " << meshname;
-				ImGui::Text(meshnamess.str().c_str());
+				MeshComp* meshcomp = (MeshComp*)selectedObj->getComponent(MESH);
+				string meshname = meshcomp->getName();
+				Text("Texture file name:"); SameLine();
+				ImGui::TextColored(vramgreen.rgba, meshname.c_str());
 				if (IsItemHovered())
 				{
-					stringstream meshfiless;
-					string meshpath = selectedObj->getComponent(MESH)->getFilePath();
-					meshfiless << "Mesh file path: " << meshpath;
-					SetTooltip(meshfiless.str().c_str());
+					string meshpath = meshcomp->getFilePath();
+					SetTooltip(meshpath.c_str());
 				}
+				stringstream meshfacecount;
+				meshfacecount << "Mesh face count: " << meshcomp->getMeshData()->getFaces();
+				stringstream meshvertcount;
+				meshvertcount << "Mesh vertice count: " << meshcomp->getMeshData()->getVerts();
+				Separator();
+				Text(meshfacecount.str().c_str());
+				Text(meshvertcount.str().c_str());
+				Separator();
 			}
 			else
 				ImGui::Text("No Object selected");
@@ -173,17 +179,26 @@ void UI::setupINSPECTOR()
 		if (CollapsingHeader("Texture"))
 		{
 			if (selectedObj != nullptr) {
-				stringstream texturenamess;
-				string texturename = selectedObj->getComponent(TEXTURE)->getName();
-				texturenamess << "Texture file name: " << texturename;
-				ImGui::Text(texturenamess.str().c_str());
+				TextureComp* textcomp = (TextureComp*)selectedObj->getComponent(TEXTURE);
+				string texturename = textcomp->getName();
+				Text("Texture file name: "); SameLine();
+				ImGui::TextColored(orange.rgba, texturename.c_str());
 				if (IsItemHovered())
 				{
-					stringstream texturefiless;
-					string texturepath = selectedObj->getComponent(TEXTURE)->getFilePath();
-					texturefiless << "Texture file path: " << texturepath;
-					SetTooltip(texturefiless.str().c_str());
+					string texturepath = textcomp->getFilePath();
+					SetTooltip(texturepath.c_str());
 				}
+				vec2 textsize = textcomp->getTextureData()->getSize();
+				stringstream textwidthstring;
+				stringstream textheightstring;
+				textwidthstring << textsize.x;
+				textheightstring << textsize.y;
+
+				Text("Texture size:"); SameLine();
+				TextColored(orange.rgba, textwidthstring.str().c_str()); SameLine();
+				Text("x"); SameLine();
+				TextColored(orange.rgba, textheightstring.str().c_str());
+				Separator();
 			}
 			else
 				ImGui::Text("No Object selected");
@@ -207,8 +222,9 @@ void UI::setupCONFIG()
 			if (TreeNode("Window"))
 			{
 				SeparatorText("Size");
-				if (DragFloat("Width", &windowwidth, 1.0f, 1.0f, 4096.0f)) App->window->resizeWindow(windowwidth, windowheight);
-				if (DragFloat("Height", &windowheight, 1.0f, 1.0f, 4096.0f)) App->window->resizeWindow(windowwidth, windowheight);
+				PushItemWidth(60.0f);
+				if (DragFloat("Width", &windowwidth, 1.0f, 1.0f, 4096.0f, "%.0f")) App->window->resizeWindow(windowwidth, windowheight);
+				if (DragFloat("Height", &windowheight, 1.0f, 1.0f, 4096.0f, "%.0f")) App->window->resizeWindow(windowwidth, windowheight);
 				if (TreeNode("Presets"))
 				{
 					if (MenuItem("1366 x 768"))
@@ -260,7 +276,7 @@ void UI::setupCONFIG()
 				SameLine(); TextColored(porpol.rgba, info.gl_version.c_str());
 				Text("DevIL version: ");
 				SameLine(); TextColored(red.rgba, info.devil_version.c_str());
-				
+
 				Separator();
 
 				TreePop();
@@ -305,7 +321,7 @@ void UI::setupABOUT()
 	if (Begin("About"))
 	{
 		ImGui::Text("WONDER ENGINE v0.1");
-		
+
 		Text("Graphical Game Engine for video game creation using C++.");
 		Text("For external library information, see the library links in");
 		Text("this window and the version information in the Configuration window.");
@@ -319,7 +335,7 @@ void UI::setupABOUT()
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Xavi Alcaniz");
 		if (IsItemClicked()) OsOpenInShell("https://github.com/StarvinXarvin");
-		
+
 		SeparatorText("Software links");
 		ImVec4 colorGray(0.5f, 0.5f, 0.5f, 1.0f);
 		Bullet(); if (ImGui::Button("SDL2 2.28.3")) OsOpenInShell("https://wiki.libsdl.org/");
@@ -330,7 +346,7 @@ void UI::setupABOUT()
 		Bullet(); if (ImGui::Button("GLEW 2.2.0#3")) OsOpenInShell("https://glew.sourceforge.net/");
 		Bullet(); if (ImGui::Button("GLM 2023-06-08")) OsOpenInShell("https://glm.g-truc.net/0.9.5/index.html");
 		Bullet(); if (ImGui::Button("jsoncpp 1.9.5")) OsOpenInShell("https://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html");
-		
+
 		ImGui::End();
 	}
 }
@@ -473,7 +489,6 @@ void UI::loadHardwareInfo()
 
 	info.CPU_count = SDL_GetCPUCount();
 	info.l1_cachekb = SDL_GetCPUCacheLineSize();
-
 }
 
 void UI::OsOpenInShell(const char* path)

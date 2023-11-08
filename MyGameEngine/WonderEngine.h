@@ -43,4 +43,9 @@ public:
 	{
 		return EngineLog;
 	}
+	void changeAspectRatio(double newAspect)
+	{
+		renderer->camera.aspect = newAspect;
+	}
+
 };

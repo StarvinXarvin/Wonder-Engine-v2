@@ -16,6 +16,10 @@ class Texture
 {
 private:
 	unsigned int _id;
+	int _width;
+	int _height;
+	string _path;
+	string _name;
 
 public:
 	using Ptr = shared_ptr<Texture>;
@@ -26,7 +30,21 @@ public:
 	void bind() const;
 	~Texture();
 
+	string getPath()
+	{
+		return _path;
+	}
+	string getName()
+	{
+		return _name;
+	}
+
 	unsigned int getID() { return _id; }
+
+	vec2 getSize()
+	{
+		return (vec2)(_width, _height);
+	}
 
 private:
 	Texture(const Texture&) = delete;

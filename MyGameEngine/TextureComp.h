@@ -30,9 +30,25 @@ public:
 
 	void extractName(string path);
 
+	Texture::Ptr getTextureData()
+	{
+		return _texture;
+	}
+
+	string getName()
+	{
+		return name;
+	}
+	string getFilePath()
+	{
+		return filePath;
+	}
+
 	void setTexture(Texture::Ptr texture)
 	{
 		_texture = texture;
+		this->name = _texture->getName();
+		this->filePath = _texture->getPath();
 	}
 
 private:
@@ -42,6 +58,7 @@ private:
 
 	string extension = "\.png";
 	string name = "";
+	string filePath = "";
 
 	bool active = true;
 

@@ -80,4 +80,9 @@ public:
 		const GLubyte* version = glGetString(GL_VERSION);
 		return reinterpret_cast<const char*>(version);
 	}
+
+	void setAspectRatio(double newAspect)
+	{
+		engine.changeAspectRatio(newAspect);
+	}
 };
