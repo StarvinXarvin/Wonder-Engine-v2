@@ -70,15 +70,10 @@ update_status UI::setupMAINMENU()
 				if (MenuItem("Console")) showCons = !showCons;
 				ImGui::EndMenu();
 			}
+			
+			if (MenuItem("Show Demo Window")) showDemo = !showDemo;
 
-			Checkbox("Show Demo Window", &showDemo);
-
-			if (MenuItem("GitHub", NULL, false, true))
-			{
-			}
-			if (IsItemClicked()) {
-				OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
-			}
+			if (MenuItem("GitHub", NULL, false, true)) OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
 
 			if (MenuItem("About")) showAbout = !showAbout;
 
@@ -156,13 +151,16 @@ void UI::setupINSPECTOR()
 		if (CollapsingHeader("Mesh"))
 		{
 			if (selectedObj != nullptr) {
-				stringstream ss;
-				string name = selectedObj->getComponent(MESH)->getName();
-				ss << "Mesh file name: " << name;
-				ImGui::Text(ss.str().c_str());
+				stringstream meshnamess;
+				string meshname = selectedObj->getComponent(MESH)->getName();
+				meshnamess << "Mesh file name: " << meshname;
+				ImGui::Text(meshnamess.str().c_str());
 				if (IsItemHovered())
 				{
-					SetTooltip("Hello");
+					stringstream meshfiless;
+					string meshpath = selectedObj->getComponent(MESH)->getFilePath();
+					meshfiless << "Mesh file path: " << meshpath;
+					SetTooltip(meshfiless.str().c_str());
 				}
 			}
 			else
@@ -170,7 +168,21 @@ void UI::setupINSPECTOR()
 		}
 		if (CollapsingHeader("Texture"))
 		{
-			MenuItem("Texture Name", NULL, false, false);
+			if (selectedObj != nullptr) {
+				stringstream texturenamess;
+				string texturename = selectedObj->getComponent(TEXTURE)->getName();
+				texturenamess << "Texture file name: " << texturename;
+				ImGui::Text(texturenamess.str().c_str());
+				if (IsItemHovered())
+				{
+					stringstream texturefiless;
+					string texturepath = selectedObj->getComponent(TEXTURE)->getFilePath();
+					texturefiless << "Texture file path: " << texturepath;
+					SetTooltip(texturefiless.str().c_str());
+				}
+			}
+			else
+				ImGui::Text("No Object selected");
 		}
 		End();
 	}
@@ -190,13 +202,36 @@ void UI::setupCONFIG()
 		{
 			if (TreeNode("Window"))
 			{
-				float windowwidth = App->window->getWindowWidth();
-				float windowheight = App->window->getWindowHeight();
-				SeparatorText("Window Size");
-				DragFloat("Width", &windowwidth, 1.0f, 1.0f, 4096.0f);
-				DragFloat("Height", &windowheight, 1.0f, 1.0f, 4096.0f);
+				SeparatorText("Size");
+				if (DragFloat("Width", &windowwidth, 1.0f, 1.0f, 4096.0f)) App->window->resizeWindow(windowwidth, windowheight);
+				if (DragFloat("Height", &windowheight, 1.0f, 1.0f, 4096.0f)) App->window->resizeWindow(windowwidth, windowheight);
+				if (TreeNode("Presets"))
+				{
+					if (MenuItem("1366 x 768"))
+					{
+						windowwidth = 1366;
+						windowheight = 768;
+						App->window->resizeWindow(windowwidth, windowheight);
+					}
+					if (MenuItem("1920 x 1080"))
+					{
+						windowwidth = 1920;
+						windowheight = 1080;
+						App->window->resizeWindow(windowwidth, windowheight);
+					}
+					if (MenuItem("2048 x 1080"))
+					{
+						windowwidth = 2048;
+						windowheight = 1080;
+						App->window->resizeWindow(windowwidth, windowheight);
+					}
+				}
 
 				SeparatorText("Markers");
+				Checkbox("Fullscreen", &App->window->fullscreen);
+				App->window->handleFullscreen();
+				Checkbox("Resizable", &App->window->resizable);
+				App->window->handleResizable();
 				// VSYNC
 				// Predefined window sizes
 				//    (HD, FHD, 4K)
@@ -215,35 +250,29 @@ void UI::setupABOUT()
 	if (Begin("About"))
 	{
 		ImGui::Text("WONDER ENGINE");
-		NewLine();
+		Separator();
 		ImGui::Text("Developed by");
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Pau Fusco");
-		if (IsItemClicked()) {
-			OsOpenInShell("https://github.com/PauFusco");
-		}
+		if (IsItemClicked()) OsOpenInShell("https://github.com/PauFusco");
 		ImGui::SameLine();
 		ImGui::Text("&");
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Xavi Alcaniz");
-		if (IsItemClicked()) {
-			OsOpenInShell("https://github.com/StarvinXarvin");
-		}
-		NewLine();
+		if (IsItemClicked()) OsOpenInShell("https://github.com/StarvinXarvin");
+		
+		Separator();
 		ImVec4 colorGray(0.5f, 0.5f, 0.5f, 1.0f);
-		ImGui::Text("LIBRARIES USED: ");
-		ImGui::Text("UI:");
-		ImGui::SameLine();
-		ImGui::TextColored(colorGray, "ImGui");
-		ImGui::Text("3D Graphics:");
-		ImGui::SameLine();
-		ImGui::TextColored(colorGray, "OpenGL, glew, SDL2");
-		ImGui::Text("Parser:");
-		ImGui::SameLine();
-		ImGui::TextColored(colorGray, "parson");
-		ImGui::Text("Asset management:");
-		ImGui::SameLine();
-		ImGui::TextColored(colorGray, "assimp");
+		Text("LIBRARIES USED: ");
+		Bullet(); if (ImGui::Button("Assimp 5.2.5")) OsOpenInShell("https://assimp-docs.readthedocs.io/");
+		Bullet(); if (ImGui::Button("DevIL 1.8.0#11")) OsOpenInShell("https://openil.sourceforge.net/");
+		Bullet(); if (ImGui::Button("GLEW 2.2.0#3")) OsOpenInShell("https://glew.sourceforge.net/");
+		Bullet(); if (ImGui::Button("GLM 2023-06-08")) OsOpenInShell("https://glm.g-truc.net/0.9.5/index.html");
+		Bullet(); if (ImGui::Button("ImGUI 1.89.9")) OsOpenInShell("https://imgui-test.readthedocs.io/");
+		Bullet(); if (ImGui::Button("jsoncpp 1.9.5")) OsOpenInShell("https://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html");
+		Bullet(); if (ImGui::Button("OpenGL 2022-12-04#3")) OsOpenInShell("https://www.opengl.org/");
+		Bullet(); if (ImGui::Button("SDL2 2.28.3")) OsOpenInShell("https://wiki.libsdl.org/");
+		ImGui::End();
 	}
 }
 
@@ -282,6 +311,9 @@ bool UI::Init()
 	showConf = true;
 
 	showAbout = false;
+
+	windowwidth = App->window->window_width;
+	windowheight = App->window->window_height;
 
 	frame_list.push_back(0);
 	ms_list.push_back(0);

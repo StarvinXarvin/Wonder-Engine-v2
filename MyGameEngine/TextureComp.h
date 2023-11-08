@@ -35,16 +35,6 @@ public:
 		_texture = texture;
 	}
 
-	string getName()
-	{
-		return this->name;
-	}
-
-	Texture::Ptr getTextureData()
-	{
-		return _texture;
-	}
-
 private:
 	Texture::Ptr _texture;
 

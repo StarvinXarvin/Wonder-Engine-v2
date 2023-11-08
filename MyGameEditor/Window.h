@@ -32,6 +32,37 @@ public:
 		return (float)window_height;
 	}
 
+	void handleFullscreen()
+	{
+		if (fullscreen) activateFullscreen();
+		else deactivateFullscreen();
+	}
+	void activateFullscreen() {
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+		fullscreen = true;
+	}
+	void deactivateFullscreen()
+	{
+		SDL_SetWindowFullscreen(window, 0);
+		fullscreen = false;
+	}
+
+	void handleResizable()
+	{
+		if (resizable) activateResizable();
+		else deactivateResizable();
+	}
+	void activateResizable()
+	{
+		SDL_SetWindowResizable(window, (SDL_bool)true);
+		resizable = true;
+	}
+	void deactivateResizable()
+	{
+		SDL_SetWindowResizable(window, (SDL_bool)false);
+		resizable = false;
+	}
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;
@@ -41,6 +72,9 @@ public:
 
 	// OpenGL Context creation
 	SDL_GLContext GLContext;
+
+	bool fullscreen = false;
+	bool resizable = true;
 
 	int window_height;
 	int window_width;

@@ -67,5 +67,8 @@ private:
 	const char scaleylabel[13] = "Scale y axis";
 	const char scalezlabel[13] = "Scale z axis";
 
+	float windowwidth;
+	float windowheight;
+
 	GameObject* selectedObj;
 };

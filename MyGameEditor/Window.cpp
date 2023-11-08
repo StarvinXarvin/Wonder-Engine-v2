@@ -46,7 +46,12 @@ SDL_Window* Window::initSDLWindowWithOpenGL() {
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-	auto window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+	Uint32 flags;
+	flags = SDL_WINDOW_OPENGL;
+	if (fullscreen) { flags |= SDL_WINDOW_FULLSCREEN; }
+	if (resizable) { flags |= SDL_WINDOW_RESIZABLE; }
+
+	auto window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, flags);
 	if (!window) throw exception(SDL_GetError());
 
 	return window;
@@ -64,22 +69,23 @@ void Window::initOpenGL() {
 	auto glew_init_error = glewInit();
 	if (glew_init_error != GLEW_OK) throw exception((char*)glewGetErrorString(glew_init_error));
 	if (!GLEW_VERSION_3_1) throw exception("OpenGL 3.1 Not Supported!");
-	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+	glViewport(0, 0, window_width, window_height);
 	glClearColor(1, 1, 1, 1);
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
+	glDepthFunc(GL_LESS);
 }
 
 bool Window::Init()
 {
 	App->Gengine->addLOG("Window Initialization");
 
+	window_height = WINDOW_HEIGHT;
+	window_width = WINDOW_WIDTH;
+
 	window = initSDLWindowWithOpenGL();
 	GLContext = createSdlGlContext(window);
 	initOpenGL();
 
-	window_height = WINDOW_HEIGHT;
-	window_width = WINDOW_WIDTH;
 
 	return true;
 }
@@ -89,6 +95,8 @@ void Window::resizeWindow(int width, int height)
 	SDL_SetWindowSize(window, width, height);
 	window_width = width;
 	window_height = height;
+	
+	glViewport(0, 0, width, height);
 }
 
 bool Window::CleanUp()
