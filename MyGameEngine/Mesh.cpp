@@ -30,7 +30,7 @@ struct aiSceneExt : aiScene {
 };
 
 std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
-	const auto scene_ptr = aiImportFile(path.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
+	const auto scene_ptr = aiImportFile(path.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_ForceGenNormals);
 	const aiSceneExt& scene = *(aiSceneExt*)scene_ptr;
 
 	//load textures
@@ -73,7 +73,7 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 
 std::vector <Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const std::string& textPath)
 {
-	const auto scene_ptr = aiImportFile(meshPath.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
+	const auto scene_ptr = aiImportFile(meshPath.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_ForceGenNormals);
 	const aiSceneExt& scene = *(aiSceneExt*)scene_ptr;
 
 	//load textures

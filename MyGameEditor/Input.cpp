@@ -12,6 +12,12 @@
 #include <SDL2/SDL.h>
 #include <imgui_impl_sdl2.h>
 
+#include <memory>
+#include <string>
+#include <fstream>
+#include <filesystem>
+namespace fs = std::filesystem;
+
 #define MAX_KEYS 300
 
 Input::Input(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -117,14 +123,33 @@ update_status Input::PreUpdate()
 
 		case SDL_DROPFILE:
 			string path = e.drop.file;
-			size_t lastslash = path.find_last_of("\\");
-			string filename = path.substr(lastslash + 1, path.size());
-			stringstream pathfromengine;
-			pathfromengine << "..\\MyGameEditor\\Assets\\" << filename;
-			stringstream ss;
-			ss << "File with path: " << path << " dropped";
-			App->Gengine->addLOG(ss.str());
-			App->Gengine->createDroppedFile(pathfromengine.str());
+
+			//regex pathExtractor(".*\\(.*)$");
+			//smatch pathArr;
+			//regex_match(path, pathArr, pathExtractor);
+			//string fileName = pathArr[1].str();
+			//
+			//stringstream dirPath;
+			//dirPath << fs::current_path() << "Assets";
+			//
+			//fs::path currentPath = dirPath.str();
+			//fs::path filePath = currentPath / fileName;
+			//
+			//if (fs::exists(filePath) && fs::is_regular_file(filePath)) {
+			//	std::cout << "File exists in the current working directory." << std::endl;
+			//}
+			//else {
+			//	std::cout << "File does not exist in the current working directory." << std::endl;
+			//}
+			//
+ 			//size_t lastslash = path.find_last_of("\\");
+			//string filename = path.substr(lastslash + 1, path.size());
+			//stringstream pathfromengine;
+			//pathfromengine << "..\\MyGameEditor\\Assets\\" << filename;
+			//stringstream ss;
+			//ss << "File with path: " << path << " dropped";
+			//App->Gengine->addLOG(ss.str());
+			App->Gengine->createDroppedFile(path);
 			break;
 		}
 

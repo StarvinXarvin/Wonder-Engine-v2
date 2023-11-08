@@ -171,11 +171,12 @@ void GameEngine::createDroppedFile(string path)
 	{
 		type = NOTADMITTED;
 	}
-	regex pathExtractor(".*Assets\\\\(.*)$");
-
+	
+	regex pathExtractor(".*\\\\(.*)$");
 	smatch pathArr;
 	regex_match(path, pathArr, pathExtractor);
 	stringstream ss;
+
 	switch (type)
 	{
 	case _FBX:
