@@ -131,8 +131,10 @@ void UI::setupINSPECTOR()
 	{
 		if (CollapsingHeader("Transform"))
 		{
-			if (selectedObj != nullptr) {
-				SeparatorText("Position");
+			if (selectedObj != nullptr)
+			{
+				PushItemWidth(60.0f);
+				SeparatorText("Rotation");
 				DragFloat(posxlabel, &fobjPos.x);
 				DragFloat(posylabel, &fobjPos.y);
 				DragFloat(poszlabel, &fobjPos.z);
@@ -195,7 +197,7 @@ void UI::setupCONFIG()
 	{
 		if (TreeNode("Application"))
 		{
-			PlotHistogram("FPS", &frame_list[0], frame_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
+			PlotLines("FPS", &frame_list[0], frame_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
 
 			PlotHistogram("ms", &ms_list[0], ms_list.size(), 0, 0, 0.0f, 100.0f, ImVec2(310, 100));
 			TreePop();
@@ -364,6 +366,15 @@ bool UI::Init()
 
 	loadHardwareInfo();
 
+	// Define colors for text
+	float rgbaBase = 255.0;
+	orange.rgba = { 209 / rgbaBase, 119 / rgbaBase, 100 / rgbaBase, 255 / rgbaBase };
+	porpol.rgba = { 187 / rgbaBase, 156 / rgbaBase, 238 / rgbaBase, 255 / rgbaBase };;
+	red.rgba = { 225 / rgbaBase, 90 / rgbaBase, 90 / rgbaBase, 255 / rgbaBase };
+	nvidiagreen.rgba = { 50 / rgbaBase, 225 / rgbaBase, 66 / rgbaBase, 255 / rgbaBase };
+	vramgreen.rgba = { 164 / rgbaBase, 243 / rgbaBase, 195 / rgbaBase, 255 / rgbaBase };
+	cpublue.rgba = { 80 / rgbaBase, 150 / rgbaBase, 250 / rgbaBase, 255 / rgbaBase };
+
 	showDemo = false;
 	showHier = true;
 	showCons = true;
@@ -463,14 +474,6 @@ void UI::loadHardwareInfo()
 	info.CPU_count = SDL_GetCPUCount();
 	info.l1_cachekb = SDL_GetCPUCacheLineSize();
 
-	// Define colors for text
-	float rgbaBase = 255.0;
-	orange.rgba = { 209 / rgbaBase, 119 / rgbaBase, 100 / rgbaBase, 255 / rgbaBase };
-	porpol.rgba = { 187 / rgbaBase, 156 / rgbaBase, 238 / rgbaBase, 255 / rgbaBase };;
-	red.rgba = { 225 / rgbaBase, 90 / rgbaBase, 90 / rgbaBase, 255 / rgbaBase };
-	nvidiagreen.rgba = { 50 / rgbaBase, 225 / rgbaBase, 66 / rgbaBase, 255 / rgbaBase };
-	vramgreen.rgba = { 164 / rgbaBase, 243 / rgbaBase, 195 / rgbaBase, 255 / rgbaBase };
-	cpublue.rgba = { 80 / rgbaBase, 150 / rgbaBase, 250 / rgbaBase, 255 / rgbaBase };
 }
 
 void UI::OsOpenInShell(const char* path)

@@ -20,7 +20,7 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
-	createGameObject("Assets/BakerHouse.fbx", "Assets/Baker_house.png");
+	//createGameObject("Assets/BakerHouse.fbx", "Assets/Baker_house.png");
 
 	return true;
 }

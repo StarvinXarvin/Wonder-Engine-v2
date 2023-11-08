@@ -49,12 +49,9 @@ void GameObject::createComponent(GameObject* owner, component_type type)
 void GameObject::drawObj()
 {
 	// Draws all the components in the vector of an object
-	for (auto child : children)
-	{
-		for (auto comp : child->component_vector)
-		{
-			if (comp->getType() == MESH)
-			{
+	for (auto child : children) {
+		for (auto comp : child->component_vector) {
+			if (comp->getType() == MESH) {
 				if (comp->getActive())
 					comp->drawComponent();
 			}
