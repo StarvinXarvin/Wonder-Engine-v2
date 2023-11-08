@@ -40,7 +40,7 @@ struct Camera
 
 	void FPSMovement(int id);
 
-	void ResetCenter(int id);
+	void ResetCenter(bool fixedPos = false, bool changeCenter = true, vec3 newCenter = glm::vec3(0, 0, 0), bool resetPrevMouse = true);
 
 	void MouseRotateAroundObject(double x, double y);
 

@@ -54,12 +54,18 @@ void Camera::FPSMovement(int id) {
 	}
 }
 
-void Camera::ResetCenter(int id) {
-	if (id == 0) {
-		center = { 0, 1, 0 };
+void Camera::ResetCenter(bool fixedPos, bool changeCenter, vec3 newCenter, bool resetPrevMouse) {
+	if (changeCenter) {
+		center = newCenter;
 	}
-	prevMouseX = 0;
-	prevMouseY = 0;
+	if (fixedPos) {
+		eye = normalize(eye);
+		eye *= 12;
+	}
+	if (resetPrevMouse) {
+		prevMouseX = 0;
+		prevMouseY = 0;
+	}
 }
 
 void Camera::MouseRotateAroundObject(double x, double y) {
