@@ -84,7 +84,7 @@ update_status GameEngine::PostUpdate()
 void GameEngine::detectCameraInput() {
 	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) {
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
-			engine.renderer->camera.ResetCenter(1);
+			engine.renderer->camera.ResetCenter(false, false);
 		}
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT) {
 			engine.renderer->camera.MouseRotateAroundObject(App->input->GetMouseX(), App->input->GetMouseY());
@@ -101,7 +101,7 @@ void GameEngine::detectCameraInput() {
 			engine.renderer->camera.cameraSpeed /= 3;
 		}
 		if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN) {
-			engine.renderer->camera.ResetCenter(1);
+			engine.renderer->camera.ResetCenter(false, false);
 		}
 		if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT) {
 			engine.renderer->camera.MousePointLookAt(App->input->GetMouseX(), App->input->GetMouseY());
@@ -132,7 +132,14 @@ void GameEngine::detectCameraInput() {
 				engine.renderer->camera.cameraMove(CameraDirection::RIGHT);
 			}
 			if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-				engine.renderer->camera.ResetCenter(0);
+				if (App->ui->getSelectedObj() != nullptr) {
+					TransformComp* transform = static_cast<TransformComp*>(App->ui->getSelectedObj()->getComponent(TRANSFORM));
+					engine.renderer->camera.ResetCenter(true, true, transform->getPosition(), false);
+				}
+				else {
+					engine.renderer->camera.ResetCenter(true);
+				}
+				
 			}
 			if (App->input->GetMousewheel() != 0) {
 				engine.renderer->camera.CameraZoom(App->input->GetMousewheel());
