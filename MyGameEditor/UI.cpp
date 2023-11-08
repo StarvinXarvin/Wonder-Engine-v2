@@ -239,40 +239,22 @@ void UI::setupCONFIG()
 				//    (HD, FHD, 4K)
 				TreePop();
 			}
-			if (TreeNode("Renderer"))
-			{
-				TreePop();
-			}
+			//if (TreeNode("Renderer"))
+			//{
+			//	TreePop();
+			//}
 			TreePop();
 		}
-	}
-}
-void UI::setupABOUT()
-{
-	if (Begin("About"))
-	{
-		ImGui::Text("WONDER ENGINE");
-		Separator();
-		ImGui::Text("Developed by");
-		ImGui::SameLine();
-		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Pau Fusco");
-		if (IsItemClicked()) OsOpenInShell("https://github.com/PauFusco");
-		ImGui::SameLine();
-		ImGui::Text("&");
-		ImGui::SameLine();
-		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Xavi Alcaniz");
-		if (IsItemClicked()) OsOpenInShell("https://github.com/StarvinXarvin");
-
-		ImVec4 orange = { 209 / 255.0, 119 / 255.0, 100 / 255.0, 255 / 255.0 };
-		ImVec4 porpol = { 187 / 255.0, 156 / 255.0, 238 / 255.0, 255 / 255.0 };
-		ImVec4 red = { 225 / 255.0, 90 / 255.0, 90 / 255.0, 255 / 255.0 };
-		ImVec4 nvidiagreen = { 50 / 255.0, 225 / 255.0, 66 / 255.0, 255 / 255.0 };
-		ImVec4 vramgreen = { 164 / 255.0, 243 / 255.0, 195 / 255.0, 255 / 255.0 };
-		ImVec4 cpublue = { 80 / 255.0, 150 / 255.0, 250 / 255.0, 255 / 255.0 };
-
+		if (TreeNode("Software and Hardware"))
 		{
 			string text = "";
-			if (CollapsingHeader("Software info"))
+			ImVec4 orange = { 209 / 255.0, 119 / 255.0, 100 / 255.0, 255 / 255.0 };
+			ImVec4 porpol = { 187 / 255.0, 156 / 255.0, 238 / 255.0, 255 / 255.0 };
+			ImVec4 red = { 225 / 255.0, 90 / 255.0, 90 / 255.0, 255 / 255.0 };
+			ImVec4 nvidiagreen = { 50 / 255.0, 225 / 255.0, 66 / 255.0, 255 / 255.0 };
+			ImVec4 vramgreen = { 164 / 255.0, 243 / 255.0, 195 / 255.0, 255 / 255.0 };
+			ImVec4 cpublue = { 80 / 255.0, 150 / 255.0, 250 / 255.0, 255 / 255.0 };
+			if (TreeNode("Software info"))
 			{
 				Text("SDL version compiled: ");
 				SameLine(); TextColored(orange, info.SDL_version_compiled.c_str());
@@ -282,9 +264,12 @@ void UI::setupABOUT()
 				SameLine(); TextColored(porpol, info.gl_version.c_str());
 				Text("DevIL version: ");
 				SameLine(); TextColored(red, info.devil_version.c_str());
-			}
+				
+				Separator();
 
-			if (CollapsingHeader("Hardware info"))
+				TreePop();
+			}
+			if (TreeNode("Hardware info"))
 			{
 				Text("GPU:");
 				Bullet(); Text("Info: ");
@@ -312,19 +297,40 @@ void UI::setupABOUT()
 				Bullet(); Text("Cache line size: ");
 				text = to_string(info.l1_cachekb) + " KB";
 				SameLine(); TextColored(cpublue, text.c_str());
-			}
 
-			SeparatorText("Software GitHub links");
-			ImVec4 colorGray(0.5f, 0.5f, 0.5f, 1.0f);
-			Bullet(); if (ImGui::Button("Assimp 5.2.5")) OsOpenInShell("https://assimp-docs.readthedocs.io/");
-			Bullet(); if (ImGui::Button("DevIL 1.8.0#11")) OsOpenInShell("https://openil.sourceforge.net/");
-			Bullet(); if (ImGui::Button("GLEW 2.2.0#3")) OsOpenInShell("https://glew.sourceforge.net/");
-			Bullet(); if (ImGui::Button("GLM 2023-06-08")) OsOpenInShell("https://glm.g-truc.net/0.9.5/index.html");
-			Bullet(); if (ImGui::Button("ImGUI 1.89.9")) OsOpenInShell("https://imgui-test.readthedocs.io/");
-			Bullet(); if (ImGui::Button("jsoncpp 1.9.5")) OsOpenInShell("https://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html");
-			Bullet(); if (ImGui::Button("OpenGL 2022-12-04#3")) OsOpenInShell("https://www.opengl.org/");
-			Bullet(); if (ImGui::Button("SDL2 2.28.3")) OsOpenInShell("https://wiki.libsdl.org/");
+				TreePop();
+			}
+			TreePop();
 		}
+	}
+}
+void UI::setupABOUT()
+{
+	if (Begin("About"))
+	{
+		ImGui::Text("WONDER ENGINE");
+		Separator();
+		ImGui::Text("Developed by");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Pau Fusco");
+		if (IsItemClicked()) OsOpenInShell("https://github.com/PauFusco");
+		ImGui::SameLine();
+		ImGui::Text("&");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Xavi Alcaniz");
+		if (IsItemClicked()) OsOpenInShell("https://github.com/StarvinXarvin");
+		
+		SeparatorText("Software links");
+		ImVec4 colorGray(0.5f, 0.5f, 0.5f, 1.0f);
+		Bullet(); if (ImGui::Button("SDL2 2.28.3")) OsOpenInShell("https://wiki.libsdl.org/");
+		Bullet(); if (ImGui::Button("OpenGL 2022-12-04#3")) OsOpenInShell("https://www.opengl.org/");
+		Bullet(); if (ImGui::Button("ImGUI 1.89.9")) OsOpenInShell("https://imgui-test.readthedocs.io/");
+		Bullet(); if (ImGui::Button("Assimp 5.2.5")) OsOpenInShell("https://assimp-docs.readthedocs.io/");
+		Bullet(); if (ImGui::Button("DevIL 1.8.0#11")) OsOpenInShell("https://openil.sourceforge.net/");
+		Bullet(); if (ImGui::Button("GLEW 2.2.0#3")) OsOpenInShell("https://glew.sourceforge.net/");
+		Bullet(); if (ImGui::Button("GLM 2023-06-08")) OsOpenInShell("https://glm.g-truc.net/0.9.5/index.html");
+		Bullet(); if (ImGui::Button("jsoncpp 1.9.5")) OsOpenInShell("https://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html");
+		
 		ImGui::End();
 	}
 }
@@ -417,13 +423,7 @@ void UI::updateObjInspector()
 {
 	TransformComp* transcomp = nullptr;
 	if (selectedObj != nullptr) {
-		for (auto& comp : selectedObj->component_vector)
-		{
-			if (comp->getType() == TRANSFORM)
-			{
-				transcomp = (TransformComp*)comp;
-			}
-		}
+		transcomp = (TransformComp*)selectedObj->getComponent(TRANSFORM);
 
 		fobjPos = transcomp->getTransformData()[0];
 		fobjRot = transcomp->getTransformData()[1];
