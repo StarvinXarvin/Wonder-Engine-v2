@@ -33,7 +33,7 @@ the websites of all the libraries we used.
 
 As a side note, the inspector window lets you see the selected Object with a default blank checker texture, see the normals of all vertices and faces, as well as
 check the number of vertices and faces, and the path of the selected mesh, as the size and the path of the texture attributed to it.
-### Models
+## Models
 The default extra meshes were taken from the following sources:
 - [Sword](https://free3d.com/3d-model/sting-sword-128810.html "Sting Sword")
 - [M16 Rifle](https://sketchfab.com/3d-models/m16-assault-rifle-339d0f7b21024387853dd926a5d51b50 "M16 Assault Rifle")
