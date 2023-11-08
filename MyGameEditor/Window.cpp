@@ -96,6 +96,7 @@ void Window::resizeWindow(int width, int height)
 	window_height = height;
 
 	glViewport(0, 0, width, height);
+	App->Gengine->setAspectRatio(width / height);
 }
 
 bool Window::CleanUp()

@@ -166,6 +166,7 @@ void UI::setupINSPECTOR()
 					meshfiless << "Mesh file path: " << meshpath;
 					SetTooltip(meshfiless.str().c_str());
 				}
+
 			}
 			else
 				ImGui::Text("No Object selected");
