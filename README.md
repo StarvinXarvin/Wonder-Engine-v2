@@ -38,4 +38,5 @@ The libraries used for this project are:
 - [GLEW](https://glew.sourceforge.net/)
 - [GLM](https://glm.g-truc.net/0.9.5/index.html)
 - [jsoncpp](https://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html)
+
 Vcpkg was used as a library manager for this project
