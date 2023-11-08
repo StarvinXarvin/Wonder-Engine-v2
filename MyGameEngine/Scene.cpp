@@ -71,24 +71,6 @@ void Scene::createGameObject(string meshPath, string texturePath)
 		meshname = meshPath.substr(slashplace + 1, meshPath.size() - slashplace - 5);
 		meshcompname = meshPath.substr(slashplace + 1, meshPath.size());
 #pragma endregion
-#pragma region Texture names
-		string texturename = "";
-		string texturecompname = "";
-
-		if (texturePath != "") {
-			size_t found = texturePath.find("\\");
-			while (found != string::npos)
-			{
-				texturePath.replace(found, 1, "/");
-				found = texturePath.find("\\", found + 1);
-			}
-
-			size_t slashplace = texturePath.find_last_of("/");
-			texturename = texturePath.substr(slashplace + 1, texturePath.size() - slashplace - 5);
-			texturecompname = texturePath.substr(slashplace + 1, texturePath.size());
-		}
-#pragma endregion
-
 		// Load meshs to a vector
 		vector<Mesh::Ptr> mesh_ptrs;
 		if (texturePath != "")
@@ -124,12 +106,6 @@ void Scene::createGameObject(string meshPath, string texturePath)
 			newGOchild->setName(meshname);
 			newGOchild->getComponent(MESH)->setName(meshcompname);
 			newGOchild->getComponent(MESH)->setFilePath(meshPath);
-
-			if (texturename != "") {
-				newGOchild->setName(texturename);
-				newGOchild->getComponent(TEXTURE)->setName(texturecompname);
-				newGOchild->getComponent(TEXTURE)->setFilePath(texturePath);
-			}
 		}
 	}
 

@@ -61,7 +61,7 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 			index_data.push_back(face.mIndices[2]);
 		}
 
-		auto mesh_sptr = make_shared<Mesh>(Formats::F_V3T2, vertex_data.data(), vertex_data.size(), index_data.data(), index_data.size());
+		auto mesh_sptr = make_shared<Mesh>(Formats::F_V3T2, vertex_data.data(), vertex_data.size(), mesh.mNumFaces, index_data.data(), index_data.size());
 		mesh_sptr->texture = texture_ptrs[mesh.mMaterialIndex];
 		mesh_ptrs.push_back(mesh_sptr);
 	}
