@@ -20,7 +20,7 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
-	//createGameObject("Assets/BakerHouse.fbx", "Assets/Baker_house.png");
+	createGameObject("Assets/Default_House/BakerHouse.fbx");
 
 	return true;
 }
@@ -71,6 +71,7 @@ void Scene::createGameObject(string meshPath, string texturePath)
 		meshname = meshPath.substr(slashplace + 1, meshPath.size() - slashplace - 5);
 		meshcompname = meshPath.substr(slashplace + 1, meshPath.size());
 #pragma endregion
+
 		// Load meshs to a vector
 		vector<Mesh::Ptr> mesh_ptrs;
 		if (texturePath != "")

@@ -1,9 +1,9 @@
-﻿  Downloading https://github.com/microsoft/vcpkg-tool/releases/download/2023-09-15/vcpkg.exe -> C:\Users\paufz\Documents\GitHub\Wonder-Engine\vcpkg\vcpkg.exe... done.
+﻿  Downloading https://github.com/microsoft/vcpkg-tool/releases/download/2023-09-15/vcpkg.exe -> E:\Lorning\CITM\3r\Engines\Wonder-Engine\vcpkg\vcpkg.exe... done.
   Validating signature... done.
   
-  vcpkg package management program version 2023-09-15-ac02a9f660977426b8ec6392919fbb1d51b10998
+  versi├│n del programa de administraci├│n de paquetes vcpkg 2023-09-15-ac02a9f660977426b8ec6392919fbb1d51b10998
   
-  See LICENSE.txt for license information.
+  Consulte LICENSE.txt para obtener informaci├│n sobre la licencia.
   Telemetry
   ---------
   vcpkg collects usage data in order to help us improve your experience.
@@ -13,15 +13,13 @@
   or by setting the VCPKG_DISABLE_METRICS environment variable.
   
   Read more about vcpkg telemetry at docs/about/privacy.md
-  Primitive.cpp
-C:\Users\paufz\Documents\GitHub\Wonder-Engine\MyGameEngine\MeshComp.h(44,21): warning C4129: '.': unrecognized character escape sequence
-C:\Users\paufz\Documents\GitHub\Wonder-Engine\MyGameEngine\TextureComp.h(43,21): warning C4129: '.': unrecognized character escape sequence
-C:\Users\paufz\Documents\GitHub\Wonder-Engine\MyGameEngine\Primitive.cpp(18,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\paufz\Documents\GitHub\Wonder-Engine\MyGameEngine\Primitive.cpp(22,20): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\paufz\Documents\GitHub\Wonder-Engine\MyGameEngine\Primitive.cpp(27,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-GLU32.lib(GLU32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in OpenGL32.lib(OPENGL32.dll); second definition ignored
-DevIL.lib(DevIL.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in OpenGL32.lib(OPENGL32.dll); second definition ignored
-assimp-vc143-mt.lib(assimp-vc143-mt.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in OpenGL32.lib(OPENGL32.dll); second definition ignored
-Mesh.obj : warning LNK4006: "public: enum aiReturn __cdecl aiMaterial::GetTexture(enum aiTextureType,unsigned int,struct aiString *,enum aiTextureMapping *,unsigned int *,float *,enum aiTextureOp *,enum aiTextureMapMode *)const " (?GetTexture@aiMaterial@@QEBA?AW4aiReturn@@W4aiTextureType@@IPEAUaiString@@PEAW4aiTextureMapping@@PEAIPEAMPEAW4aiTextureOp@@PEAW4aiTextureMapMode@@@Z) already defined in assimp-vc143-mt.lib(assimp-vc143-mt.dll); second definition ignored
-Cube.obj : warning LNK4006: "public: __cdecl Cube::Cube(void)" (??0Cube@@QEAA@XZ) already defined in Primitive.obj; second definition ignored
-  MyGameEngine.vcxproj -> C:\Users\paufz\Documents\GitHub\Wonder-Engine\x64\Release\MyGameEngine.lib
+  Scene.cpp
+E:\Lorning\CITM\3r\Engines\Wonder-Engine\MyGameEngine\MeshComp.h(44,21): warning C4129: '.': secuencia de escape de carácter no reconocida
+E:\Lorning\CITM\3r\Engines\Wonder-Engine\MyGameEngine\TextureComp.h(59,21): warning C4129: '.': secuencia de escape de carácter no reconocida
+E:\Lorning\CITM\3r\Engines\Wonder-Engine\MyGameEngine\GameObject.h(46): warning C4715: 'GameObject::getComponent': no todas las rutas de acceso de control devuelven un valor
+GLU32.lib(GLU32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en OpenGL32.lib(OPENGL32.dll); segunda definición omitida
+DevIL.lib(DevIL.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en OpenGL32.lib(OPENGL32.dll); segunda definición omitida
+assimp-vc142-mt.lib(assimp-vc142-mt.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR ya se definió en OpenGL32.lib(OPENGL32.dll); segunda definición omitida
+Mesh.obj : warning LNK4006: "public: enum aiReturn __cdecl aiMaterial::GetTexture(enum aiTextureType,unsigned int,struct aiString *,enum aiTextureMapping *,unsigned int *,float *,enum aiTextureOp *,enum aiTextureMapMode *)const " (?GetTexture@aiMaterial@@QEBA?AW4aiReturn@@W4aiTextureType@@IPEAUaiString@@PEAW4aiTextureMapping@@PEAIPEAMPEAW4aiTextureOp@@PEAW4aiTextureMapMode@@@Z) ya se definió en assimp-vc142-mt.lib(assimp-vc142-mt.dll); segunda definición omitida
+Cube.obj : warning LNK4006: "public: __cdecl Cube::Cube(void)" (??0Cube@@QEAA@XZ) ya se definió en Primitive.obj; segunda definición omitida
+  MyGameEngine.vcxproj -> E:\Lorning\CITM\3r\Engines\Wonder-Engine\x64\Release\MyGameEngine.lib
