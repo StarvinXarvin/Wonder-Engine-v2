@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.h"
+#include "imgui.h"
 #include "../MyGameEngine/GameObject.h"
 #include <vector>
 
@@ -22,6 +23,11 @@ struct hardwareInfo
 
 	uint CPU_count = 0;
 	uint l1_cachekb = 0;
+};
+
+struct color
+{
+	ImVec4 rgba;
 };
 
 class UI : public Module
@@ -87,6 +93,13 @@ private:
 	const char scalexlabel[13] = "Scale x axis";
 	const char scaleylabel[13] = "Scale y axis";
 	const char scalezlabel[13] = "Scale z axis";
+
+	color orange;
+	color porpol;
+	color red;
+	color nvidiagreen;
+	color vramgreen;
+	color cpublue;
 
 	float windowwidth;
 	float windowheight;

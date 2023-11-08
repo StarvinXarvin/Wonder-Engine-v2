@@ -248,22 +248,16 @@ void UI::setupCONFIG()
 		if (TreeNode("Software and Hardware"))
 		{
 			string text = "";
-			ImVec4 orange = { 209 / 255.0, 119 / 255.0, 100 / 255.0, 255 / 255.0 };
-			ImVec4 porpol = { 187 / 255.0, 156 / 255.0, 238 / 255.0, 255 / 255.0 };
-			ImVec4 red = { 225 / 255.0, 90 / 255.0, 90 / 255.0, 255 / 255.0 };
-			ImVec4 nvidiagreen = { 50 / 255.0, 225 / 255.0, 66 / 255.0, 255 / 255.0 };
-			ImVec4 vramgreen = { 164 / 255.0, 243 / 255.0, 195 / 255.0, 255 / 255.0 };
-			ImVec4 cpublue = { 80 / 255.0, 150 / 255.0, 250 / 255.0, 255 / 255.0 };
 			if (TreeNode("Software info"))
 			{
 				Text("SDL version compiled: ");
-				SameLine(); TextColored(orange, info.SDL_version_compiled.c_str());
+				SameLine(); TextColored(orange.rgba, info.SDL_version_compiled.c_str());
 				Text("SDL version linked: ");
-				SameLine(); TextColored(orange, info.SDL_version_linked.c_str());
+				SameLine(); TextColored(orange.rgba, info.SDL_version_linked.c_str());
 				Text("OpenGL version: ");
-				SameLine(); TextColored(porpol, info.gl_version.c_str());
+				SameLine(); TextColored(porpol.rgba, info.gl_version.c_str());
 				Text("DevIL version: ");
-				SameLine(); TextColored(red, info.devil_version.c_str());
+				SameLine(); TextColored(red.rgba, info.devil_version.c_str());
 				
 				Separator();
 
@@ -273,30 +267,30 @@ void UI::setupCONFIG()
 			{
 				Text("GPU:");
 				Bullet(); Text("Info: ");
-				SameLine(); TextColored(nvidiagreen, info.GPU.c_str());
+				SameLine(); TextColored(nvidiagreen.rgba, info.GPU.c_str());
 				Bullet(); Text("Vendor: ");
-				SameLine(); TextColored(nvidiagreen, info.GPUVendor.c_str());
+				SameLine(); TextColored(nvidiagreen.rgba, info.GPUVendor.c_str());
 				Bullet(); Text("Driver: ");
-				SameLine(); TextColored(nvidiagreen, info.GPUDriver.c_str());
+				SameLine(); TextColored(nvidiagreen.rgba, info.GPUDriver.c_str());
 
 				Text("VRAM:");
 				Bullet(); Text("Budget: ");
 				text = to_string(info.VRAM_mb_budget) + " MB";
-				SameLine(); TextColored(vramgreen, text.c_str());
+				SameLine(); TextColored(vramgreen.rgba, text.c_str());
 				Bullet(); Text("Usage: ");
 				text = to_string(info.VRAM_mb_usage) + " MB";
-				SameLine(); TextColored(vramgreen, text.c_str());
+				SameLine(); TextColored(vramgreen.rgba, text.c_str());
 				Bullet(); Text("Available: ");
 				text = to_string(info.VRAM_mb_available) + " MB";
-				SameLine(); TextColored(vramgreen, text.c_str());
+				SameLine(); TextColored(vramgreen.rgba, text.c_str());
 
 				Text("CPU:");
 				Bullet(); Text("Cores: ");
 				text = to_string(info.CPU_count);
-				SameLine(); TextColored(cpublue, text.c_str());
+				SameLine(); TextColored(cpublue.rgba, text.c_str());
 				Bullet(); Text("Cache line size: ");
 				text = to_string(info.l1_cachekb) + " KB";
-				SameLine(); TextColored(cpublue, text.c_str());
+				SameLine(); TextColored(cpublue.rgba, text.c_str());
 
 				TreePop();
 			}
@@ -308,7 +302,11 @@ void UI::setupABOUT()
 {
 	if (Begin("About"))
 	{
-		ImGui::Text("WONDER ENGINE");
+		ImGui::Text("WONDER ENGINE v0.1");
+		
+		Text("Graphical Game Engine for video game creation using C++.");
+		Text("For external library information, see the library links in");
+		Text("this window and the version information in the Configuration window.");
 		Separator();
 		ImGui::Text("Developed by");
 		ImGui::SameLine();
@@ -464,6 +462,15 @@ void UI::loadHardwareInfo()
 
 	info.CPU_count = SDL_GetCPUCount();
 	info.l1_cachekb = SDL_GetCPUCacheLineSize();
+
+	// Define colors for text
+	float rgbaBase = 255.0;
+	orange.rgba = { 209 / rgbaBase, 119 / rgbaBase, 100 / rgbaBase, 255 / rgbaBase };
+	porpol.rgba = { 187 / rgbaBase, 156 / rgbaBase, 238 / rgbaBase, 255 / rgbaBase };;
+	red.rgba = { 225 / rgbaBase, 90 / rgbaBase, 90 / rgbaBase, 255 / rgbaBase };
+	nvidiagreen.rgba = { 50 / rgbaBase, 225 / rgbaBase, 66 / rgbaBase, 255 / rgbaBase };
+	vramgreen.rgba = { 164 / rgbaBase, 243 / rgbaBase, 195 / rgbaBase, 255 / rgbaBase };
+	cpublue.rgba = { 80 / rgbaBase, 150 / rgbaBase, 250 / rgbaBase, 255 / rgbaBase };
 }
 
 void UI::OsOpenInShell(const char* path)
