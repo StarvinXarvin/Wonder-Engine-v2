@@ -20,7 +20,7 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
-	createGameObject("../MyGameEditor/Assets/BakerHouse.fbx", "../MyGameEditor/Assets/Baker_house.png");
+	createGameObject("Assets/BakerHouse.fbx", "Assets/Baker_house.png");
 
 	return true;
 }
@@ -76,7 +76,6 @@ void Scene::createGameObject(string meshPath, string texturePath)
 		string texturecompname = "";
 
 		if (texturePath != "") {
-
 			size_t found = texturePath.find("\\");
 			while (found != string::npos)
 			{

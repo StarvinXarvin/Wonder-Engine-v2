@@ -13,7 +13,7 @@
 #include <sstream>
 #include <vector>
 
-enum Shape{
+enum Shape {
 	CUBE = 0,
 	SPHERE,
 	CYLINDER,

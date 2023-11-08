@@ -5,6 +5,25 @@
 
 class Application;
 
+struct hardwareInfo
+{
+	string SDL_version_compiled;
+	string SDL_version_linked;
+	string gl_version;
+	string devil_version;
+
+	string GPUVendor;
+	string GPU;
+	string GPUDriver;
+
+	float VRAM_mb_budget = 0.f;
+	float VRAM_mb_usage = 0.f;
+	float VRAM_mb_available = 0.f;
+
+	uint CPU_count = 0;
+	uint l1_cachekb = 0;
+};
+
 class UI : public Module
 {
 public:
@@ -35,6 +54,8 @@ private:
 	void calculateFramerate();
 
 	void updateObjInspector();
+
+	void loadHardwareInfo();
 
 	void OsOpenInShell(const char* path);
 
@@ -71,4 +92,6 @@ private:
 	float windowheight;
 
 	GameObject* selectedObj;
+
+	hardwareInfo info;
 };
