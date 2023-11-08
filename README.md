@@ -27,4 +27,4 @@ check the number of vertices and faces, and the path of the selected mesh, also 
 
 The default extra meshes where taken from the following sources:
 - [Sword](https://free3d.com/3d-model/sting-sword-128810.html "Sting Sword")
-- [M16 Rifle](https://sketchfab.com/3d-models/m16-assault-rifle-339d0f7b21024387853dd926a5d51b50#download "M16 Assault Rifle")
+- [M16 Rifle](https://sketchfab.com/3d-models/m16-assault-rifle-339d0f7b21024387853dd926a5d51b50 "M16 Assault Rifle")
