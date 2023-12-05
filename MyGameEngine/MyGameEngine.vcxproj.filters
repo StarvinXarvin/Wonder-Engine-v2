@@ -92,6 +92,9 @@
     <ClInclude Include="Primitive.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Importer.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WonderEngine.cpp">
@@ -143,6 +146,9 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Primitive.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Importer.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
