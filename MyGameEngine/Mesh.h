@@ -7,8 +7,11 @@
 #include "types.h"
 #include "Graphic.h"
 #include "Texture.h"
+#include "Importer.h"
+
 
 using namespace std;
+using namespace MeshImporter;
 
 class Mesh : public Graphic
 {
@@ -22,20 +25,25 @@ private:
 	const enum Formats _format;
 
 	unsigned int _vertex_buffer_id;
-	const unsigned int _numVerts;
+	unsigned int _numVerts;
 
 	unsigned int _indexs_buffer_id;
-	const unsigned int _numIndexs;
+	unsigned int _numIndexs;
 
-	const unsigned int _numFaces;
+	unsigned int _numFaces;
+
+	friend void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh);
+	friend unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer);
+	friend void MeshImporter::Load(char* fileBuffer, Mesh* ourMesh);
 
 public:
+
 	using Ptr = shared_ptr<Mesh>;
 
 	static vector<Ptr> loadFromFile(const std::string& path);
 	static vector<Ptr> loadFromFile(const string& meshPath, const string& texturePath);
 
-	// Load a texture to an already loaded mesh
+	//// Load a texture to an already loaded mesh
 	void loadTextureToMesh(const string& textPath);
 	Texture::Ptr texture;
 
@@ -62,6 +70,10 @@ public:
 	const unsigned int getVerts()
 	{
 		return _numVerts;
+	}
+	const unsigned int getIndexs()
+	{
+		return _numIndexs;
 	}
 
 	int normalWidth = 1;

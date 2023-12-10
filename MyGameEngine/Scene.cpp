@@ -2,6 +2,7 @@
 
 #include "Mesh.h"
 #include "Texture.h"
+#include "Importer.h"
 
 #include <iostream>
 #include <string>

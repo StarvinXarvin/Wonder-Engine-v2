@@ -17,6 +17,7 @@
 namespace fs = std::filesystem;
 
 using namespace std;
+using namespace MeshImporter;
 
 struct aiMeshExt : aiMesh {
 	auto verts() const { return span((vec3f*)mVertices, mNumVertices); }
@@ -28,6 +29,39 @@ struct aiSceneExt : aiScene {
 	auto materials() const { return span(mMaterials, mNumMaterials); }
 	auto meshes() const { return span((aiMeshExt**)mMeshes, mNumMeshes); }
 };
+
+Mesh::Mesh(Formats format, const void* vertex_data, unsigned int numVerts, unsigned int numFaces, const unsigned int* index_data, unsigned int numIndexs) :
+	_format(format),
+	_numVerts(numVerts),
+	_numIndexs(numIndexs),
+	_numFaces(numFaces)
+{
+	glGenBuffers(1, &_vertex_buffer_id);
+	glBindBuffer(GL_ARRAY_BUFFER, _vertex_buffer_id);
+
+	switch (_format) {
+	case Formats::F_V3:
+		glBufferData(GL_ARRAY_BUFFER, sizeof(V3) * numVerts, vertex_data, GL_STATIC_DRAW);
+		break;
+	case Formats::F_V3C4:
+		glBufferData(GL_ARRAY_BUFFER, sizeof(V3C4) * numVerts, vertex_data, GL_STATIC_DRAW);
+		break;
+	case Formats::F_V3T2:
+		glBufferData(GL_ARRAY_BUFFER, sizeof(V3T2) * numVerts, vertex_data, GL_STATIC_DRAW);
+		break;
+	}
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	if (index_data) {
+		glGenBuffers(1, &_indexs_buffer_id);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexs_buffer_id);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * numIndexs, index_data, GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+	else {
+		_indexs_buffer_id = 0;
+	}
+}
 
 std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 	const auto scene_ptr = aiImportFile(path.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_ForceGenNormals);
@@ -176,39 +210,6 @@ void Mesh::loadTextureToMesh(const std::string& textPath)
 	fs::path texPath = fs::path(textPath).parent_path() / fs::path(aiPath.C_Str()).filename();
 	auto texture_ptr = make_shared<Texture>(texPath.string());
 	texture = texture_ptr;
-}
-
-Mesh::Mesh(Formats format, const void* vertex_data, unsigned int numVerts, unsigned int numFaces, const unsigned int* index_data, unsigned int numIndexs) :
-	_format(format),
-	_numVerts(numVerts),
-	_numIndexs(numIndexs),
-	_numFaces(numFaces)
-{
-	glGenBuffers(1, &_vertex_buffer_id);
-	glBindBuffer(GL_ARRAY_BUFFER, _vertex_buffer_id);
-
-	switch (_format) {
-	case Formats::F_V3:
-		glBufferData(GL_ARRAY_BUFFER, sizeof(V3) * numVerts, vertex_data, GL_STATIC_DRAW);
-		break;
-	case Formats::F_V3C4:
-		glBufferData(GL_ARRAY_BUFFER, sizeof(V3C4) * numVerts, vertex_data, GL_STATIC_DRAW);
-		break;
-	case Formats::F_V3T2:
-		glBufferData(GL_ARRAY_BUFFER, sizeof(V3T2) * numVerts, vertex_data, GL_STATIC_DRAW);
-		break;
-	}
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	if (index_data) {
-		glGenBuffers(1, &_indexs_buffer_id);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexs_buffer_id);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * numIndexs, index_data, GL_STATIC_DRAW);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
-	else {
-		_indexs_buffer_id = 0;
-	}
 }
 
 Mesh::Mesh(Mesh&& b) noexcept :
