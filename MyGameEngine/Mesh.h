@@ -51,6 +51,7 @@ public:
 	bool drawChecker = false;
 
 	std::vector<vec3f> meshVerts;
+	std::vector<vec3f> meshIndices;
 	std::vector<vec3f> meshNorms;
 	std::vector<vec3f> meshFaceCenters;
 	std::vector<vec3f> meshFaceNorms;

@@ -44,11 +44,15 @@ unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer) {
 	cursor += bytes;
 
 	// Store indices
-	bytes = sizeof(unsigned int) * ourMesh->getIndexs(); 
+	bytes = sizeof(unsigned int) * ourMesh->_numIndexs;
 	memcpy(cursor, &ourMesh->_numIndexs, bytes); 
 	cursor += bytes;
 
 	//Falta el resto de la mesh data, listillo
+
+	//...
+	// 
+	//Esta yendo uno por uno añadiendo la memoria
 
 	const char* filePath = "Library/save.txt";
 	std::ofstream outputFile(filePath);
@@ -59,7 +63,7 @@ unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer) {
 		// Close the file stream
 		outputFile.close();
 	}
-	//...
+
 	return bytes; //Esto me lo inventé yo porque busqué en internet por que era un uint, para hacer calculos de cuantos bytes han sido pasados y todo eso
 
 	//Resumen: Alocar toda la info en bytes adyacentes para que luego se pueda escribir con un simple iterador que vaya de byte en byte
