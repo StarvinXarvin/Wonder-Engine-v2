@@ -35,11 +35,10 @@ private:
 	unsigned int _numFaces;
 
 	friend void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh);
-	friend unsigned int MeshImporter::Save(Mesh::Ptr ourMesh, char* fileBuffer);
+	friend unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer);
 	friend void MeshImporter::Load(char* fileBuffer, Mesh* ourMesh);
 
 public:
-
 
 	static vector<Ptr> loadFromFile(const std::string& path);
 	static vector<Ptr> loadFromFile(const string& meshPath, const string& texturePath);

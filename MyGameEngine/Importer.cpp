@@ -22,7 +22,6 @@ using namespace std;
 using namespace MeshImporter;
 
 
-
 void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh) {
 
 	//Aqui iria lo de importar la Mesh del mesh.cpp, esencialmente lo mismo que el loadfromfile
@@ -31,7 +30,7 @@ void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh) {
 
 }
 
-unsigned int MeshImporter::Save(Mesh::Ptr ourMesh, char* fileBuffer) {
+unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer) {
 
 	// amount of indices / vertices / colors / normals / texture_coords / AABB 
 	unsigned int ranges[2] = { ourMesh->_numIndexs, ourMesh->_numVerts };

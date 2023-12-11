@@ -30,7 +30,7 @@ class Mesh;
 namespace MeshImporter
 {
 	void MeshImport(const aiMesh* mesh, Mesh* ourMesh); 
-	unsigned int Save(Mesh::Ptr ourMesh, char* fileBuffer);
+	unsigned int Save(Mesh* ourMesh, char* fileBuffer);
 	void Load(char* fileBuffer, Mesh* ourMesh);
 
 };
