@@ -45,13 +45,13 @@ unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer) {
 
 	// Store indices
 	bytes = sizeof(unsigned int) * ourMesh->_numIndexs;
-	memcpy(cursor, &ourMesh->_numIndexs, bytes); 
+	memcpy(cursor, &ourMesh->meshIndices, bytes); 
 	cursor += bytes;
 
 	//Falta el resto de la mesh data, listillo
 
 	//...
-	// 
+	
 	//Esta yendo uno por uno añadiendo la memoria
 
 	const char* filePath = "Library/save.txt";
