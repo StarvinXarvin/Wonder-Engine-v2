@@ -120,15 +120,7 @@ void Scene::createGameObject(string meshPath, string texturePath)
 			char* buffer = new char;
 
 			MeshImporter::Save(mesh.get(), buffer);
-
-			const char* filePath = "Library/save.txt";
-			std::ofstream outputFile(filePath);
-			if (outputFile.is_open()) {
-				// Write the contents of the buffer to the file
-				outputFile << buffer;
-				// Close the file stream
-				outputFile.close();
-			}
+			
 		}
 	}
 

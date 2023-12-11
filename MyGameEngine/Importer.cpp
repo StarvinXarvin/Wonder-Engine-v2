@@ -35,17 +35,34 @@ unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer) {
 	// amount of indices / vertices / colors / normals / texture_coords / AABB 
 	unsigned int ranges[2] = { ourMesh->_numIndexs, ourMesh->_numVerts };
 
-	unsigned int size = sizeof(ranges) + sizeof(unsigned int) * ourMesh->_numIndexs + sizeof(float) * ourMesh->_numVerts * 3; fileBuffer = new char[size]; // Allocate
+	unsigned int size = sizeof(ranges) + sizeof(unsigned int) * ourMesh->_numIndexs + sizeof(float) * ourMesh->_numVerts * 3; //Esto es el tamaño del header + el array de vectores y de indices
+	fileBuffer = new char[size]; // Now the file buffer is the whole size
 	char* cursor = fileBuffer;
 
-	unsigned int bytes = sizeof(ranges); // First store ranges memcpy(cursor, ranges, bytes);
+	unsigned int bytes = sizeof(ranges); // First store ranges 
+	memcpy(cursor, ranges, bytes); //Le añade el tamaño de nuev para añadirlos
 	cursor += bytes;
 
-
 	// Store indices
-	bytes = sizeof(unsigned int) * ourMesh->getIndexs(); memcpy(cursor, &ourMesh->_numIndexs, bytes); cursor += bytes;
+	bytes = sizeof(unsigned int) * ourMesh->getIndexs(); 
+	memcpy(cursor, &ourMesh->_numIndexs, bytes); 
+	cursor += bytes;
+
+	//Falta el resto de la mesh data, listillo
+
+	const char* filePath = "Library/save.txt";
+	std::ofstream outputFile(filePath);
+	if (outputFile.is_open()) {
+		// Write the contents of the buffer to the file
+		//Esto deberia estar iterado, el cursor se encarga de ir bit por bit de informacion
+		outputFile << fileBuffer;
+		// Close the file stream
+		outputFile.close();
+	}
 	//...
-	return bytes;
+	return bytes; //Esto me lo inventé yo porque busqué en internet por que era un uint, para hacer calculos de cuantos bytes han sido pasados y todo eso
+
+	//Resumen: Alocar toda la info en bytes adyacentes para que luego se pueda escribir con un simple iterador que vaya de byte en byte
 
 }
 
