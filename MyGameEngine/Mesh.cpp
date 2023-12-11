@@ -128,6 +128,8 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 		mesh_ptrs.push_back(mesh_sptr);
 	}
 
+	//Intentar guardar la mesh en un archivo desde aqui
+
 	aiReleaseImport(scene_ptr);
 
 	return mesh_ptrs;

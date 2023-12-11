@@ -25,7 +25,7 @@ using namespace MeshImporter;
 
 void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh) {
 
-	//Aqui iria lo de importar la Mesh del mesh.cpp
+	//Aqui iria lo de importar la Mesh del mesh.cpp, esencialmente lo mismo que el loadfromfile
 
 	
 
