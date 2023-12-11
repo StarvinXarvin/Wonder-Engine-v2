@@ -116,6 +116,10 @@ void Scene::createGameObject(string meshPath, string texturePath)
 			newGOchild->setName(meshname);
 			newGOchild->getComponent(MESH)->setName(meshcompname);
 			newGOchild->getComponent(MESH)->setFilePath(meshPath);
+
+			char* buffer;
+
+			MeshImporter::Save(mesh, buffer);
 		}
 	}
 
