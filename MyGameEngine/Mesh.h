@@ -21,6 +21,8 @@ public:
 	struct V3C4 { vec3f v; vec4f c; };
 	struct V3T2 { vec3f v; vec2f t; };
 
+	using Ptr = shared_ptr<Mesh>;
+
 private:
 	const enum Formats _format;
 
@@ -33,12 +35,11 @@ private:
 	unsigned int _numFaces;
 
 	friend void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh);
-	friend unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer);
+	friend unsigned int MeshImporter::Save(Mesh::Ptr ourMesh, char* fileBuffer);
 	friend void MeshImporter::Load(char* fileBuffer, Mesh* ourMesh);
 
 public:
 
-	using Ptr = shared_ptr<Mesh>;
 
 	static vector<Ptr> loadFromFile(const std::string& path);
 	static vector<Ptr> loadFromFile(const string& meshPath, const string& texturePath);
