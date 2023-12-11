@@ -70,7 +70,7 @@ $(SolutionDir)\vcpkg\vcpkg.exe install opengl glew glm sdl2 imgui[opengl3-bindin
     <PostBuildEvent>
       <Command>copy $(SolutionDir)\vcpkg\installed\x64-windows\bin\*.* $(OutDir)
 
-mkdir "$(SolutionDir)\MyGameEditor\Library"
+if not exist "$(SolutionDir)\MyGameEditor\Library" mkdir "$(SolutionDir)\MyGameEditor\Library"
 
 if not exist "$(OutDir)\Assets" mkdir "$(OutDir)\Assets"</Command>
     </PostBuildEvent>

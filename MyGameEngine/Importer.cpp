@@ -23,7 +23,7 @@ using namespace MeshImporter;
 
 
 
-void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh) { //Claro cojones es void porque se lo pasa al ourMesh viniendo de mesh soy tonto
+void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh) {
 
 	//Aqui iria lo de importar la Mesh del mesh.cpp
 
