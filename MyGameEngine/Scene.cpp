@@ -9,7 +9,15 @@
 #include <fstream>
 #include <filesystem>
 
+
 using namespace std;
+
+#ifdef _DEBUG
+std::string pathPrefix = "../x64/Debug";
+#else
+std::string pathPrefix = "../x64/Release";
+#endif
+
 
 Scene::Scene(WonderEngine* engine, bool start_enabled) : EngineModule(engine, start_enabled)
 {
