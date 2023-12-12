@@ -114,9 +114,7 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& path) {
 			const aiFace& face = mesh.mFaces[i];
 
 			// Output the indices of the current face
-			std::cout << "Face " << i << " indices: ";
 			for (unsigned int j = 0; j < face.mNumIndices; ++j) {
-				std::cout << face.mIndices[j] << " ";
 				mesh_sptr->meshIndices.push_back(face.mIndices[j]);
 			}
 			std::cout << std::endl;
