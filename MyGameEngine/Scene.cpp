@@ -29,7 +29,7 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
-	createGameObject(pathPrefix + "Assets/Default_House/BakerHouse.fbx");
+	createGameObject("Assets/Default_House/BakerHouse.fbx");
 
 	return true;
 }
