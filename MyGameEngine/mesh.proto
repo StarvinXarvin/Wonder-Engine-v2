@@ -5,3 +5,5 @@ package customMeshFile;
 message Mesh {
 	required int32 numVerts = 1;
 } //NOTA: BUSCAR QUE ES UN DTO
+
+//El loader y el importer y todo eso deberian estar en el editor creo 
