@@ -65,7 +65,7 @@
     </Link>
     <PreBuildEvent>
       <Command>call $(SolutionDir)\vcpkg\bootstrap-vcpkg.bat
-$(SolutionDir)\vcpkg\vcpkg.exe install opengl glew glm sdl2 imgui[opengl3-binding,sdl2-binding,docking-experimental] jsoncpp parson assimp devil --recurse --triplet x64-windows</Command>
+$(SolutionDir)\vcpkg\vcpkg.exe install opengl glew glm sdl2 imgui[opengl3-binding,sdl2-binding,docking-experimental] jsoncpp parson assimp devil protobuf --recurse --triplet x64-windows</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)\vcpkg\installed\x64-windows\bin\*.* $(OutDir)

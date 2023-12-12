@@ -48,11 +48,19 @@ unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer) {
 	memcpy(cursor, &ourMesh->meshIndices, bytes); 
 	cursor += bytes;
 
+	bytes = sizeof(vec3f) * ourMesh->_numVerts;
+	memcpy(cursor, &ourMesh->meshVerts, bytes);
+	cursor += bytes;
+
+
+
 	//Falta el resto de la mesh data, listillo
 
 	//...
 	
 	//Esta yendo uno por uno añadiendo la memoria
+
+	//https://protobuf.dev/getting-started/cpptutorial/
 
 	const char* filePath = "Library/save.txt";
 	std::ofstream outputFile(filePath);
