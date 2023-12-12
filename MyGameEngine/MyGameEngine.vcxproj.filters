@@ -24,6 +24,9 @@
     <Filter Include="GameObject\Components">
       <UniqueIdentifier>{f892b8e5-9c9d-42b9-ad04-9b3d06aa1b3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Importer">
+      <UniqueIdentifier>{96c6b79e-139e-411a-a74c-e4ab2ef47600}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WonderEngine.h">
@@ -93,7 +96,7 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Importer.h">
-      <Filter>GameObject</Filter>
+      <Filter>GameObject\Importer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -149,7 +152,12 @@
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Importer.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>GameObject\Importer</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mesh.proto">
+      <Filter>GameObject\Importer</Filter>
+    </None>
   </ItemGroup>
 </Project>

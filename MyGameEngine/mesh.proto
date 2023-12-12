@@ -1,0 +1,7 @@
+syntax = "proto2";
+
+package customMeshFile;
+
+message Mesh {
+	required int32 numVerts = 1;
+} //NOTA: BUSCAR QUE ES UN DTO
