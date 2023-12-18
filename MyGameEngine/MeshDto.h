@@ -4,6 +4,8 @@
 #include <ostream>
 #include <istream>
 
+
+
 struct MeshDto 
 {
 	
@@ -14,6 +16,8 @@ struct MeshDto
 
 	std::vector<VertexV3T2> vertex_data;
 	std::vector<unsigned int> index_data;
+
+	unsigned int faces;
 
 	std::ostream& seralize(std::ostream& os) const; 
 	std::istream& deseralize(std::istream& is); 

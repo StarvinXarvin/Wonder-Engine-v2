@@ -35,8 +35,10 @@ private:
 	unsigned int _numFaces;
 
 	friend void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh, const std::string& path);
-	friend unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer);
-	friend void MeshImporter::Load(char* fileBuffer, Mesh* ourMesh);
+	friend unsigned int MeshImporter::MeshSave(Mesh* ourMesh, char* fileBuffer);
+	friend void MeshImporter::MeshLoad(char* fileBuffer, Mesh* ourMesh);
+	friend 	MeshDto* MeshImporter::MeshToDTO(Mesh* mesh);
+	friend Mesh* MeshImporter::DTOToMesh(MeshDto* dto);
 
 public:
 
@@ -50,6 +52,7 @@ public:
 	bool drawChecker = false;
 
 	std::vector<vec3f> meshVerts;
+	std::vector<V3T2> meshVertsV3T2;
 	std::vector<unsigned int> meshIndices;
 	std::vector<vec3f> meshNorms;
 	std::vector<vec3f> meshFaceCenters;
