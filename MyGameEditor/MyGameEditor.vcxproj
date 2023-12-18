@@ -59,13 +59,13 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\vcpkg\installed\x64-windows\lib\;$(SolutionDir)\vcpkg\installed\x64-windows\lib\manual-link\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;OpenGL32.lib;SDL2.lib;SDL2main.lib;imgui.lib;parson.lib;DevIL.lib;libprotobuf.lib;libprotobuf-lite.lib;libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;OpenGL32.lib;SDL2.lib;SDL2main.lib;imgui.lib;parson.lib;DevIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
       <Command>call $(SolutionDir)\vcpkg\bootstrap-vcpkg.bat
-$(SolutionDir)\vcpkg\vcpkg.exe install opengl glew glm sdl2 imgui[opengl3-binding,sdl2-binding,docking-experimental] jsoncpp parson assimp devil protobuf --recurse --triplet x64-windows</Command>
+$(SolutionDir)\vcpkg\vcpkg.exe install opengl glew glm sdl2 imgui[opengl3-binding,sdl2-binding,docking-experimental] jsoncpp parson assimp devil --recurse --triplet x64-windows</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)\vcpkg\installed\x64-windows\bin\*.* $(OutDir)
@@ -108,6 +108,7 @@ $(SolutionDir)\vcpkg\vcpkg.exe install opengl glew sdl2 imgui[opengl3-binding,sd
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Importer.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -123,6 +124,7 @@ $(SolutionDir)\vcpkg\vcpkg.exe install opengl glew sdl2 imgui[opengl3-binding,sd
     <ClInclude Include="Application.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="Importer.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="types.h" />

@@ -2,7 +2,7 @@
 
 #include "Mesh.h"
 #include "Texture.h"
-#include "Importer.h"
+//#include "Importer.h"
 
 #include <iostream>
 #include <string>
@@ -11,12 +11,6 @@
 
 
 using namespace std;
-
-#ifdef _DEBUG
-std::string pathPrefix = "../x64/Debug";
-#else
-std::string pathPrefix = "../x64/Release";
-#endif
 
 
 Scene::Scene(WonderEngine* engine, bool start_enabled) : EngineModule(engine, start_enabled)
@@ -119,7 +113,7 @@ void Scene::createGameObject(string meshPath, string texturePath)
 
 			char* buffer = new char;
 
-			MeshImporter::Save(mesh.get(), buffer);
+			//MeshImporter::Save(mesh.get(), buffer);
 			
 		}
 	}

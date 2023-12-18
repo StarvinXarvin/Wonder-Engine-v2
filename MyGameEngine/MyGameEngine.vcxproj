@@ -22,7 +22,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Graphic.h" />
-    <ClInclude Include="Importer.h" />
+    <ClInclude Include="MeshDto.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="MeshComp.h" />
     <ClInclude Include="Mesh.h" />
@@ -43,10 +43,10 @@
     <ClCompile Include="CubeVertexArray.cpp" />
     <ClCompile Include="CubeVertexBuffer.cpp" />
     <ClCompile Include="CubeWireframeIVBO.cpp" />
-    <ClCompile Include="Importer.cpp" />
     <ClCompile Include="MeshComp.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="MeshDto.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="TextureComp.cpp" />
@@ -54,9 +54,6 @@
     <ClCompile Include="TransformComp.cpp" />
     <ClCompile Include="WonderEngine.cpp" />
     <ClCompile Include="Renderer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="mesh.proto" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

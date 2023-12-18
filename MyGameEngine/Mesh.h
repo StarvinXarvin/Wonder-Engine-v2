@@ -7,7 +7,7 @@
 #include "types.h"
 #include "Graphic.h"
 #include "Texture.h"
-#include "Importer.h"
+#include "../MyGameEditor/Importer.h"
 
 
 using namespace std;
@@ -34,14 +34,13 @@ private:
 
 	unsigned int _numFaces;
 
-	friend void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh);
+	friend void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh, const std::string& path);
 	friend unsigned int MeshImporter::Save(Mesh* ourMesh, char* fileBuffer);
 	friend void MeshImporter::Load(char* fileBuffer, Mesh* ourMesh);
 
 public:
 
-	static vector<Ptr> loadFromFile(const std::string& path);
-	static vector<Ptr> loadFromFile(const string& meshPath, const string& texturePath);
+	static vector<Ptr> loadFromFile(const std::string& path, const string& textPath = "");
 
 	//// Load a texture to an already loaded mesh
 	void loadTextureToMesh(const string& textPath);
