@@ -149,8 +149,6 @@ std::vector<Mesh::Ptr> Mesh::loadFromFile(const std::string& meshPath, const std
 		mesh_ptrs.push_back(mesh_sptr);
 	}
 
-	//Parece que no hay array de vertices aqui
-
 	aiReleaseImport(scene_ptr);
 
 	return mesh_ptrs;

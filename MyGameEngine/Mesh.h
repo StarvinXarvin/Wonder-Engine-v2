@@ -34,11 +34,11 @@ private:
 
 	unsigned int _numFaces;
 
-	friend void MeshImporter::MeshImport(const aiMesh* mesh, Mesh* ourMesh, const std::string& path);
-	friend unsigned int MeshImporter::MeshSave(Mesh* ourMesh, char* fileBuffer);
-	friend void MeshImporter::MeshLoad(char* fileBuffer, Mesh* ourMesh);
+	friend void MeshImporter::MeshImport(MeshDto& meshDTO, const std::string& path);
+	friend void MeshImporter::MeshSave(const char* filepath, MeshDto& dto);
+	friend void MeshImporter::MeshLoad(const char* filepath, MeshDto& dto);
 	friend 	MeshDto* MeshImporter::MeshToDTO(Mesh* mesh);
-	friend Mesh* MeshImporter::DTOToMesh(MeshDto* dto);
+	friend Mesh* MeshImporter::DTOToMesh(MeshDto& dto);
 
 public:
 

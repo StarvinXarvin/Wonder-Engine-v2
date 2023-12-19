@@ -83,7 +83,15 @@ void Scene::createGameObject(string meshPath, string texturePath)
 		}
 		else
 		{
-			mesh_ptrs = Mesh::loadFromFile(meshPath);
+			MeshDto* dto = new MeshDto;
+			MeshImporter::MeshImport(*dto, meshPath);
+			MeshImporter::MeshSave("Library/saveDto.wdr", *dto);
+			MeshImporter::MeshLoad("Library/saveDto.wdr", *dto);
+			auto mesh_sptr = make_shared<Mesh>(DTOToMesh(*dto)->F_V3T2, DTOToMesh(*dto)->meshVertsV3T2.data(), DTOToMesh(*dto)->getVerts(), DTOToMesh(*dto)->getFaces(), DTOToMesh(*dto)->meshIndices.data(), DTOToMesh(*dto)->getIndexs());
+			mesh_sptr.get()->loadTextureToMesh("Assets/Baker_house.png");
+			mesh_ptrs.push_back(mesh_sptr); //Parece que el problema está aqui porque el resto lo compila bien 
+			delete dto;
+			//mesh_ptrs = Mesh::loadFromFile(meshPath);
 		}
 
 		// Create components for the new gameobject
@@ -103,7 +111,8 @@ void Scene::createGameObject(string meshPath, string texturePath)
 				if (comp->getType() == TEXTURE)
 				{
 					textcomp = (TextureComp*)comp;
-					textcomp->setTexture(mesh->texture);
+					textcomp->setTexture(mesh->texture); //Falta la textura (Me cago en mi putisima estampa)
+														 //Tiene que sacar la textura del Devil probablemente
 				}
 			}
 
@@ -111,9 +120,6 @@ void Scene::createGameObject(string meshPath, string texturePath)
 			newGOchild->getComponent(MESH)->setName(meshcompname);
 			newGOchild->getComponent(MESH)->setFilePath(meshPath);
 
-			char* buffer = new char;
-
-			//MeshImporter::Save(mesh.get(), buffer);
 			
 		}
 	}

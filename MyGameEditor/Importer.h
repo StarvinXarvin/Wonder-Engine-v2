@@ -27,12 +27,11 @@ struct MeshDto;
 
 namespace MeshImporter
 {
-	void MeshImport(const aiMesh* mesh, Mesh* ourMesh, const std::string& path);
-	unsigned int MeshSave(Mesh* ourMesh, char* fileBuffer);
-	void MeshLoad(char* fileBuffer, Mesh* ourMesh);
-	void MeshDTOImport(const aiMesh* mesh, MeshDto* meshDTO, const std::string& path);
+	void MeshImport(MeshDto& meshDTO, const std::string& path);
+	void MeshSave(const char* filepath, MeshDto& dto);
+	void MeshLoad(const char* filepath, MeshDto& dto);
 	MeshDto* MeshToDTO(Mesh* mesh);
-	Mesh* DTOToMesh(MeshDto* dto);
+	Mesh* DTOToMesh(MeshDto& dto);
 
 }
 
