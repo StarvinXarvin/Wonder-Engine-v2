@@ -37,8 +37,8 @@ private:
 	friend void MeshImporter::MeshImport(MeshDto& meshDTO, const std::string& path);
 	friend void MeshImporter::MeshSave(const char* filepath, MeshDto& dto);
 	friend void MeshImporter::MeshLoad(const char* filepath, MeshDto& dto);
-	friend 	MeshDto* MeshImporter::MeshToDTO(Mesh* mesh);
-	friend Mesh* MeshImporter::DTOToMesh(MeshDto& dto);
+	friend 	MeshDto MeshImporter::MeshToDTO(shared_ptr<Mesh> mesh);
+	friend shared_ptr<Mesh> MeshImporter::DTOToMesh(MeshDto& dto);
 
 public:
 

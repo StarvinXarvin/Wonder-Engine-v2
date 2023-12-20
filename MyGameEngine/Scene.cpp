@@ -23,6 +23,7 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
+	//createGameObject("Assets/street/Street_environment_V01.fbx");
 	createGameObject("Assets/Default_House/BakerHouse.fbx");
 
 	return true;
@@ -83,14 +84,16 @@ void Scene::createGameObject(string meshPath, string texturePath)
 		}
 		else
 		{
-			MeshDto* dto = new MeshDto;
-			MeshImporter::MeshImport(*dto, meshPath);
-			MeshImporter::MeshSave("Library/saveDto.wdr", *dto);
-			MeshImporter::MeshLoad("Library/saveDto.wdr", *dto);
-			auto mesh_sptr = make_shared<Mesh>(DTOToMesh(*dto)->F_V3T2, DTOToMesh(*dto)->meshVertsV3T2.data(), DTOToMesh(*dto)->getVerts(), DTOToMesh(*dto)->getFaces(), DTOToMesh(*dto)->meshIndices.data(), DTOToMesh(*dto)->getIndexs());
-			mesh_sptr.get()->loadTextureToMesh("Assets/Baker_house.png");
-			mesh_ptrs.push_back(mesh_sptr); //Parece que el problema está aqui porque el resto lo compila bien 
-			delete dto;
+			MeshDto dto;
+			MeshImporter::MeshImport(dto, meshPath);
+			MeshImporter::MeshSave("Library/saveDto.wdr", dto);
+			MeshImporter::MeshLoad("Library/saveDto.wdr", dto);
+			//shared_ptr<Mesh> tempMesh = DTOToMesh(dto);
+			//int verts = tempMesh->getVerts();
+			auto mesh_sptr = make_shared<Mesh>(DTOToMesh(dto)->F_V3T2, DTOToMesh(dto)->meshVertsV3T2.data(), DTOToMesh(dto)->getVerts(), DTOToMesh(dto)->getFaces(), DTOToMesh(dto)->meshIndices.data(), DTOToMesh(dto)->getIndexs());
+			mesh_sptr.get()->loadTextureToMesh("Assets/Default_House/Baker_house.png");
+			mesh_ptrs.push_back(mesh_sptr);
+
 			//mesh_ptrs = Mesh::loadFromFile(meshPath);
 		}
 

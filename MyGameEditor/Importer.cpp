@@ -121,7 +121,7 @@ void MeshImporter::MeshImport(MeshDto& meshDTO, const std::string& path) {
 
 	aiReleaseImport(scene_ptr);
 
-	meshDTO = *MeshToDTO(mesh_ptrs.data()->get());
+	meshDTO = MeshToDTO(*mesh_ptrs.data());
 
 }
 
@@ -141,9 +141,9 @@ void MeshImporter::MeshLoad(const char* filepath, MeshDto& dto) {
 
 }
 
-MeshDto* MeshImporter::MeshToDTO(Mesh* mesh) {
+MeshDto MeshImporter::MeshToDTO(shared_ptr<Mesh> mesh) {
 
-	MeshDto* dto = new MeshDto;
+	MeshDto dto;
 
 	for (size_t i = 0; i < mesh->_numVerts; i++) {
 		MeshDto::VertexV3T2 vec;
@@ -152,22 +152,22 @@ MeshDto* MeshImporter::MeshToDTO(Mesh* mesh) {
 		vec.vertex.z = mesh->meshVerts[i].z;
 		vec.texCoords.s = mesh->meshVertsV3T2[i].t.x;
 		vec.texCoords.t = mesh->meshVertsV3T2[i].t.y;
-		dto->vertex_data.push_back(vec);
+		dto.vertex_data.push_back(vec);
 	}
 
 	for (size_t i = 0; i < mesh->_numIndexs; i++) {
-		dto->index_data.push_back(mesh->meshIndices[i]);
+		dto.index_data.push_back(mesh->meshIndices[i]);
 	}
 
-	dto->faces = mesh->_numFaces;
+	dto.faces = mesh->_numFaces;
 
 	return dto;
 }
 
-Mesh* MeshImporter::DTOToMesh(MeshDto& dto) {
+shared_ptr<Mesh> MeshImporter::DTOToMesh(MeshDto& dto) {
 
-	unsigned int numVerts = sizeof(dto.vertex_data) / sizeof(MeshDto::VertexV3T2);
-	unsigned int numIndices = sizeof(dto.index_data) / sizeof(unsigned int);
+	unsigned int numVerts = dto.vertex_data.size();
+	unsigned int numIndices = dto.index_data.size();
 
 	vector<Mesh::V3T2> vertex_data;
 	for (size_t i = 0; i < numVerts; ++i) {
@@ -184,7 +184,20 @@ Mesh* MeshImporter::DTOToMesh(MeshDto& dto) {
 
 	auto mesh = make_shared <Mesh>(Mesh::Formats::F_V3T2, vertex_data.data(), numVerts, dto.faces, index_data.data(), numIndices);
 
-	return mesh.get();
+	for (size_t i = 0; i < numVerts; i++) {
+		vec3f glmNormal(vertex_data[i].v.x, vertex_data[i].v.y, vertex_data[i].v.z);
+		mesh->meshVerts.push_back(glmNormal);
+	}
+
+	for (size_t i = 0; i < numVerts; i++) {
+		mesh->meshVertsV3T2.push_back(vertex_data[i]);
+	}
+
+	for (size_t i = 0; i < numIndices; i++) {
+		mesh->meshIndices.push_back(index_data[i]);
+	}
+
+	return mesh;
 }
 
 void TextureImporter::TextureImport() {

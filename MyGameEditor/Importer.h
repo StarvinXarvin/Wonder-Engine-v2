@@ -30,8 +30,8 @@ namespace MeshImporter
 	void MeshImport(MeshDto& meshDTO, const std::string& path);
 	void MeshSave(const char* filepath, MeshDto& dto);
 	void MeshLoad(const char* filepath, MeshDto& dto);
-	MeshDto* MeshToDTO(Mesh* mesh);
-	Mesh* DTOToMesh(MeshDto& dto);
+	MeshDto MeshToDTO(shared_ptr<Mesh> mesh);
+	shared_ptr<Mesh> DTOToMesh(MeshDto& dto);
 
 }
 
