@@ -54,6 +54,7 @@ private:
 	void setupINSPECTOR();
 	void setupCONSOLE();
 	void setupHIERARCHY();
+	void setupASSETS();
 	void setupABOUT();
 	void setupCONFIG();
 
@@ -64,6 +65,8 @@ private:
 	void loadHardwareInfo();
 
 	void OsOpenInShell(const char* path);
+
+	void TraverseFiles(const std::filesystem::path& _Path);
 
 private:
 	float frame_rate;
@@ -77,7 +80,7 @@ private:
 	bool showCons;
 	bool showInsp;
 	bool showConf;
-
+	bool showAssets;
 	bool showAbout;
 
 	glm::vec3 fobjPos;

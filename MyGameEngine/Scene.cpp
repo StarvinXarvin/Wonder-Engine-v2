@@ -24,7 +24,7 @@ Scene::~Scene()
 bool Scene::Start()
 {
 	//createGameObject("Assets/street/Street_environment_V01.fbx");
-	createGameObject("Assets/Default_House/BakerHouse.fbx");
+	createGameObject("Assets/Default_House/BakerHouse.fbx", "Assets/Default_House/Baker_house.png");
 
 	return true;
 }
@@ -78,34 +78,25 @@ void Scene::createGameObject(string meshPath, string texturePath)
 
 		// Load meshs to a vector
 		vector<Mesh::Ptr> mesh_ptrs;
-		if (texturePath != "")
-		{
-			mesh_ptrs = Mesh::loadFromFile(meshPath, texturePath);
-		}
-		else
-		{
 			vector<MeshDto> dtoVec;
 			MeshImporter::MeshImport(dtoVec, meshPath);
 
 			for (size_t i = 0; i < dtoVec.size(); i++) {
-				MeshImporter::MeshSave("Library/saveDto.wdr", dtoVec[i]);
-				MeshImporter::MeshLoad("Library/saveDto.wdr", dtoVec[i]);
-				//shared_ptr<Mesh> tempMesh = DTOToMesh(dto);
-				//int verts = tempMesh->getVerts();
+				MeshImporter::MeshSave("Library/Meshes/saveDto.wdr", dtoVec[i]);
+				MeshImporter::MeshLoad("Library/Meshes/saveDto.wdr", dtoVec[i]);
 				auto mesh_sptr = make_shared<Mesh>(	DTOToMesh(dtoVec[i])->F_V3T2, 
 													DTOToMesh(dtoVec[i])->meshVertsV3T2.data(), 
 													DTOToMesh(dtoVec[i])->getVerts(), 
 													DTOToMesh(dtoVec[i])->getFaces(), 
 													DTOToMesh(dtoVec[i])->meshIndices.data(), 
 													DTOToMesh(dtoVec[i])->getIndexs());
+				if (!texturePath.empty()) {
+					mesh_sptr.get()->loadTextureToMesh(texturePath);
+				}
 
-				mesh_sptr.get()->loadTextureToMesh("Assets/Default_House/Baker_house.png");
 				mesh_ptrs.push_back(mesh_sptr);
 			}
 			
-
-			//mesh_ptrs = Mesh::loadFromFile(meshPath);
-		}
 
 		// Create components for the new gameobject
 		// Create all meshes as new gameobjects, childs of the newgObj
@@ -124,8 +115,7 @@ void Scene::createGameObject(string meshPath, string texturePath)
 				if (comp->getType() == TEXTURE)
 				{
 					textcomp = (TextureComp*)comp;
-					textcomp->setTexture(mesh->texture); //Falta la textura (Me cago en mi putisima estampa)
-														 //Tiene que sacar la textura del Devil probablemente
+					textcomp->setTexture(mesh->texture); 
 				}
 			}
 

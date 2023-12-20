@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <filesystem>
 #include <vector>
 #include <chrono>
 #include <thread>
@@ -74,6 +75,8 @@ update_status UI::setupMAINMENU()
 			}
 
 			if (MenuItem("Show Demo Window")) showDemo = !showDemo;
+
+			if (MenuItem("Assets")) showAssets = !showAssets;
 
 			if (MenuItem("GitHub", NULL, false, true)) OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
 
@@ -329,6 +332,19 @@ void UI::setupCONFIG()
 		}
 	}
 }
+
+void UI::setupASSETS() {
+
+	if (Begin("Assets"))
+	{
+		ImGui::Text("ASSETS");
+
+		TraverseFiles("Assets");
+
+		ImGui::End();
+	}
+}
+
 void UI::setupABOUT()
 {
 	if (Begin("About"))
@@ -344,10 +360,15 @@ void UI::setupABOUT()
 		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Pau Fusco");
 		if (IsItemClicked()) OsOpenInShell("https://github.com/PauFusco");
 		ImGui::SameLine();
-		ImGui::Text("&");
+		ImGui::Text(",");
 		ImGui::SameLine();
 		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Xavi Alcaniz");
 		if (IsItemClicked()) OsOpenInShell("https://github.com/StarvinXarvin");
+		ImGui::SameLine();
+		ImGui::Text("&");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(0.6f, 0.8f, 1.0f, 1.0f), "Sergio Garriguez");
+		if (IsItemClicked()) OsOpenInShell("https://github.com/SergioGarriguez");
 
 		SeparatorText("Software links");
 		ImVec4 colorGray(0.5f, 0.5f, 0.5f, 1.0f);
@@ -380,6 +401,7 @@ update_status UI::setUpUI()
 
 	loadHardwareInfo();
 	if (showAbout) setupABOUT();
+	if (showAssets) setupASSETS();
 	if (showDemo) ShowDemoWindow();
 
 	return ret;
@@ -409,7 +431,7 @@ bool UI::Init()
 	showCons = true;
 	showInsp = true;
 	showConf = true;
-
+	showAssets = false;
 	showAbout = false;
 
 	windowwidth = App->window->window_width;
@@ -519,4 +541,24 @@ void UI::OsOpenInShell(const char* path)
 	snprintf(command, 256, "%s \"%s\"", open_executable, path);
 	system(command);
 #endif
+}
+
+void UI::TraverseFiles(const std::filesystem::path &_Path) {
+
+	for (const auto& entry : fs::directory_iterator(_Path))
+	{
+		if (fs::is_directory(entry.status()))
+		{
+			if (TreeNode(entry.path().filename().string().c_str())) {
+				string newPath = _Path.string() + "/" + entry.path().filename().string();
+				UI::TraverseFiles(newPath.c_str());
+			}
+		}
+		else {
+			Bullet(); Text(entry.path().filename().string().c_str());
+}
+		}
+	
+	TreePop();
+
 }
