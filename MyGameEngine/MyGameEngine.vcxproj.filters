@@ -92,7 +92,7 @@
     <ClInclude Include="Primitive.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Importer.h">
+    <ClInclude Include="MeshDto.h">
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -151,7 +151,7 @@
     <ClCompile Include="Primitive.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Importer.cpp">
+    <ClCompile Include="MeshDto.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="BBox.h">

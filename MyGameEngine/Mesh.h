@@ -7,8 +7,11 @@
 #include "types.h"
 #include "Graphic.h"
 #include "Texture.h"
+#include "../MyGameEditor/Importer.h"
+
 
 using namespace std;
+using namespace MeshImporter;
 
 class Mesh : public Graphic
 {
@@ -18,24 +21,30 @@ public:
 	struct V3C4 { vec3f v; vec4f c; };
 	struct V3T2 { vec3f v; vec2f t; };
 
+	using Ptr = shared_ptr<Mesh>;
+
 private:
 	const enum Formats _format;
 
 	unsigned int _vertex_buffer_id;
-	const unsigned int _numVerts;
+	unsigned int _numVerts;
 
 	unsigned int _indexs_buffer_id;
-	const unsigned int _numIndexs;
+	unsigned int _numIndexs;
 
-	const unsigned int _numFaces;
+	unsigned int _numFaces;
+
+	friend void MeshImporter::MeshImport(vector<MeshDto>& meshDTO, const std::string& path);
+	friend void MeshImporter::MeshSave(const char* filepath, MeshDto& dto);
+	friend void MeshImporter::MeshLoad(const char* filepath, MeshDto& dto);
+	friend 	MeshDto MeshImporter::MeshToDTO(shared_ptr<Mesh> mesh);
+	friend shared_ptr<Mesh> MeshImporter::DTOToMesh(MeshDto& dto);
 
 public:
-	using Ptr = shared_ptr<Mesh>;
 
-	static vector<Ptr> loadFromFile(const std::string& path);
-	static vector<Ptr> loadFromFile(const string& meshPath, const string& texturePath);
+	static vector<Ptr> loadFromFile(const std::string& path, const string& textPath = "");
 
-	// Load a texture to an already loaded mesh
+	//// Load a texture to an already loaded mesh
 	void loadTextureToMesh(const string& textPath);
 	Texture::Ptr texture;
 
@@ -43,6 +52,8 @@ public:
 	bool drawChecker = false;
 
 	std::vector<vec3f> meshVerts;
+	std::vector<V3T2> meshVertsV3T2;
+	std::vector<unsigned int> meshIndices;
 	std::vector<vec3f> meshNorms;
 	std::vector<vec3f> meshFaceCenters;
 	std::vector<vec3f> meshFaceNorms;
@@ -62,6 +73,10 @@ public:
 	const unsigned int getVerts()
 	{
 		return _numVerts;
+	}
+	const unsigned int getIndexs()
+	{
+		return _numIndexs;
 	}
 
 	int normalWidth = 1;

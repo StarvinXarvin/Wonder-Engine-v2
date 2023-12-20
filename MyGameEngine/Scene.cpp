@@ -2,13 +2,16 @@
 
 #include "Mesh.h"
 #include "Texture.h"
+//#include "Importer.h"
 
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <filesystem>
 
+
 using namespace std;
+
 
 Scene::Scene(WonderEngine* engine, bool start_enabled) : EngineModule(engine, start_enabled)
 {
@@ -20,7 +23,8 @@ Scene::~Scene()
 
 bool Scene::Start()
 {
-	createGameObject("Assets/Default_House/BakerHouse.fbx");
+	//createGameObject("Assets/street/Street_environment_V01.fbx");
+	createGameObject("Assets/Default_House/BakerHouse.fbx", "Assets/Default_House/Baker_house.png");
 
 	return true;
 }
@@ -74,14 +78,25 @@ void Scene::createGameObject(string meshPath, string texturePath)
 
 		// Load meshs to a vector
 		vector<Mesh::Ptr> mesh_ptrs;
-		if (texturePath != "")
-		{
-			mesh_ptrs = Mesh::loadFromFile(meshPath, texturePath);
-		}
-		else
-		{
-			mesh_ptrs = Mesh::loadFromFile(meshPath);
-		}
+			vector<MeshDto> dtoVec;
+			MeshImporter::MeshImport(dtoVec, meshPath);
+
+			for (size_t i = 0; i < dtoVec.size(); i++) {
+				MeshImporter::MeshSave("Library/Meshes/saveDto.wdr", dtoVec[i]);
+				MeshImporter::MeshLoad("Library/Meshes/saveDto.wdr", dtoVec[i]);
+				auto mesh_sptr = make_shared<Mesh>(	DTOToMesh(dtoVec[i])->F_V3T2, 
+													DTOToMesh(dtoVec[i])->meshVertsV3T2.data(), 
+													DTOToMesh(dtoVec[i])->getVerts(), 
+													DTOToMesh(dtoVec[i])->getFaces(), 
+													DTOToMesh(dtoVec[i])->meshIndices.data(), 
+													DTOToMesh(dtoVec[i])->getIndexs());
+				if (!texturePath.empty()) {
+					mesh_sptr.get()->loadTextureToMesh(texturePath);
+				}
+
+				mesh_ptrs.push_back(mesh_sptr);
+			}
+			
 
 		// Create components for the new gameobject
 		// Create all meshes as new gameobjects, childs of the newgObj
@@ -100,13 +115,15 @@ void Scene::createGameObject(string meshPath, string texturePath)
 				if (comp->getType() == TEXTURE)
 				{
 					textcomp = (TextureComp*)comp;
-					textcomp->setTexture(mesh->texture);
+					textcomp->setTexture(mesh->texture); 
 				}
 			}
 
 			newGOchild->setName(meshname);
 			newGOchild->getComponent(MESH)->setName(meshcompname);
 			newGOchild->getComponent(MESH)->setFilePath(meshPath);
+
+			
 		}
 	}
 
