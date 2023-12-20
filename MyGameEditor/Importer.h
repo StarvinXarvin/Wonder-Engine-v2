@@ -27,7 +27,7 @@ struct MeshDto;
 
 namespace MeshImporter
 {
-	void MeshImport(MeshDto& meshDTO, const std::string& path);
+	void MeshImport(vector<MeshDto>& meshDTO, const std::string& path);
 	void MeshSave(const char* filepath, MeshDto& dto);
 	void MeshLoad(const char* filepath, MeshDto& dto);
 	MeshDto MeshToDTO(shared_ptr<Mesh> mesh);

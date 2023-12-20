@@ -84,15 +84,25 @@ void Scene::createGameObject(string meshPath, string texturePath)
 		}
 		else
 		{
-			MeshDto dto;
-			MeshImporter::MeshImport(dto, meshPath);
-			MeshImporter::MeshSave("Library/saveDto.wdr", dto);
-			MeshImporter::MeshLoad("Library/saveDto.wdr", dto);
-			//shared_ptr<Mesh> tempMesh = DTOToMesh(dto);
-			//int verts = tempMesh->getVerts();
-			auto mesh_sptr = make_shared<Mesh>(DTOToMesh(dto)->F_V3T2, DTOToMesh(dto)->meshVertsV3T2.data(), DTOToMesh(dto)->getVerts(), DTOToMesh(dto)->getFaces(), DTOToMesh(dto)->meshIndices.data(), DTOToMesh(dto)->getIndexs());
-			mesh_sptr.get()->loadTextureToMesh("Assets/Default_House/Baker_house.png");
-			mesh_ptrs.push_back(mesh_sptr);
+			vector<MeshDto> dtoVec;
+			MeshImporter::MeshImport(dtoVec, meshPath);
+
+			for (size_t i = 0; i < dtoVec.size(); i++) {
+				MeshImporter::MeshSave("Library/saveDto.wdr", dtoVec[i]);
+				MeshImporter::MeshLoad("Library/saveDto.wdr", dtoVec[i]);
+				//shared_ptr<Mesh> tempMesh = DTOToMesh(dto);
+				//int verts = tempMesh->getVerts();
+				auto mesh_sptr = make_shared<Mesh>(	DTOToMesh(dtoVec[i])->F_V3T2, 
+													DTOToMesh(dtoVec[i])->meshVertsV3T2.data(), 
+													DTOToMesh(dtoVec[i])->getVerts(), 
+													DTOToMesh(dtoVec[i])->getFaces(), 
+													DTOToMesh(dtoVec[i])->meshIndices.data(), 
+													DTOToMesh(dtoVec[i])->getIndexs());
+
+				mesh_sptr.get()->loadTextureToMesh("Assets/Default_House/Baker_house.png");
+				mesh_ptrs.push_back(mesh_sptr);
+			}
+			
 
 			//mesh_ptrs = Mesh::loadFromFile(meshPath);
 		}

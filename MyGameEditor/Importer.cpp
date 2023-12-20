@@ -38,7 +38,7 @@ struct aiSceneExt : aiScene {
 	auto meshes() const { return span((aiMeshExt**)mMeshes, mNumMeshes); }
 };
 
-void MeshImporter::MeshImport(MeshDto& meshDTO, const std::string& path) {
+void MeshImporter::MeshImport(vector<MeshDto>& meshDTO, const std::string& path) {
 
 
 	const auto scene_ptr = aiImportFile(path.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_ForceGenNormals);
@@ -73,7 +73,7 @@ void MeshImporter::MeshImport(MeshDto& meshDTO, const std::string& path) {
 		}
 
 		auto mesh_sptr = make_shared<Mesh>(Mesh::Formats::F_V3T2, vertex_data.data(), vertex_data.size(), mesh.mNumFaces, index_data.data(), index_data.size());
-		mesh_sptr->texture = texture_ptrs[mesh.mMaterialIndex]; //Aqui es donde se pasa la textura
+		mesh_sptr->texture = texture_ptrs[mesh.mMaterialIndex]; 
 
 		for (size_t i = 0; i < mesh.mNumVertices; i++) {
 			aiVector3D normal = mesh.mNormals[i];
@@ -116,12 +116,11 @@ void MeshImporter::MeshImport(MeshDto& meshDTO, const std::string& path) {
 		}
 
 		mesh_ptrs.push_back(mesh_sptr);
+		meshDTO.push_back(MeshToDTO(mesh_sptr));
 	}
 
 
 	aiReleaseImport(scene_ptr);
-
-	meshDTO = MeshToDTO(*mesh_ptrs.data());
 
 }
 
@@ -205,18 +204,7 @@ void TextureImporter::TextureImport() {
 }
 
 void TextureImporter::TextureSave() {
-	//ILuint size;
-	//ILubyte* data;
-	//ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);// To pick a specific DXT compression use 
-	//size = ilSaveL(IL_DDS, nullptr, 0); // Get the size of the data buffer
-	//if (size > 0) {
-	//	data = new ILubyte[size]; // allocate data buffer
-	//	if (ilSaveL(IL_DDS, data, size) > 0) { // Save to buffer with the ilSaveIL function
-	//		*fileBuffer = (char*)data;
-	//	}
-	//	delete[] data;
-	//
-	//}
+
 }
 
 
