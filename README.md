@@ -1,5 +1,5 @@
-# WonderEngine
-Wonder Engine is a 3D Game Engine with basic Mesh and texture-loading functionality.
+# WonderEngine v2
+Wonder Engine v2 is a 3D Game Engine with basic Mesh and texture-loading functionality forked from the original Wonder Engine by users PauFusco and StarvinXarvin.
 ## Functionalities
 Wonder Engine comes with 3 default meshes and some basic textures you can import at any time, by just dragging and dropping them on the editor.
 You can also load your own meshes and textures from any place on your drive. Beware these have to be compatible with the Mesh in which you are applying them.
@@ -50,3 +50,8 @@ Vcpkg was used as a library manager for this project
 The default extra meshes were taken from the following sources:
 - [Sword](https://free3d.com/3d-model/sting-sword-128810.html "Sting Sword")
 - [M16 Rifle](https://sketchfab.com/3d-models/m16-assault-rifle-339d0f7b21024387853dd926a5d51b50 "M16 Assault Rifle")
+
+#V2 ADDITIONS
+
+- Mesh Importer that also allows for saving and loading several meshes at once (by StarvinXarvin)
+- Assets window inspector in the menu tab (by StarvinXarvin)
