@@ -6,6 +6,7 @@
 #include "TransformComp.h"
 #include "MeshComp.h"
 #include "TextureComp.h"
+#include "BBox.h"
 
 #include <string>
 #include <sstream>
@@ -36,7 +37,7 @@ public:
 		this->name = name;
 	}
 
-	Component* getComponent(component_type type)
+	Component* getComponent(component_type type) const
 	{
 		for (auto comp : this->component_vector)
 		{
@@ -64,10 +65,11 @@ public:
 	{
 		return children;
 	}
+	AABBox aabb() const;
 
 private:
 	string name = "";
-
+	
 	string meshName = "";
 	string textureName = "";
 

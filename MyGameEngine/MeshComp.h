@@ -36,8 +36,12 @@ public:
 		_mesh.get()->draw();
 	}
 
+
+	AABBox aabb;
+
 private:
 	Mesh::Ptr _mesh;
+	
 
 	component_type type = MESH;
 

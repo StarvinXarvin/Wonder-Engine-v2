@@ -95,6 +95,9 @@
     <ClInclude Include="MeshDto.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WonderEngine.cpp">
@@ -151,5 +154,11 @@
     <ClCompile Include="MeshDto.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="BBox.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WonderEngine.rc" />
   </ItemGroup>
 </Project>
