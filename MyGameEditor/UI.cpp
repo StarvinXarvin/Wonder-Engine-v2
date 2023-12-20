@@ -78,7 +78,7 @@ update_status UI::setupMAINMENU()
 
 			if (MenuItem("Assets")) showAssets = !showAssets;
 
-			if (MenuItem("GitHub", NULL, false, true)) OsOpenInShell("https://github.com/CITM-UPC/Wonder-Engine");
+			if (MenuItem("GitHub", NULL, false, true)) OsOpenInShell("https://github.com/StarvinXarvin/Wonder-Engine-v2");
 
 			if (MenuItem("About")) showAbout = !showAbout;
 
