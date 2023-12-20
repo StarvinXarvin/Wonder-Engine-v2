@@ -14,9 +14,13 @@
   or by setting the VCPKG_DISABLE_METRICS environment variable.
   
   Read more about vcpkg telemetry at docs/about/privacy.md
-  BBox.hpp
+  Scanning sources for module dependencies...
+  BBox.h
+  Compiling...
+  BBox.h
   Camera.cpp
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(44,21): warning C4129: '.': unrecognized character escape sequence
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(48,21): warning C4129: '.': unrecognized character escape sequence
 C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\TextureComp.h(59,21): warning C4129: '.': unrecognized character escape sequence
 C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Camera.cpp(74,16): warning C4244: 'initializing': conversion from 'T' to 'float', possible loss of data
           with
@@ -50,13 +54,14 @@ C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Camera.cpp(105,1
   CubeWireframeIVBO.cpp
   Importer.cpp
   MeshComp.cpp
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(44,21): warning C4129: '.': unrecognized character escape sequence
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(48,21): warning C4129: '.': unrecognized character escape sequence
 C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\TextureComp.h(59,21): warning C4129: '.': unrecognized character escape sequence
   Mesh.cpp
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Mesh.cpp(271,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Mesh.cpp(275,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Mesh.cpp(287,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Mesh.cpp(291,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Mesh.cpp(285,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Mesh.cpp(289,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Mesh.cpp(301,15): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Mesh.cpp(305,21): warning C4018: '<': signed/unsigned mismatch
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xutility(135,1): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xutility(134): message : see reference to function template instantiation '_Ty *std::construct_at<_Ty,Mesh::Formats,Mesh::V3T2*,unsigned __int64,const unsigned int&,unsigned int*,unsigned __int64,void>(_Ty *const ,Mesh::Formats &&,Mesh::V3T2 *&&,unsigned __int64 &&,const unsigned int &,unsigned int *&&,unsigned __int64 &&) noexcept(<expr>)' being compiled
           with
@@ -85,67 +90,63 @@ C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Mesh.cpp(64): me
           ]
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xutility(142,1): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
   GameObject.cpp
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(7,41): warning C4003: not enough arguments for function-like macro invocation 'max'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(8,41): warning C4003: not enough arguments for function-like macro invocation 'min'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(7,41): error C2589: '(': illegal token on right side of '::'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(7): error C2062: type 'unknown-type' unexpected
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(7,41): error C2059: syntax error: ')'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(7,10): error C2059: syntax error: ')'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(7,10): error C2143: syntax error: missing ';' before '}'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(7,47): error C2059: syntax error: '}'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(8,41): error C2589: '(': illegal token on right side of '::'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(8,10): error C2059: syntax error: 'member initializer'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(8,10): error C2143: syntax error: missing ';' before '{'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(8,10): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(22,1): error C2059: syntax error: '<L_GRAMMAR_end_class>'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(9,29): error C2597: illegal reference to non-static member 'AABBox::min'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(9,29): error C3867: 'AABBox::min': non-standard syntax; use '&' to create a pointer to member
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(9,29): error C2597: illegal reference to non-static member 'AABBox::max'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(9,29): error C3867: 'AABBox::max': non-standard syntax; use '&' to create a pointer to member
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(9,29): error C2568: '+': unable to resolve function overload
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(10,28): error C2597: illegal reference to non-static member 'AABBox::max'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(10,28): error C3867: 'AABBox::max': non-standard syntax; use '&' to create a pointer to member
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(10,28): error C2597: illegal reference to non-static member 'AABBox::min'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(10,28): error C3867: 'AABBox::min': non-standard syntax; use '&' to create a pointer to member
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(10,28): error C2568: '-': unable to resolve function overload
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(21,54): error C2352: 'AABBox::a': illegal call of non-static member function
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(12): message : see declaration of 'AABBox::a'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(21,59): error C2352: 'AABBox::b': illegal call of non-static member function
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(13): message : see declaration of 'AABBox::b'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(21,64): error C2352: 'AABBox::c': illegal call of non-static member function
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(14): message : see declaration of 'AABBox::c'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(21,69): error C2352: 'AABBox::d': illegal call of non-static member function
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(15): message : see declaration of 'AABBox::d'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(21,74): error C2352: 'AABBox::e': illegal call of non-static member function
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(16): message : see declaration of 'AABBox::e'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(21,79): error C2352: 'AABBox::f': illegal call of non-static member function
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(17): message : see declaration of 'AABBox::f'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(21,84): error C2352: 'AABBox::g': illegal call of non-static member function
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(18): message : see declaration of 'AABBox::g'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(21,89): error C2352: 'AABBox::h': illegal call of non-static member function
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(19): message : see declaration of 'AABBox::h'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(31,19): error C2597: illegal reference to non-static member 'OBBox::<unnamed-tag>::a'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(26): message : see declaration of 'OBBox::<unnamed-tag>::a'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(31,21): error C2597: illegal reference to non-static member 'OBBox::<unnamed-tag>::a'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(26): message : see declaration of 'OBBox::<unnamed-tag>::a'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(31,1): error C2440: 'initializing': cannot convert from 'unknown' to 'vec3'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(31,1): message : No constructor could take the source type, or constructor overload resolution was ambiguous
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(32,24): error C2597: illegal reference to non-static member 'OBBox::verts'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(27): message : see declaration of 'OBBox::verts'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(32,24): error C3535: cannot deduce type for 'auto &&' from 'unknown'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(32,1): error C2440: 'initializing': cannot convert from 'unknown' to 'int &&'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(32,1): message : Reason: cannot convert from 'unknown' to 'int'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(32,24): message : There is no context in which this conversion is possible
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(32,1): error C3536: '<begin>$L0': cannot be used before it is initialized
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(32,1): error C3536: '<end>$L0': cannot be used before it is initialized
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(32,29): error C2100: illegal indirection
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(33,20): error C2589: '(': illegal token on right side of '::'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(33): error C2062: type 'unknown-type' unexpected
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(33,1): error C2059: syntax error: ')'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(34,20): error C2589: '(': illegal token on right side of '::'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(34): error C2062: type 'unknown-type' unexpected
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(34,1): error C2059: syntax error: ')'
-C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\BBox.hpp(42,40): fatal error C1903: unable to recover from previous error(s); stopping compilation
-  INTERNAL COMPILER ERROR in 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64\CL.exe'
-      Please choose the Technical Support command on the Visual C++
-      Help menu, or open the Technical Support help file for more information
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(48,21): warning C4129: '.': unrecognized character escape sequence
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\TextureComp.h(59,21): warning C4129: '.': unrecognized character escape sequence
+  Primitive.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(48,21): warning C4129: '.': unrecognized character escape sequence
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\TextureComp.h(59,21): warning C4129: '.': unrecognized character escape sequence
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Primitive.cpp(31,34): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Primitive.cpp(32,34): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Primitive.cpp(33,32): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Primitive.cpp(35,34): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Primitive.cpp(36,34): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\Primitive.cpp(37,32): warning C4244: 'argument': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+  Scene.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(48,21): warning C4129: '.': unrecognized character escape sequence
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\TextureComp.h(59,21): warning C4129: '.': unrecognized character escape sequence
+  TextureComp.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\TextureComp.h(59,21): warning C4129: '.': unrecognized character escape sequence
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(48,21): warning C4129: '.': unrecognized character escape sequence
+  Texture.cpp
+  TransformComp.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+  WonderEngine.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(48,21): warning C4129: '.': unrecognized character escape sequence
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\TextureComp.h(59,21): warning C4129: '.': unrecognized character escape sequence
+  Renderer.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\MeshComp.h(48,21): warning C4129: '.': unrecognized character escape sequence
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\TextureComp.h(59,21): warning C4129: '.': unrecognized character escape sequence
+  Generating Code...
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\GameObject.h(47): warning C4715: 'GameObject::getComponent': not all control paths return a value
+C:\Users\Usuario\Documents\GitHub\Wonder-Engine-v2\MyGameEngine\GameObject.h(47): warning C4715: 'GameObject::getComponent': not all control paths return a value
+LINK : fatal error LNK1181: cannot open input file 'assimp-vc142-mt.lib'

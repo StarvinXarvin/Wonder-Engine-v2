@@ -1,10 +1,10 @@
 #pragma once
 
-//#include "BBox.h"
+#include "BBox.h"
 //#include "BoundingBox.h"
 
 class Graphic {
 public:
-	//AABBox aabb;
+	AABBox aabb;
 	virtual void draw() = 0;
 };

@@ -6,8 +6,8 @@
 
 
 struct AABBox {
-	vec3 min{ std::numeric_limits<double>::max() };
-	vec3 max{ std::numeric_limits<double>::min() };
+	vec3 min{ (std::numeric_limits<double>::max)() };
+	vec3 max{ (std::numeric_limits<double>::min)() };
 	inline vec3 center() const { return (min + max) * 0.5; }
 	inline vec3 sizes() const { return max - min; }
 
